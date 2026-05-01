@@ -1,0 +1,24 @@
+version: "3.8"
+
+services:
+  web:
+    build: .
+    image: magnolia-peluqueria:prod
+    ports:
+      - "3000"
+    networks:
+      - agent-net
+    deploy:
+      mode: replicated
+      replicas: 2
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.magnolia-peluqueria.rule=Host(`magnolia-peluqueria.paragu-ai.com`)"
+        - "traefik.http.routers.magnolia-peluqueria.entrypoints=websecure"
+        - "traefik.http.routers.magnolia-peluqueria.tls=true"
+        - "traefik.http.routers.magnolia-peluqueria.tls.certresolver=letsencryptresolver"
+        - "traefik.http.services.magnolia-peluqueria.loadbalancer.server.port=3000"
+
+networks:
+  agent-net:
+    external: true
