@@ -1,43 +1,70 @@
-import { MapPin, Phone, Clock } from "lucide-react";
-import Link from "next/link";
+import Link from "next/link"
+import { MapPin, Phone, Clock } from "lucide-react"
 
-export function Footer() {
+interface FooterProps {
+  businessName?: string
+  tagline?: string
+  address?: string
+  phone?: string
+  hours?: string
+  waPhone?: string
+}
+
+export function Footer({
+  businessName = "Negocio",
+  tagline = "",
+  address = "",
+  phone = "",
+  hours = "Lun-Sáb: 9:00 - 20:00",
+  waPhone = "",
+}: FooterProps) {
+  const waMsg = "Hola!%20Quiero%20m%C3%A1s%20informaci%C3%B3n"
+  const waLink = waPhone ? `https://wa.me/${waPhone}?text=${waMsg}` : "#"
+
   return (
-    <footer className="bg-[#1a1a1a] text-white py-12">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-4">
+    <footer className="bg-primary py-12 text-white">
+      <div className="container-page">
+        <div className="grid gap-10 sm:grid-cols-2 md:grid-cols-4">
           <div>
-            <h3 className="font-heading text-lg font-bold mb-3">Magnolia Peluquería</h3>
-            <p className="text-sm text-white/70">Tu Mejor Look en Asunción</p>
+            <h3 className="mb-3 text-lg font-bold">{businessName}</h3>
+            {tagline && <p className="text-sm text-white/70">{tagline}</p>}
           </div>
           <div>
-            <h4 className="text-sm font-semibold uppercase tracking-wider text-white/70 mb-4">Enlaces</h4>
+            <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-white/60">Enlaces</h4>
             <div className="flex flex-col gap-2 text-sm">
-              <Link href="/" className="text-white/80 hover:text-white">Inicio</Link>
-              <Link href="/servicios" className="text-white/80 hover:text-white">Servicios</Link>
-              <Link href="/contacto" className="text-white/80 hover:text-white">Contacto</Link>
+              <Link href="/" className="text-white/80 hover:text-white transition-colors">Inicio</Link>
+              <Link href="/servicios" className="text-white/80 hover:text-white transition-colors">Servicios</Link>
+              <Link href="/nosotros" className="text-white/80 hover:text-white transition-colors">Nosotros</Link>
+              <Link href="/faq" className="text-white/80 hover:text-white transition-colors">FAQ</Link>
+              <Link href="/contacto" className="text-white/80 hover:text-white transition-colors">Contacto</Link>
             </div>
           </div>
           <div>
-            <h4 className="text-sm font-semibold uppercase tracking-wider text-white/70 mb-4">Horarios</h4>
-            <div className="text-sm text-white/80 space-y-1">
-              <p><Clock className="w-3 h-3 inline mr-2" />Lun-Sáb: 9:00 - 20:00</p>
-              <p className="ml-5">Dom: Cerrado</p>
+            <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-white/60">Legales</h4>
+            <div className="flex flex-col gap-2 text-sm">
+              <Link href="/privacidad" className="text-white/80 hover:text-white transition-colors">Privacidad</Link>
+              <Link href="/terminos" className="text-white/80 hover:text-white transition-colors">Términos</Link>
             </div>
           </div>
           <div>
-            <h4 className="text-sm font-semibold uppercase tracking-wider text-white/70 mb-4">Contacto</h4>
+            <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-white/60">Contacto</h4>
             <div className="text-sm text-white/80 space-y-2">
-              <p><MapPin className="w-3 h-3 inline mr-2" />Bartolome De Las Casas 206 esq, Asunción</p>
-              <p><Phone className="w-3 h-3 inline mr-2" />(021) 558 289</p>
-              <a href="https://wa.me/59521558289?text=Hola!%20Quiero%20agendar%20una%20cita%20en%20Magnolia%20Peluquer%C3%ADa" target="_blank" rel="noopener noreferrer" className="text-[#b76e79] hover:text-[#b76e79]/80 block mt-2">WhatsApp</a>
+              {address && <p className="flex items-start gap-2"><MapPin className="w-4 h-4 mt-0.5 shrink-0" />{address}</p>}
+              {phone && <p className="flex items-center gap-2"><Phone className="w-4 h-4 shrink-0" />{phone}</p>}
+              <p className="flex items-center gap-2"><Clock className="w-4 h-4 shrink-0" />{hours}</p>
+              {waPhone && (
+                <a href={waLink} target="_blank" rel="noopener noreferrer"
+                  className="inline-block mt-2 text-secondary hover:text-secondary-dark transition-colors font-medium">
+                  WhatsApp
+                </a>
+              )}
             </div>
           </div>
         </div>
         <div className="mt-10 border-t border-white/20 pt-6 text-center text-xs text-white/50">
-          © 2026 Magnolia Peluquería. Todos los derechos reservados.
+          &copy; {new Date().getFullYear()} {businessName}. Todos los derechos reservados.
         </div>
       </div>
     </footer>
-  );
+  )
 }

@@ -1,9 +1,9 @@
-import { Header } from "@/components/header";
-import { Footer } from "@/components/footer";
-import { WhatsAppFloat } from "@/components/whatsapp-float";
-import { MapPin, Phone, Clock, MessageCircle } from "lucide-react";
+import { Header } from "@/components/header"
+import { Footer } from "@/components/footer"
+import { WhatsAppFloat } from "@/components/whatsapp-float"
+import { MapPin, Phone, Clock, MessageCircle } from "lucide-react"
 
-export const metadata = { title: "Contacto — Magnolia Peluquería", description: "Visitanos o contactanos por WhatsApp." };
+export const metadata = { title: "Contacto — Magnolia Peluquería" }
 
 export default function ContactoPage() {
   return (
@@ -16,41 +16,48 @@ export default function ContactoPage() {
           <div className="grid md:grid-cols-2 gap-8">
             <div className="space-y-6">
               <div className="flex items-start gap-3">
-                <MapPin className="w-5 h-5 text-secondary mt-0.5" />
+                <MapPin className="w-5 h-5 text-secondary mt-0.5 shrink-0" />
                 <div>
                   <p className="font-semibold text-foreground">Dirección</p>
-                  <p className="text-sm text-foreground-light">Bartolome De Las Casas 206 esq, Asunción</p>
+                  <p className="text-sm text-foreground-light">Asunción</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
-                <Phone className="w-5 h-5 text-secondary mt-0.5" />
+                <Phone className="w-5 h-5 text-secondary mt-0.5 shrink-0" />
                 <div>
                   <p className="font-semibold text-foreground">Teléfono</p>
-                  <p className="text-sm text-foreground-light">(021) 558 289</p>
+                  <p className="text-sm text-foreground-light">0981 000 003</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
-                <Clock className="w-5 h-5 text-secondary mt-0.5" />
+                <Clock className="w-5 h-5 text-secondary mt-0.5 shrink-0" />
                 <div>
                   <p className="font-semibold text-foreground">Horarios</p>
-                  <p className="text-sm text-foreground-light">Lun-Sáb: 9:00 - 20:00</p>
-                  <p className="text-sm text-foreground-light">Domingo: Cerrado</p>
+                  <p className="text-sm text-foreground-light">Mar-Sáb: 9:00 - 19:00</p>
                 </div>
               </div>
-              <a href="https://wa.me/59521558289?text=Hola!%20Quiero%20agendar%20una%20cita%20en%20Magnolia%20Peluquer%C3%ADa" target="_blank" rel="noopener noreferrer"
-                 className="inline-flex items-center gap-2 bg-[#25d366] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#25d366]/90 transition-all">
+            </div>
+            <div className="bg-white rounded-xl border border-border p-8 shadow-sm">
+              <h2 className="font-heading text-xl font-bold text-primary mb-4">Escribinos por WhatsApp</h2>
+              <p className="text-foreground-light mb-6">Respondemos en menos de 5 minutos</p>
+              <a href="https://wa.me/595981000003?text=Hola!%20Quiero%20informaci%C3%B3n"
+                target="_blank" rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-secondary text-white px-6 py-3 rounded-lg font-semibold hover:bg-secondary-dark transition-all">
                 <MessageCircle className="w-5 h-5" /> Contactar por WhatsApp
               </a>
-            </div>
-            <div className="rounded-xl overflow-hidden border border-gray-200 shadow-sm h-[300px]">
-              <iframe src={"https://maps.google.com/maps?q="+encodeURIComponent("Bartolome De Las Casas 206 esq, Asunción")+"&output=embed"}
-                width="100%" height="100%" style={{border:0}} allowFullScreen loading="lazy" />
             </div>
           </div>
         </div>
       </section>
-      <Footer />
+      <Footer
+        businessName="Magnolia Peluquería"
+        tagline="Tu Mejor Look en Asunción"
+        address="Asunción"
+        phone="0981 000 003"
+        hours="Mar-Sáb: 9:00 - 19:00"
+        waPhone="595981000003"
+      />
       <WhatsAppFloat />
     </>
-  );
+  )
 }

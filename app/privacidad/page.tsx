@@ -27,7 +27,14 @@ export default function PrivacidadPage() {
           </div>
         </div>
       </main>
-      <Footer />
+      <Footer
+        businessName="Magnolia Peluquería"
+        tagline="Tu Mejor Look en Asunción"
+        address="Asunción"
+        phone="0981 000 003"
+        hours="Mar-Sáb: 9:00 - 19:00"
+        waPhone="595981000003"
+      />
       <WhatsAppFloat />
     </>
   )
