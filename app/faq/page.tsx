@@ -32,9 +32,9 @@ export default function FAQPage() {
         businessName="Magnolia Peluquería"
         tagline="Tu Mejor Look en Asunción"
         address="Asunción"
-        phone="0981 000 003"
+        phone="0981 106 062"
         hours="Mar-Sáb: 9:00 - 19:00"
-        waPhone="595981000003"
+        waPhone="595986106062"
       />
       <WhatsAppFloat />
     </>

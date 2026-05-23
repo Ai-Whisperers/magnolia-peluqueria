@@ -23,9 +23,9 @@ export default function NotFound() {
         businessName="Magnolia Peluquería"
         tagline=""
         address=""
-        phone="595981000003"
+        phone="595986106062"
         hours=""
-        waPhone="595981000003"
+        waPhone="595986106062"
       />
       <WhatsAppFloat />
     </>

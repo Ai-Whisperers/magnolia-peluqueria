@@ -1,6 +1,6 @@
 import React from "react"
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://viajero.paragu-ai.com"
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://magnolia-peluqueria.paragu-ai.com"
 
 export function JsonLd({ data }: { data: Record<string, any> }) {
   return React.createElement("script", {

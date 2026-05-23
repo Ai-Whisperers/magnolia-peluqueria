@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://SITE_URL_PLACEHOLDER/sitemap.xml
+Sitemap: https://magnolia-peluqueria.paragu-ai.com/sitemap.xml

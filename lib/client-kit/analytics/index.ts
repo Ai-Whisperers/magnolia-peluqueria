@@ -3,7 +3,7 @@ import { useEffect } from "react"
 
 declare global { interface Window { gtag?: any; dataLayer?: any[] } }
 
-const GA_ID = "G-X2XQZR3J6K"
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID || ""
 
 export function Analytics() {
   useEffect(() => {

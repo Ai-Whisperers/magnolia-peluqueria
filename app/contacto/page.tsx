@@ -26,7 +26,7 @@ export default function ContactoPage() {
                 <Phone className="w-5 h-5 text-secondary mt-0.5 shrink-0" />
                 <div>
                   <p className="font-semibold text-foreground">Teléfono</p>
-                  <p className="text-sm text-foreground-light">0981 000 003</p>
+                  <p className="text-sm text-foreground-light">0981 106 062</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
@@ -40,7 +40,7 @@ export default function ContactoPage() {
             <div className="bg-white rounded-xl border border-border p-8 shadow-sm">
               <h2 className="font-heading text-xl font-bold text-primary mb-4">Escribinos por WhatsApp</h2>
               <p className="text-foreground-light mb-6">Respondemos en menos de 5 minutos</p>
-              <a href="https://wa.me/595981000003?text=Hola!%20Quiero%20informaci%C3%B3n"
+              <a href="https://wa.me/595986106062?text=Hola!%20Quiero%20informaci%C3%B3n"
                 target="_blank" rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-secondary text-white px-6 py-3 rounded-lg font-semibold hover:bg-secondary-dark transition-all">
                 <MessageCircle className="w-5 h-5" /> Contactar por WhatsApp
@@ -53,9 +53,9 @@ export default function ContactoPage() {
         businessName="Magnolia Peluquería"
         tagline="Tu Mejor Look en Asunción"
         address="Asunción"
-        phone="0981 000 003"
+        phone="0981 106 062"
         hours="Mar-Sáb: 9:00 - 19:00"
-        waPhone="595981000003"
+        waPhone="595986106062"
       />
       <WhatsAppFloat />
     </>

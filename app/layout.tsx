@@ -1,3 +1,4 @@
+import CookieConsent from "@/components/CookieConsent"
 import type { Metadata } from "next"
 import { Montserrat, Playfair_Display } from "next/font/google"
 import "./globals.css"
@@ -54,6 +55,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {children}
         <Analytics />
         <SpeedInsights />
+              <CookieConsent />
       </body>
     </html>
   )
