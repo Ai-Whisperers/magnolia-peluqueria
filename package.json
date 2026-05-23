@@ -12,21 +12,6 @@
     "test:ui": "vitest --ui"
   },
   "dependencies": {
-    "@ai-whisperers/admin": "^0.1.0",
-    "@ai-whisperers/api-helpers": "^0.1.0",
-    "@ai-whisperers/auth": "^0.1.0",
-    "@ai-whisperers/catalog": "^0.1.0",
-    "@ai-whisperers/checkout": "^0.1.0",
-    "@ai-whisperers/client-kit": "^0.1.0",
-    "@ai-whisperers/commerce": "^0.1.0",
-    "@ai-whisperers/i18n": "^0.1.0",
-    "@ai-whisperers/payments": "^0.1.0",
-    "@ai-whisperers/product": "^0.1.0",
-    "@ai-whisperers/seo": "^0.1.0",
-    "@ai-whisperers/theme": "^0.1.0",
-    "@ai-whisperers/ui": "^0.1.0",
-    "@ai-whisperers/ui-extras": "^0.1.0",
-    "@ai-whisperers/whatsapp": "^0.1.0",
     "lucide-react": "^1.14.0",
     "next": "16.2.4",
     "react": "19.2.4",
@@ -35,7 +20,6 @@
     "@vercel/speed-insights": "^1.2.0"
   },
   "devDependencies": {
-    "@ai-whisperers/test-vitest": "^0.1.0",
     "@tailwindcss/postcss": "^4",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
