@@ -1,5 +1,6 @@
 import { Header } from "@/components/header"
 import { Hero } from "@/components/hero"
+import { Testimonials } from "@/components/testimonials"
 import { Services } from "@/components/services"
 import { CtaBanner } from "@/components/cta-banner"
 import { Footer } from "@/components/footer"
@@ -13,6 +14,7 @@ export default function Home() {
         title="Magnolia Peluquería"
         subtitle="Cortes profesionales, coloración y tratamientos que transforman tu estilo en Asunción"
       />
+      <Testimonials />
       <Services />
       <CtaBanner />
       <Footer
