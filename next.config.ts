@@ -11,8 +11,13 @@ const securityHeaders = [
 ]
 
 const config: NextConfig = {
-  output: "standalone",
+  output: "export",
   poweredByHeader: false,
+  images: {
+    unoptimized: true,
+  },
+  trailingSlash: true,
+  basePath: "",
   async headers() {
     return [
       { source: '/(.*)', headers: securityHeaders },

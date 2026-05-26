@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next"
+export const dynamic = "force-static"
 export default function sitemap(): MetadataRoute.Sitemap {
   const domain = "https://magnolia-peluqueria.paragu-ai.com"
   const pages = ["/", "/servicios", "/contacto", "/nosotros", "/faq", "/privacidad", "/terminos"]
