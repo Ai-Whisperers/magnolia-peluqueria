@@ -1,0 +1,136 @@
+{
+  "meta": {
+    "locale": "es",
+    "author": "magnolia"
+  },
+  "business": {
+    "name": "Magnolia Peluquería",
+    "tagline": "Tu Mejor Look en Asunción",
+    "whatsapp": "595986106062",
+    "whatsappMessage": "Hola!%20Quiero%20reservar%20una%20cita%20en%20Magnolia",
+    "phoneFormatted": "0981 106 062",
+    "phoneLink": "tel:+595986106062",
+    "address": "Asunción, Paraguay",
+    "addressDetail": "Zona céntrica de Asunción",
+    "hours": "Martes a Sábado: 9:00 - 19:00",
+    "hoursClosed": "Domingos y Lunes cerrados",
+    "instagram": "magnolia_peluqueria",
+    "instagramUrl": "https://instagram.com/magnolia_peluqueria",
+    "mapsUrl": "https://maps.google.com/?q=Magnolia+Peluqueria+Asuncion+Paraguay",
+    "mapsEmbed": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d21606.37701864!2d-57.63535!3d-25.26327!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjXCsDE1JzQyLjIiUyA1N8KwMzcnNTguMSJX!5e0!3m2!1ses!2spy!4v1600000000000!5m2!1ses!2spy",
+    "email": "info@magnolia-peluqueria.com",
+    "ctaMessage": "Hola!%20Quiero%20reservar%20una%20cita%20en%20Magnolia"
+  },
+  "hero": {
+    "slides": [
+      {
+        "image": "https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1600&q=85",
+        "title": "Magnolia Peluquería",
+        "subtitle": "Donde tu cabello encuentra su mejor versión",
+        "badge": "Asunción, Paraguay"
+      },
+      {
+        "image": "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=1600&q=85",
+        "title": "Coloración Profesional",
+        "subtitle": "Tonos que realzan tu belleza natural",
+        "badge": "Balayage · Mechas · Color"
+      },
+      {
+        "image": "https://images.unsplash.com/photo-1595476108010-b4d1ef1b45e9?w=1600&q=85",
+        "title": "Cortes que Transforman",
+        "subtitle": "Asesoría personalizada para cada rostro",
+        "badge": "Cortes · Peinados · Eventos"
+      }
+    ],
+    "whatsappMessage": "Hola!%20Quiero%20informaci%C3%B3n%20sobre%20sus%20servicios"
+  },
+  "stats": [
+    { "value": "15+", "label": "Años de experiencia" },
+    { "value": "800+", "label": "Clientas felices" },
+    { "value": "4.9", "label": "Estrellas Google", "suffix": "★" }
+  ],
+  "reasons": [
+    { "title": "Productos Premium", "desc": "Usamos marcas internacionales de alta gama para garantizar resultados excepcionales." },
+    { "title": "Atención Personalizada", "desc": "Cada clienta recibe asesoría individual para encontrar su mejor estilo." },
+    { "title": "Ambiente Acogedor", "desc": "Espacios diseñados para que te sientas cómoda y relajada." }
+  ],
+  "services": {
+    "categories": [
+      {
+        "name": "Cortes",
+        "icon": "scissors",
+        "color": "rose",
+        "items": [
+          { "name": "Corte Dama", "price": "Gs. 90.000", "desc": "Corte profesional con asesoría de estilo personalizada según la forma de tu rostro", "duration": "40 min", "popular": false },
+          { "name": "Corte Caballero", "price": "Gs. 60.000", "desc": "Corte moderno o clásico con acabado impecable", "duration": "30 min", "popular": false },
+          { "name": "Corte Infantil", "price": "Gs. 50.000", "desc": "Corte para niños hasta 12 años en ambiente divertido", "duration": "25 min", "popular": false },
+          { "name": "Recorte de Puntas", "price": "Gs. 40.000", "desc": "Mantenimiento de largo y forma sin cambio de estilo", "duration": "20 min", "popular": false }
+        ]
+      },
+      {
+        "name": "Coloración",
+        "icon": "palette",
+        "color": "violet",
+        "items": [
+          { "name": "Coloración Completa", "price": "Gs. 250.000", "desc": "Coloración profesional con productos premium que cuidan tu cabello", "duration": "90 min", "popular": false },
+          { "name": "Balayage", "price": "Gs. 400.000", "desc": "Técnica francesa de mechas degradadas para un look natural y soleado", "duration": "2 horas", "popular": true },
+          { "name": "Mechas", "price": "Gs. 300.000", "desc": "Mechas tradicionales con papel aluminium para un resultado definido", "duration": "90 min", "popular": false },
+          { "name": "Tónico Capilar", "price": "Gs. 80.000", "desc": "Tratamiento colorante sin amoníaco para refreshing entre visitas", "duration": "45 min", "popular": false }
+        ]
+      },
+      {
+        "name": "Tratamientos",
+        "icon": "sparkles",
+        "color": "amber",
+        "items": [
+          { "name": "Keratina", "price": "Gs. 350.000", "desc": "Alisado progresivo con keratina profesional. Resultado suave por 3-4 meses", "duration": "2 horas", "popular": true },
+          { "name": "Botox Capilar", "price": "Gs. 200.000", "desc": "Tratamiento reconstructor intensivo para cabello dañado o reseco", "duration": "60 min", "popular": false },
+          { "name": "Nutrición Capilar", "price": "Gs. 120.000", "desc": "Tratamiento nutritivo con aceites esenciales para brillo y suavidad", "duration": "40 min", "popular": false },
+          { "name": "Hidratación Profunda", "price": "Gs. 90.000", "desc": "Hidratación intensiva con mascarilla nutritiva para cabello seco", "duration": "35 min", "popular": false }
+        ]
+      },
+      {
+        "name": "Peinados",
+        "icon": "sparkle",
+        "color": "sky",
+        "items": [
+          { "name": "Peinado para Eventos", "price": "Gs. 150.000", "desc": "Peinados especiales para bodas, fiestas y eventos formales", "duration": "1 hora", "popular": false },
+          { "name": "Recogido", "price": "Gs. 100.000", "desc": "Peinados elegantes para ocasiones especiales", "duration": "45 min", "popular": false },
+          { "name": "Brushing", "price": "Gs. 50.000", "desc": "Secado y peinado con volumen natural", "duration": "30 min", "popular": false }
+        ]
+      }
+    ]
+  },
+  "gallery": [
+    { "src": "https://images.unsplash.com/photo-1562322140-8baeececf3df?w=600&q=80", "alt": "Balayage profesional con tonos miel", "tag": "Balayage" },
+    { "src": "https://images.unsplash.com/photo-1595476108010-b4d1ef1b45e9?w=600&q=80", "alt": "Corte moderno con dégradé", "tag": "Corte" },
+    { "src": "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&q=80", "alt": "Coloración completa con reflejo rubio", "tag": "Color" },
+    { "src": "https://images.unsplash.com/photo-1605491668644-b82e54f9f2af?w=600&q=80", "alt": "Mechas con foil técnica profesional", "tag": "Mechas" },
+    { "src": "https://images.unsplash.com/photo-1559599101-f09722fb4948?w=600&q=80", "alt": "Tratamiento keratina resultado liso brillante", "tag": "Keratina" },
+    { "src": "https://images.unsplash.com/photo-1634449571010-02389ed0f9b0?w=600&q=80", "alt": "Peinado para evento especial", "tag": "Eventos" }
+  ],
+  "testimonials": [
+    { "name": "María Fernández", "initials": "MF", "color": "rose", "quote": "Llevo 2 años yendo a Magnolia. El mejor balayage que me han hecho en mi vida. La atención es impecable, me escuchan y siempre me van bien.", "service": "Balayage + Corte", "stars": 5 },
+    { "name": "Carmen López", "initials": "CL", "color": "violet", "quote": "Me encantó el tratamiento de keratina. El cabello quedó súper suave y duró más de 3 meses. La relación calidad-precio es excelente.", "service": "Keratina", "stars": 5 },
+    { "name": "Ana Martínez", "initials": "AM", "color": "amber", "quote": "La única peluquería donde siento que me escuchan de verdad. El ambiente es hermoso, muy tranquilo, y los precios muy justos.", "service": "Coloración + Tratamiento", "stars": 5 },
+    { "name": "Claudia Rodríguez", "initials": "CR", "color": "sky", "quote": "Fui para mi boda y me hicieron un peinado espectacular. Todas las invitadas preguntaron dónde me había hecho el pelo. ¡100% recomendado!", "service": "Peinado para Eventos", "stars": 5 }
+  ],
+  "cta": {
+    "title": "Reservá tu Turno",
+    "subtitle": "Escribinos por WhatsApp y te confirmamos tu cita en minutos.",
+    "buttonText": "Reservar por WhatsApp"
+  },
+  "seo": {
+    "reviewCount": "100",
+    "latitude": -25.26327,
+    "longitude": -57.63535,
+    "priceRange": "$$",
+    "aggregateRating": "4.9"
+  },
+  "contactPage": {
+    "title": "Contactanos",
+    "subtitle": "Estamos para ayudarte. Escribinos por WhatsApp o visitanos.",
+    "whatsappLabel": "Escribinos directo",
+    "mapLabel": "Cómo llegar"
+  }
+}

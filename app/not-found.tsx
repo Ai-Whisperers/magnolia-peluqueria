@@ -2,6 +2,7 @@ import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { WhatsAppFloat } from "@/components/whatsapp-float"
 import Link from "next/link"
+import { business, waLink } from "@/lib/config"
 
 export const metadata = { title: "Página no encontrada — Magnolia Peluquería" }
 
@@ -20,12 +21,12 @@ export default function NotFound() {
         </div>
       </main>
       <Footer
-        businessName="Magnolia Peluquería"
-        tagline=""
-        address=""
-        phone="595986106062"
-        hours=""
-        waPhone="595986106062"
+        businessName={business.name}
+        tagline={business.tagline}
+        address={business.address}
+        phone={business.phoneFormatted}
+        hours={business.hours}
+        waPhone={business.whatsapp}
       />
       <WhatsAppFloat />
     </>
