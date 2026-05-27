@@ -9,7 +9,7 @@
     "whatsapp": "595986106062",
     "whatsappMessage": "Hola!%20Quiero%20reservar%20una%20cita%20en%20Magnolia",
     "phoneFormatted": "0981 106 062",
-    "phoneLink": "tel:+595986106062",
+    "phoneLink": "tel:+595****6062",
     "address": "Asunción, Paraguay",
     "addressDetail": "Zona céntrica de Asunción",
     "hours": "Martes a Sábado: 9:00 - 19:00",
@@ -107,13 +107,124 @@
     { "src": "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&q=80", "alt": "Coloración completa con reflejo rubio", "tag": "Color" },
     { "src": "https://images.unsplash.com/photo-1605491668644-b82e54f9f2af?w=600&q=80", "alt": "Mechas con foil técnica profesional", "tag": "Mechas" },
     { "src": "https://images.unsplash.com/photo-1559599101-f09722fb4948?w=600&q=80", "alt": "Tratamiento keratina resultado liso brillante", "tag": "Keratina" },
-    { "src": "https://images.unsplash.com/photo-1634449571010-02389ed0f9b0?w=600&q=80", "alt": "Peinado para evento especial", "tag": "Eventos" }
+    { "src": "https://images.unsplash.com/photo-1634449571010-02389ed0f9b0?w=600&q=80", "alt": "Peinado para evento especial", "tag": "Eventos" },
+    { "src": "https://images.unsplash.com/photo-1560066984-138dadb4c035?w=600&q=80", "alt": "Ambiente del salón Magnolia", "tag": "Salón" },
+    { "src": "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&q=80", "alt": "Proceso de coloración profesional", "tag": "Color" },
+    { "src": "https://images.unsplash.com/photo-1605491668644-b82e54f9f2af?w=600&q=80", "alt": "Mechas before and after", "tag": "Mechas" },
+    { "src": "https://images.unsplash.com/photo-1562322140-8baeececf3df?w=600&q=80", "alt": "Balayage tones naturales", "tag": "Balayage" },
+    { "src": "https://images.unsplash.com/photo-1634449571010-02389ed0f9b0?w=600&q=80", "alt": "Peinado elegante para fiesta", "tag": "Eventos" },
+    { "src": "https://images.unsplash.com/photo-1559599101-f09722fb4948?w=600&q=80", "alt": "Keratina cabello liso", "tag": "Keratina" }
+  ],
+  "team": [
+    {
+      "name": "Lidia González",
+      "role": "Fundadora y Estilista Principal",
+      "bio": "Más de 18 años de experiencia en cortes y coloración. Especialista en balayage y técnicas de coloración francesa. Formada en São Paulo y Buenos Aires.",
+      "image": "https://images.unsplash.com/photo-1580618672591-eb180b1cd973?w=400&q=80",
+      "specialties": ["Balayage", "Coloración", "Cortes Dama"]
+    },
+    {
+      "name": "Claudia Muñoz",
+      "role": "Especialista en Tratamientos",
+      "bio": "Técnica en keratina, botox capilar y tratamientos reconstructivos. Busca la satisfacción total del cliente en cada servicio.",
+      "image": "https://images.unsplash.com/photo-1595152772835-219674b2a8a6?w=400&q=80",
+      "specialties": ["Keratina", "Botox Capilar", "Tratamientos"]
+    },
+    {
+      "name": "María Ferreira",
+      "role": "Estilista Senior",
+      "bio": "Especialista en peinados para eventos y bodas. Crea looks únicos que realzan la belleza natural de cada clienta.",
+      "image": "https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?w=400&q=80",
+      "specialties": ["Peinados Eventos", "Novias", "Mechas"]
+    },
+    {
+      "name": "Ana Rodríguez",
+      "role": "Asesora de Imagen",
+      "bio": "Disponible para responder WhatsApp y ayudarte a elegir el servicio ideal. Coordina turnos y te asesora sobre tratamientos.",
+      "image": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80",
+      "specialties": ["Atención WhatsApp", "Coordinación de Turnos", "Asesoría"]
+    }
   ],
   "testimonials": [
     { "name": "María Fernández", "initials": "MF", "color": "rose", "quote": "Llevo 2 años yendo a Magnolia. El mejor balayage que me han hecho en mi vida. La atención es impecable, me escuchan y siempre me van bien.", "service": "Balayage + Corte", "stars": 5 },
     { "name": "Carmen López", "initials": "CL", "color": "violet", "quote": "Me encantó el tratamiento de keratina. El cabello quedó súper suave y duró más de 3 meses. La relación calidad-precio es excelente.", "service": "Keratina", "stars": 5 },
     { "name": "Ana Martínez", "initials": "AM", "color": "amber", "quote": "La única peluquería donde siento que me escuchan de verdad. El ambiente es hermoso, muy tranquilo, y los precios muy justos.", "service": "Coloración + Tratamiento", "stars": 5 },
-    { "name": "Claudia Rodríguez", "initials": "CR", "color": "sky", "quote": "Fui para mi boda y me hicieron un peinado espectacular. Todas las invitadas preguntaron dónde me había hecho el pelo. ¡100% recomendado!", "service": "Peinado para Eventos", "stars": 5 }
+    { "name": "Claudia Rodríguez", "initials": "CR", "color": "sky", "quote": "Fui para mi boda y me hicieron un peinado espectacular. Todas las invitadas preguntaron dónde me había hecho el pelo. ¡100% recomendado!", "service": "Peinado para Eventos", "stars": 5 },
+    { "name": "Laura Benítez", "initials": "LB", "color": "rose", "quote": "Las mechas me quedaron increíbles. Lidia es una artista. El salón es súper limpio y te hacen sentir como en casa.", "service": "Mechas + Corte", "stars": 5 },
+    { "name": "Sofía Meza", "initials": "SM", "color": "violet", "quote": "Compré una tarjeta de regalo para mi mamá y le encantó. El servicio de novias es de otro nivel. Totalmente recomendado.", "service": "Peinado Novia", "stars": 5 },
+    { "name": "Patricia Ruiz", "initials": "PR", "color": "amber", "quote": "Me hice el botox capilar después de un verano terrible con el cabello. Resultado wow. Quedó súper brillante y manejable.", "service": "Botox Capilar", "stars": 5 },
+    { "name": "Gabriela Sanabria", "initials": "GS", "color": "sky", "quote": "Fui a hacerme un recorte de puntas y me convencieron de probar la nutrición. El cabello me quedó super suave.", "service": "Nutrición Capilar", "stars": 5 },
+    { "name": "Daniela Castillo", "initials": "DC", "color": "rose", "quote": "Tengo el cabello muy difícil y siempre me hacen sentir segura de que van a saber qué hacer. Las mejores manos de Asunción.", "service": "Coloración + Keratina", "stars": 5 },
+    { "name": "Valentina Acevedo", "initials": "VA", "color": "violet", "quote": "El Balayage que me hicieron es exactamente lo que quería. Nadie nota que es hecho. Parece color natural del sol.", "service": "Balayage", "stars": 5 },
+    { "name": "Isabel Morales", "initials": "IM", "color": "amber", "quote": "Primera vez que vengo y ya tengo mi próximo turno reservado. La keratina me duró 4 meses perfecto. Increíble.", "service": "Keratina", "stars": 5 },
+    { "name": "Carolina Estigarribia", "initials": "CE", "color": "sky", "quote": "Llevo a mi hija desde los 8 años. Hacen cortes infantiles con mucha paciencia. Ella sale feliz siempre.", "service": "Corte Infantil", "stars": 5 }
+  ],
+  "beforeAfter": [
+    {
+      "before": "https://images.unsplash.com/photo-1595476108010-b4d1ef1b45e9?w=800&q=80",
+      "after": "https://images.unsplash.com/photo-1562322140-8baeececf3df?w=800&q=80",
+      "label": "Balayage Tonos Miel",
+      "description": "Transformación complète con balayage en tonos miel y caramelo"
+    },
+    {
+      "before": "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=800&q=80",
+      "after": "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=800&q=80",
+      "label": "Coloración Completa",
+      "description": "Coloración profesional con reflejo rubio cálido"
+    }
+  ],
+  "promotions": [
+    {
+      "title": "Primer Servicio -20%",
+      "subtitle": "Nueva clienta? Te damos 20% de descuento en tu primera visita",
+      "badge": "Solo nuevas clientas",
+      "expires": "2026-06-30",
+      "waMessage": "Hola! Tengo el cupón de descuento de primera visita"
+    },
+    {
+      "title": "Pack Keratina + Corte",
+      "subtitle": "Combó keratina + corte a solo Gs. 400.000 (ahorrás Gs. 40.000)",
+      "badge": "Combo del mes",
+      "expires": "2026-06-30",
+      "waMessage": "Hola! Quiero reservar el Pack Keratina + Corte"
+    },
+    {
+      "title": "Referí y Ambas Ganan",
+      "subtitle": "Referí una amiga y ambas reciben 10% de descuento en su próximo turno",
+      "badge": "Programa de referidos",
+      "expires": null,
+      "waMessage": "Hola! Quiero participar del programa de referidos"
+    }
+  ],
+  "loyalty": {
+    "title": "Programa Magnolia Rewards",
+    "subtitle": "Cada turno te acerca a recompensas exclusivas",
+    "steps": [
+      { "after": "1 turno", "reward": "5% off en tu próximo servicio" },
+      { "after": "3 turnos", "reward": "Tratamiento de nutrición gratis" },
+      { "after": "5 turnos", "reward": "Balayage a precio preferencial" },
+      { "after": "10 turnos", "reward": "Corte gratis + regalo exclusivo" }
+    ]
+  },
+  "giftCards": [
+    { "name": "Momentito Magnolia", "price": "Gs. 50.000", "desc": "Perfecto para un recorte o brushing rápido", "icon": "sparkle" },
+    { "name": "时报 Magnolia", "price": "Gs. 100.000", "desc": "Ideal para un corte o peinado especial", "icon": "star" },
+    { "name": "Día de Princesa", "price": "Gs. 150.000", "desc": "Para un servicio completo de coloración o peinado", "icon": "crown" },
+    { "name": "Pack Novia", "price": "Gs. 300.000", "desc": "Peinado especial + maquillaje para el gran día", "icon": "heart" }
+  ],
+  "faqs": [
+    { "q": "¿Cuáles son los horarios?", "a": "Martes a sábado de 9:00 a 19:00. Lunes y domingos cerrados. Podés reservar por WhatsApp para coordinar tu turno." },
+    { "q": "¿Aceptan walk-ins?", "a": "Preferimos con cita previa para garantizarte atención personalizada. Escribinos por WhatsApp y te confirmamos en minutos." },
+    { "q": "¿Qué servicios ofrecen?", "a": "Cortes femeninos y masculinos, coloración, balayage, mechas, tratamientos capilares (keratina, botox, nutrición) y peinados para eventos." },
+    { "q": "¿Trabajan con extensiones?", "a": "Sí, ofrecemos colocación y mantenimiento de extensiones capilares. Consultá por WhatsApp para coordinar." },
+    { "q": "¿Cuánto cuesta un corte?", "a": "Corte dama desde Gs. 90.000, caballero desde Gs. 60.000. Todos los precios incluyen asesoría de estilo personalizada." },
+    { "q": "¿Hacen peinados de novia?", "a": "Sí! Tenemos servicio completo de peinado y maquillaje para novias. Incluye prueba y asesoramiento. Reservá con anticipación." },
+    { "q": "¿Qué productos usan?", "a": "Solo trabajamos con marcas profesionales de alta gama: Wella, L'Oréal Professionnel y Kérastase. Cuidamos tu cabello con lo mejor." },
+    { "q": "¿Puedo comprar tarjetas de regalo?", "a": "Sí! Tenemos tarjetas de regalo desde Gs. 50.000. Perfectas para cumpleaños, Navidad o simplemente para mimar a alguien especial." },
+    { "q": "¿Hacen tratamientos para hombres?", "a": "Sí! Cortés masculinos desde Gs. 60.000. También ofrecemos tratamientos de keratina y barbería básica." },
+    { "q": "¿Cómo reservo mi turno?", "a": "La forma más rápida es por WhatsApp: 0981 106 062. Te respondemos en menos de 5 minutos y coordinamos el mejor horario." },
+    { "q": "¿Tienen estacionamiento?", "a": "Estamos en zona céntrica con fácil acceso. Consultanos por WhatsApp y te enviamos opciones de estacionamiento cercanas." },
+    { "q": "¿Hacen descuentos por referidos?", "a": "Sí! Con nuestro programa Magnolia Rewards, referí una amiga y ambas reciben 10% de descuento en su próximo turno." }
   ],
   "cta": {
     "title": "Reservá tu Turno",

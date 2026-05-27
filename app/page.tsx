@@ -1,39 +1,47 @@
 import { Header } from "@/components/header"
-import { Hero } from "@/components/hero"
-import { WhyUs } from "@/components/why-us"
-import { Gallery } from "@/components/gallery"
-import { Testimonials } from "@/components/testimonials"
-import { BeforeAfter } from "@/components/before-after"
-import { Services } from "@/components/services"
-import { InstagramFeed } from "@/components/instagram-feed"
-import { Location } from "@/components/location"
-import { CtaBanner } from "@/components/cta-banner"
 import { Footer } from "@/components/footer"
 import { WhatsAppFloat } from "@/components/whatsapp-float"
+import { Hero } from "@/components/hero"
+import { Services } from "@/components/services"
+import { Gallery } from "@/components/gallery"
+import { Testimonials } from "@/components/testimonials"
+import { BeforeAfterSection } from "@/components/before-after"
+import { Location } from "@/components/location"
+import { CtaBanner } from "@/components/cta-banner"
+import { AnimatedStats } from "@/components/animated-stats"
+import { TeamSection } from "@/components/team-section"
+import { PromotionsSection } from "@/components/promotions"
+import { LoyaltySection } from "@/components/loyalty"
+import { GiftCardsSection } from "@/components/gift-cards"
+import { business } from "@/lib/config"
+import { waLink } from "@/lib/config"
 
-export default function Home() {
+export default function HomePage() {
   return (
     <>
       <Header />
       <Hero />
-      <WhyUs />
-      <Gallery />
-      <Testimonials />
-      <BeforeAfter />
+      <AnimatedStats />
       <Services />
-      <InstagramFeed />
-      <Location />
+      <BeforeAfterSection />
+      <PromotionsSection />
+      <LoyaltySection />
+      <GiftCardsSection />
+      <TeamSection />
+      <Testimonials />
+      <Gallery />
       <CtaBanner
-        waPhone="595986106062"
-        message="Hola!%20Quiero%20reservar%20una%20cita%20en%20Magnolia"
+        waPhone={business.whatsapp}
+        message="Hola! Quiero reservarme un turno en Magnolia"
       />
+      <Location />
       <Footer
-        businessName="Magnolia Peluquería"
-        tagline="Tu Mejor Look en Asunción"
-        address="Asunción, Paraguay"
-        phone="0981 106 062"
-        hours="Mar-Sáb: 9:00 - 19:00"
-        waPhone="595986106062"
+        businessName={business.name}
+        tagline={business.tagline}
+        address={business.address}
+        phone={business.phoneFormatted}
+        hours={business.hours}
+        waPhone={business.whatsapp}
       />
       <WhatsAppFloat />
     </>

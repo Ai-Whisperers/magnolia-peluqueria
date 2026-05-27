@@ -24,8 +24,14 @@ export const gallery = contentData.gallery
 export const testimonials = contentData.testimonials
 export const reasons = contentData.reasons
 export const cta = contentData.cta
+export const team = contentData.team
+export const beforeAfter = contentData.beforeAfter
+export const promotions = contentData.promotions
+export const loyalty = contentData.loyalty
+export const giftCards = contentData.giftCards
+export const faqs = contentData.faqs
 
-// ─── WhatsApp helpers ────────────────────────────────────────────────
+// ─── WhatsApp helpers ───────────────────────────────────────────────
 
 export function waLink(message?: string): string {
   const msg = message ?? business.ctaMessage
@@ -34,6 +40,10 @@ export function waLink(message?: string): string {
 
 export function waLinkForService(serviceName: string): string {
   return waLink(`Hola! Quiero reservar ${serviceName}`)
+}
+
+export function waLinkForPromotion(promotionMessage: string): string {
+  return waLink(promotionMessage)
 }
 
 // ─── Theme shortcuts ────────────────────────────────────────────────
