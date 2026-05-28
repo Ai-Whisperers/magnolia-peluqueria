@@ -11,6 +11,7 @@ type Lang = "es" | "en"
 const NAV_ITEMS_ES = [
   { label: "Inicio", href: "/es" },
   { label: "Servicios", href: "/es/servicios" },
+  { label: "Blog", href: "/es/blog" },
   { label: "Nosotros", href: "/es/nosotros" },
   { label: "Reservar", href: "/es/booking" },
   { label: "FAQ", href: "/es/faq" },
@@ -20,6 +21,7 @@ const NAV_ITEMS_ES = [
 const NAV_ITEMS_EN = [
   { label: "Home", href: "/en" },
   { label: "Services", href: "/en/servicios" },
+  { label: "Blog", href: "/en/blog" },
   { label: "About Us", href: "/en/nosotros" },
   { label: "Book", href: "/en/booking" },
   { label: "FAQ", href: "/en/faq" },

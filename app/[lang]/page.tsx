@@ -9,6 +9,7 @@ import { TeamSection } from "@/components/team-section"
 import { Testimonials } from "@/components/testimonials"
 import { GiftCardsSection } from "@/components/gift-cards"
 import { LoyaltySection } from "@/components/loyalty"
+import { InstagramFeed } from "@/components/instagram-feed"
 import { Footer } from "@/components/footer"
 import { WhatsAppFloat } from "@/components/whatsapp-float"
 import { getContent } from "@/lib/config"
@@ -46,6 +47,7 @@ export default async function LangHomePage({
       <TeamSection />
       <Testimonials />
       <LoyaltySection />
+      <InstagramFeed />
       <GiftCardsSection />
       <Footer
         businessName={c.business.name}

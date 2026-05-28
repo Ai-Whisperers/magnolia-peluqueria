@@ -14,13 +14,13 @@ interface AnimatedStatProps {
 }
 
 function useCountUp(target: number, duration = 1500, isActive: boolean) {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(target) // SSR-safe: start at final value
   const frameRef = useRef(0)
   const startRef = useRef(0)
 
   useEffect(() => {
     if (!isActive) {
-      setCount(0)
+      setCount(target)
       return
     }
     startRef.current = Date.now()

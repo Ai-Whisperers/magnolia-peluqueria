@@ -151,7 +151,7 @@ export function BookingForm({ supabaseConfigured, lang = "es" }: BookingFormProp
 
   if (submitted) {
     return (
-      <div className="text-center py-12">
+      <div className="text-center py-8">
         {(() => {
           const apiError = (typeof window !== "undefined" ? (window as unknown as Record<string, unknown>).__magnolia_booking_error as string : null) ?? null
           const fallbackUrl = (typeof window !== "undefined" ? (window as unknown as Record<string, unknown>).__magnolia_booking_fallback as string : null) ?? null
@@ -162,25 +162,66 @@ export function BookingForm({ supabaseConfigured, lang = "es" }: BookingFormProp
                   <strong>⚠️ {apiError}</strong>
                 </div>
               )}
-              <div className="w-20 h-20 rounded-full bg-secondary/10 flex items-center justify-center mx-auto mb-6">
-                <Check className="w-10 h-10 text-secondary" />
+
+              {/* Booking confirmation */}
+              <div className="w-16 h-16 rounded-full bg-secondary/10 flex items-center justify-center mx-auto mb-5">
+                <Check className="w-8 h-8 text-secondary" />
               </div>
               <h3 className="font-heading text-2xl font-bold text-primary mb-3">{lang === "es" ? "¡Casi listo!" : "Almost done!"}</h3>
-              <p className="text-foreground-light mb-8 max-w-sm mx-auto">
+              <p className="text-foreground-light mb-6 max-w-sm mx-auto text-sm">
                 {lang === "es"
-                  ? "Completá tu reserva enviándonos un mensaje por WhatsApp con tus datos."
-                  : "Complete your booking by sending us a WhatsApp message with your details."}
+                  ? "Completá tu reserva enviándonos un mensaje por WhatsApp."
+                  : "Complete your booking by sending us a WhatsApp message."}
               </p>
               <a
                 href={fallbackUrl ?? `https://wa.me/${waPhone}?text=${encodeURIComponent(getWhatsAppMessage())}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 bg-[#25D366] text-white font-bold px-8 py-4 rounded-xl hover:bg-[#20BD5A] transition-all text-lg"
+                className="inline-flex items-center gap-3 bg-[#25D366] text-white font-bold px-8 py-3.5 rounded-xl hover:bg-[#20BD5A] transition-all text-base mb-6"
               >
-                <MessageCircle className="w-6 h-6" />
-                {lang === "es" ? "Reservar por WhatsApp" : "Book via WhatsApp"}
+                <MessageCircle className="w-5 h-5" />
+                {lang === "es" ? "Confirmar por WhatsApp" : "Confirm via WhatsApp"}
               </a>
-              <p className="text-xs text-foreground-muted mt-4">
+
+              {/* Loyalty progress tracker */}
+              <div className="bg-primary rounded-2xl p-5 text-white mb-5">
+                <p className="text-xs text-white/60 uppercase tracking-widest mb-3 font-semibold">
+                  {lang === "es" ? "Programa de Rewards" : "Rewards Program"}
+                </p>
+                <div className="grid grid-cols-4 gap-2">
+                  {[
+                    { filled: true, label: lang === "es" ? "Turno reservado" : "Booked", icon: Check },
+                    { filled: false, label: lang === "es" ? "Visita completada" : "Visit done", icon: Check },
+                    { filled: false, label: lang === "es" ? "Tercera visita" : "Third visit", icon: Check },
+                    { filled: false, label: lang === "es" ? "Premio especial" : "Special reward", icon: Check },
+                  ].map(({ filled, label, icon: Icon }, i) => (
+                    <div key={i} className="flex flex-col items-center text-center">
+                      <div className={`w-8 h-8 rounded-full flex items-center justify-center mb-1 text-xs ${filled ? "bg-secondary text-white" : "bg-white/10 text-white/30"}`}>
+                        <Icon className="w-4 h-4" />
+                      </div>
+                      <p className="text-[10px] leading-tight" style={{ color: filled ? "var(--color-secondary)" : "rgba(255,255,255,0.3)" }}>{label}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Gift card upsell */}
+              <div className="bg-card rounded-xl border border-border p-4 text-left mb-4">
+                <p className="text-xs text-foreground-muted mb-2">{lang === "es" ? "¿Regalás un momento especial?" : "Gift someone special?"}</p>
+                <p className="font-semibold text-primary text-sm mb-3">
+                  {lang === "es"
+                    ? "Tarjetas de regalo disponibles desde Gs. 50.000"
+                    : "Gift cards starting from Gs. 50.000"}
+                </p>
+                <a
+                  href={`/${lang}/reserva`}
+                  className="inline-flex items-center gap-2 bg-rose-50 text-rose-600 font-semibold text-sm px-4 py-2 rounded-lg hover:bg-rose-100 transition-colors"
+                >
+                  🎁 {lang === "es" ? "Ver tarjetas de regalo" : "View gift cards"}
+                </a>
+              </div>
+
+              <p className="text-xs text-foreground-muted">
                 {lang === "es" ? "Te respondemos en menos de 5 minutos" : "We reply in under 5 minutes"}
               </p>
             </>

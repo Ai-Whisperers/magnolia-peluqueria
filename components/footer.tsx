@@ -42,6 +42,7 @@ export function Footer({
               <Link href={`/${lang}/servicios`} className="text-white/80 hover:text-white transition-colors">{labels.servicios}</Link>
               <Link href={`/${lang}/nosotros`} className="text-white/80 hover:text-white transition-colors">{labels.nosotras}</Link>
               <Link href={`/${lang}/faq`} className="text-white/80 hover:text-white transition-colors">{labels.faq}</Link>
+              <Link href={`/${lang}/blog`} className="text-white/80 hover:text-white transition-colors">{lang === "es" ? "Blog" : "Blog"}</Link>
               <Link href={`/${lang}/contacto`} className="text-white/80 hover:text-white transition-colors">{labels.contacto}</Link>
             </div>
           </div>

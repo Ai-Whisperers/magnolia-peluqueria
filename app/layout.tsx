@@ -35,7 +35,13 @@ export const metadata: Metadata = {
     googleBot: { index: true, follow: true, "max-video-preview": -1, "max-image-preview": "large", "max-snippet": -1 },
   },
   icons: { icon: "/favicon.ico", apple: "/icon-192.png" },
-  alternates: { canonical: "https://magnolia-peluqueria.paragu-ai.com" },
+  alternates: {
+    canonical: "https://magnolia-peluqueria.paragu-ai.com",
+    languages: {
+      "es-PY": "https://magnolia-peluqueria.paragu-ai.com/es",
+      "en-US": "https://magnolia-peluqueria.paragu-ai.com/en",
+    },
+  },
   openGraph: {
     title: "Magnolia Peluquería | Cortés y Coloración Profesional",
     description: "Peluquería profesional en Asunción. Cortes, coloración, balayage, keratina y tratamientos capilares.",
@@ -93,11 +99,17 @@ const jsonLd = {
     "@type": "OfferCatalog",
     name: "Servicios de peluquería",
     itemListElement: [
-      { "@type": "Offer", name: "Corte Dama", priceCurrency: "PYG" },
-      { "@type": "Offer", name: "Balayage / Mechas", priceCurrency: "PYG" },
-      { "@type": "Offer", name: "Keratina", priceCurrency: "PYG" },
-      { "@type": "Offer", name: "Botox Capilar", priceCurrency: "PYG" },
+      { "@type": "Offer", name: "Corte Dama", priceCurrency: "PYG", price: "90000" },
+      { "@type": "Offer", name: "Balayage / Mechas", priceCurrency: "PYG", price: "400000" },
+      { "@type": "Offer", name: "Keratina", priceCurrency: "PYG", price: "350000" },
+      { "@type": "Offer", name: "Botox Capilar", priceCurrency: "PYG", price: "200000" },
+      { "@type": "Offer", name: "Corte Caballero", priceCurrency: "PYG", price: "60000" },
     ],
+  },
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: "4.9",
+    reviewCount: "800",
   },
   potentialAction: {
     "@type": "ReserveAction",
@@ -109,6 +121,15 @@ const jsonLd = {
     result: { "@type": "Reservation", name: "Reserva de turno" },
   },
   sameAs: ["https://instagram.com/magnolia_peluqueria"],
+}
+
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Inicio", item: "https://magnolia-peluqueria.paragu-ai.com" },
+    { "@type": "ListItem", position: 2, name: "Magnolia Peluquería", item: "https://magnolia-peluqueria.paragu-ai.com" },
+  ],
 }
 
 const faqJsonLd = {
@@ -175,6 +196,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
         />
       </head>
       <body className="font-body antialiased bg-background text-foreground">
