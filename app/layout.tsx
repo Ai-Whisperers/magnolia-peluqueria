@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import { Montserrat, Playfair_Display } from "next/font/google"
 import "./globals.css"
-import CookieConsent from "@/components/CookieConsent"
+import { CookieConsent } from "@/components/CookieConsent"
 import { WhatsAppFloat } from "@/components/whatsapp-float"
 import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from "@vercel/speed-insights/next"
@@ -173,7 +173,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="font-body antialiased bg-background text-foreground">
         {children}
-        <WhatsAppFloat />
+        <WhatsAppFloat lang="es" />
         <CookieConsent />
         <SpeedInsights />
         <Analytics />

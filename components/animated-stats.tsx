@@ -1,5 +1,6 @@
 "use client"
 import { useEffect, useRef, useState } from "react"
+import { statsData } from "@/lib/config"
 
 interface StatItem {
   value: string
@@ -73,13 +74,17 @@ function AnimateOnce({ value, label, suffix = "" }: { value: string; label: stri
   )
 }
 
-export function AnimatedStats() {
-  const stats: StatItem[] = [
-    { value: "15", label: "Años de experiencia", suffix: "+" },
-    { value: "800", label: "Clientas satisfechas", suffix: "+" },
-    { value: "4.9", label: "Estrellas en Google", suffix: " ★" },
-    { value: "100", label: "Servicios realizados", suffix: "+" },
-  ]
+interface AnimatedStatsProps {
+  lang?: "es" | "en"
+}
+
+export function AnimatedStats({ lang = "es" }: AnimatedStatsProps) {
+  const rawStats = statsData(lang)
+  const stats: StatItem[] = rawStats.map((s: { value: string; label: string }) => ({
+    value: s.value,
+    label: s.label,
+    suffix: s.value.includes("★") ? "★" : s.value.match(/\d/) ? "+" : "",
+  }))
 
   return (
     <section className="py-16 bg-white border-y border-gray-100">

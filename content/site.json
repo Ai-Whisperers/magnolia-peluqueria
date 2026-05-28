@@ -24,7 +24,23 @@
     },
     "seo": {
       "ogImage": "/images/og-default.jpg",
-      "twitterHandle": ""
+      "twitterHandle": "",
+      "analyticsId": "G-XXXXXXXXXX"
     }
+  },
+  "features": {
+    "exitIntentPopup": true,
+    "cookieConsent": true,
+    "testimonialsCarousel": true,
+    "bookingForm": true,
+    "googleMapsEmbed": true,
+    "breadcrumbs": true,
+    "localBusinessJsonLd": true,
+    "faqJsonLd": true,
+    "beforeAfterSlider": true,
+    "promoBanner": true,
+    "loyaltyProgram": true,
+    "giftCards": true,
+    "instagramLink": true
   }
 }

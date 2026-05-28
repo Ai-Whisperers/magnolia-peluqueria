@@ -2,6 +2,7 @@
 import { useState } from "react"
 import { Scissors, Palette, Sparkles, Sparkle, Clock, ChevronDown } from "lucide-react"
 import { services, waLinkForService, getColorMap, ColorName } from "@/lib/config"
+import type { Lang } from "@/lib/config"
 
 const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
   scissors: Scissors,
@@ -10,20 +11,28 @@ const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
   sparkle: Sparkle,
 }
 
-export function Services() {
+interface ServicesProps {
+  lang: Lang
+}
+
+export function Services({ lang }: ServicesProps) {
   const [openCat, setOpenCat] = useState<string | null>(null)
+
+  const labels = {
+    es: { header: "Servicios", sub: "Servicios profesionales con productos de alta gama. Cada tratamiento incluye diagnóstico personalizado.", book: "Reservar" },
+    en: { header: "Services", sub: "Professional services with premium products. Every treatment includes a personalized diagnosis.", book: "Book" },
+  }
+  const l = labels[lang] ?? labels.es
 
   return (
     <section className="py-20 bg-background" id="servicios">
       <div className="container-page">
         <div className="text-center mb-14">
           <span className="inline-flex items-center gap-2 text-sm font-bold text-secondary uppercase tracking-widest mb-4">
-            <Sparkles className="w-4 h-4" /> Servicios
+            <Sparkles className="w-4 h-4" /> {l.header}
           </span>
           <h2 className="font-heading text-4xl font-bold text-primary mb-4">Nuestros Servicios</h2>
-          <p className="text-foreground-light max-w-xl mx-auto">
-            Servicios profesionales con productos de alta gama. Cada tratamiento incluye diagnóstico personalizado.
-          </p>
+          <p className="text-foreground-light max-w-xl mx-auto">{l.sub}</p>
         </div>
 
         {/* Category tabs */}
@@ -90,7 +99,7 @@ export function Services() {
                           <span className="font-bold text-primary text-lg whitespace-nowrap">{svc.price}</span>
                           <a href={waLinkForService(svc.name)} target="_blank" rel="noopener noreferrer"
                             className="text-xs bg-secondary text-white px-4 py-2 rounded-full font-semibold hover:bg-secondary-dark transition-colors whitespace-nowrap">
-                            Reservar
+                            {l.book}
                           </a>
                         </div>
                       </div>

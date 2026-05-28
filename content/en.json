@@ -1,0 +1,415 @@
+{
+  "meta": {
+    "locale": "en",
+    "author": "magnolia"
+  },
+  "business": {
+    "name": "Magnolia Peluquería",
+    "tagline": "Your Best Look in Asunción",
+    "whatsapp": "595986106062",
+    "whatsappMessage": "Hi!%20I%20want%20to%20book%20an%20appointment%20at%20Magnolia",
+    "phoneFormatted": "0981 106 062",
+    "phoneLink": "tel:+595****6062",
+    "address": "Asunción, Paraguay",
+    "addressDetail": "Downtown Asunción",
+    "hours": "Tuesday to Saturday: 9:00 AM - 7:00 PM",
+    "hoursClosed": "Sundays and Mondays closed",
+    "instagram": "magnolia_peluqueria",
+    "instagramUrl": "https://instagram.com/magnolia_peluqueria",
+    "mapsEmbed": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3706.5!2d-57.63535!3d-25.26327!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMfCsDE1JzM3LjQiUyA1N8KwMzcnNTUuNiJF!5e0!3m2!1sen!2spy!4v1700000000000!5m2!1sen!2spy",
+    "mapsUrl": "https://www.google.com/maps?q=Magnolia+Peluqueria+Asuncion+Paraguay&hl=en&entry=ttu",
+    "email": "info@magnolia-peluqueria.com",
+    "ctaMessage": "Hi!%20I%20want%20to%20book%20an%20appointment%20at%20Magnolia"
+  },
+  "hero": {
+    "slides": [
+      {
+        "image": "https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1600&q=85",
+        "title": "Magnolia Peluquería",
+        "subtitle": "Where your hair finds its best version",
+        "badge": "Asunción, Paraguay"
+      },
+      {
+        "image": "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=1600&q=85",
+        "title": "Professional Coloring",
+        "subtitle": "Tones that enhance your natural beauty",
+        "badge": "Balayage · Highlights · Color"
+      },
+      {
+        "image": "https://images.unsplash.com/photo-1595476108010-b4d1ef1b45e9?w=1600&q=85",
+        "title": "Transformative Cuts",
+        "subtitle": "Personalized consultation for every face shape",
+        "badge": "Cuts · Styling · Events"
+      }
+    ],
+    "whatsappMessage": "Hi!%20I%20want%20information%20about%20your%20services"
+  },
+  "stats": [
+    { "value": "15+", "label": "Years of experience" },
+    { "value": "800+", "label": "Happy clients" },
+    { "value": "4.9", "label": "Google stars", "suffix": "★" }
+  ],
+  "reasons": [
+    { "title": "Premium Products", "desc": "We use high-end international brands to guarantee exceptional results." },
+    { "title": "Personalized Attention", "desc": "Each client receives individual consultation to find their best style." },
+    { "title": "Cozy Environment", "desc": "Spaces designed so you feel comfortable and relaxed." }
+  ],
+  "services": {
+    "categories": [
+      {
+        "name": "Haircuts",
+        "icon": "scissors",
+        "color": "rose",
+        "items": [
+          { "name": "Ladies Cut", "price": "Gs. 90,000", "desc": "Professional cut with personalized style consultation based on your face shape", "duration": "40 min", "popular": false },
+          { "name": "Mens Cut", "price": "Gs. 60,000", "desc": "Modern or classic cut with impeccable finish", "duration": "30 min", "popular": false },
+          { "name": "Kids Cut", "price": "Gs. 50,000", "desc": "Haircut for kids up to 12 years old in a fun environment", "duration": "25 min", "popular": false },
+          { "name": "Trim", "price": "Gs. 40,000", "desc": "Maintenance of length and shape without changing style", "duration": "20 min", "popular": false }
+        ]
+      },
+      {
+        "name": "Coloring",
+        "icon": "palette",
+        "color": "violet",
+        "items": [
+          { "name": "Full Color", "price": "Gs. 250,000", "desc": "Professional coloring with premium products that care for your hair", "duration": "90 min", "popular": false },
+          { "name": "Balayage", "price": "Gs. 400,000", "desc": "French technique of degraded highlights for a natural, sunny look", "duration": "2 hours", "popular": true },
+          { "name": "Highlights", "price": "Gs. 300,000", "desc": "Traditional foil highlights for a defined result", "duration": "90 min", "popular": false },
+          { "name": "Color Tonic", "price": "Gs. 80,000", "desc": "Ammonia-free color treatment for refreshing between visits", "duration": "45 min", "popular": false }
+        ]
+      },
+      {
+        "name": "Treatments",
+        "icon": "sparkles",
+        "color": "amber",
+        "items": [
+          { "name": "Keratin", "price": "Gs. 350,000", "desc": "Progressive keratin straightening. Smooth results for 3-4 months", "duration": "2 hours", "popular": true },
+          { "name": "Hair Botox", "price": "Gs. 200,000", "desc": "Intensive reconstructive treatment for damaged or dry hair", "duration": "60 min", "popular": false },
+          { "name": "Hair Nutrition", "price": "Gs. 120,000", "desc": "Nutritive treatment with essential oils for shine and softness", "duration": "40 min", "popular": false },
+          { "name": "Deep Hydration", "price": "Gs. 90,000", "desc": "Intensive hydration with nutritive mask for dry hair", "duration": "35 min", "popular": false }
+        ]
+      },
+      {
+        "name": "Styling",
+        "icon": "sparkle",
+        "color": "sky",
+        "items": [
+          { "name": "Event Styling", "price": "Gs. 150,000", "desc": "Special hairstyles for weddings, parties and formal events", "duration": "1 hour", "popular": false },
+          { "name": "Updo", "price": "Gs. 100,000", "desc": "Elegant hairstyles for special occasions", "duration": "45 min", "popular": false },
+          { "name": "Blowout", "price": "Gs. 50,000", "desc": "Blow dry and style with natural volume", "duration": "30 min", "popular": false }
+        ]
+      }
+    ]
+  },
+  "gallery": [
+    { "src": "https://images.unsplash.com/photo-1562322140-8baeececf3df?w=600&q=80", "alt": "Professional balayage with honey tones", "tag": "Balayage" },
+    { "src": "https://images.unsplash.com/photo-1595476108010-b4d1ef1b45e9?w=600&q=80", "alt": "Modern cut with degradation", "tag": "Cut" },
+    { "src": "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&q=80", "alt": "Full color with blonde highlights", "tag": "Color" },
+    { "src": "https://images.unsplash.com/photo-1605491668644-b82e54f9f2af?w=600&q=80", "alt": "Highlights with foil professional technique", "tag": "Highlights" },
+    { "src": "https://images.unsplash.com/photo-1559599101-f09722fb4948?w=600&q=80", "alt": "Keratin treatment result smooth and shiny", "tag": "Keratin" },
+    { "src": "https://images.unsplash.com/photo-1634449571010-02389ed0f9b0?w=600&q=80", "alt": "Hairstyle for special event", "tag": "Events" },
+    { "src": "https://images.unsplash.com/photo-1560066984-138dadb4c035?w=600&q=80", "alt": "Magnolia salon environment", "tag": "Salon" },
+    { "src": "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&q=80", "alt": "Professional coloring process", "tag": "Color" },
+    { "src": "https://images.unsplash.com/photo-1605491668644-b82e54f9f2af?w=600&q=80", "alt": "Highlights before and after", "tag": "Highlights" },
+    { "src": "https://images.unsplash.com/photo-1562322140-8baeececf3df?w=600&q=80", "alt": "Balayage natural tones", "tag": "Balayage" },
+    { "src": "https://images.unsplash.com/photo-1634449571010-02389ed0f9b0?w=600&q=80", "alt": "Elegant party hairstyle", "tag": "Events" },
+    { "src": "https://images.unsplash.com/photo-1559599101-f09722fb4948?w=600&q=80", "alt": "Keratin straight hair", "tag": "Keratin" }
+  ],
+  "team": [
+    {
+      "name": "Lidia González",
+      "role": "Founder & Head Stylist",
+      "bio": "Over 18 years of experience in cuts and coloring. Specialist in balayage and French coloring techniques. Trained in São Paulo and Buenos Aires.",
+      "image": "https://images.unsplash.com/photo-1580618672591-eb180b1cd973?w=400&q=80",
+      "specialties": ["Balayage", "Coloring", "Ladies Cuts"]
+    },
+    {
+      "name": "Claudia Muñoz",
+      "role": "Treatment Specialist",
+      "bio": "Technician in keratin, hair botox and reconstructive treatments. Seeks total client satisfaction with every service.",
+      "image": "https://images.unsplash.com/photo-1595152772835-219674b2a8a6?w=400&q=80",
+      "specialties": ["Keratin", "Hair Botox", "Treatments"]
+    },
+    {
+      "name": "María Ferreira",
+      "role": "Senior Stylist",
+      "bio": "Specialist in event and wedding hairstyles. Creates unique looks that enhance each client's natural beauty.",
+      "image": "https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?w=400&q=80",
+      "specialties": ["Event Styling", "Brides", "Highlights"]
+    },
+    {
+      "name": "Ana Rodríguez",
+      "role": "Image Advisor",
+      "bio": "Available to answer WhatsApp and help you choose the ideal service. Coordinates appointments and advises on treatments.",
+      "image": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80",
+      "specialties": ["WhatsApp Support", "Appointment Coordination", "Consultation"]
+    }
+  ],
+  "testimonials": [
+    { "name": "María Fernández", "initials": "MF", "color": "rose", "quote": "I've been going to Magnolia for 2 years. The best balayage I've ever had. The attention is impeccable, they listen to me and it always turns out great.", "service": "Balayage + Cut", "stars": 5 },
+    { "name": "Carmen López", "initials": "CL", "color": "violet", "quote": "I loved the keratin treatment. My hair was super smooth and lasted over 3 months. The quality-price ratio is excellent.", "service": "Keratin", "stars": 5 },
+    { "name": "Ana Martínez", "initials": "AM", "color": "amber", "quote": "The only salon where I feel like they really listen. The environment is beautiful, very calm, and the prices are very fair.", "service": "Coloring + Treatment", "stars": 5 },
+    { "name": "Claudia Rodríguez", "initials": "CR", "color": "sky", "quote": "I went for my wedding and they did an spectacular hairstyle. All the guests asked where I had my hair done. 100% recommended!", "service": "Event Styling", "stars": 5 },
+    { "name": "Laura Benítez", "initials": "LB", "color": "rose", "quote": "The highlights turned out incredible. Lidia is an artist. The salon is super clean and they make you feel at home.", "service": "Highlights + Cut", "stars": 5 },
+    { "name": "Sofía Meza", "initials": "SM", "color": "violet", "quote": "I bought a gift card for my mom and she loved it. The bridal service is on another level. Totally recommended.", "service": "Bridal Hairstyle", "stars": 5 },
+    { "name": "Patricia Ruiz", "initials": "PR", "color": "amber", "quote": "I did the hair botox after a terrible summer with my hair. Wow result. It was super shiny and manageable.", "service": "Hair Botox", "stars": 5 },
+    { "name": "Gabriela Sanabria", "initials": "GS", "color": "sky", "quote": "I went for a trim and they convinced me to try the nutrition treatment. My hair was super soft.", "service": "Hair Nutrition", "stars": 5 },
+    { "name": "Daniela Castillo", "initials": "DC", "color": "rose", "quote": "I have very difficult hair and they always make me feel confident they'll know what to do. The best hands in Asunción.", "service": "Coloring + Keratin", "stars": 5 },
+    { "name": "Valentina Acevedo", "initials": "VA", "color": "violet", "quote": "The Balayage they did is exactly what I wanted. Nobody notices it's done. It looks like natural sun color.", "service": "Balayage", "stars": 5 },
+    { "name": "Isabel Morales", "initials": "IM", "color": "amber", "quote": "First time here and I already have my next appointment booked. The keratin lasted 4 months perfectly. Amazing.", "service": "Keratin", "stars": 5 },
+    { "name": "Carolina Estigarribia", "initials": "CE", "color": "sky", "quote": "I've been taking my daughter since she was 8. They do kids cuts with a lot of patience. She always leaves happy.", "service": "Kids Cut", "stars": 5 }
+  ],
+  "beforeAfter": [
+    {
+      "before": "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=800&q=80",
+      "after": "https://images.unsplash.com/photo-1562322140-8baeececf3df?w=800&q=80",
+      "label": "Balayage Transformación",
+      "description": "De cabello sin vida a tonos miel naturales con balayage francés"
+    },
+    {
+      "before": "https://images.unsplash.com/photo-1595476108010-b4d1ef1b45e9?w=800&q=80",
+      "after": "https://images.unsplash.com/photo-1605491668644-b82e54f9f2af?w=800&q=80",
+      "label": "Corte + Color",
+      "description": "Corte moderno con dégradé y coloración en tonos castaño-rojizo"
+    }
+  ],
+  "promotions": [
+    {
+      "title": "Primera vez?",
+      "badge": "20% OFF",
+      "desc": "20% de descuento en tu primera visita",
+      "cta": "Reservar ahora",
+      "highlight": true
+    }
+  ],
+  "loyalty": {
+    "title": "Club de Fidelidad",
+    "desc": "Acumulá sellos en cada visita y canjealos por descuentos especiales.",
+    "steps": [
+      "Pedí tu tarjeta en cada visita",
+      "Acumulá 6 sellos",
+      "Canjealos por un 15% de descuento en tu próximo servicio"
+    ]
+  },
+  "giftCards": {
+    "title": "Tarjetas de Regalo",
+    "desc": "El regalo perfecto para alguien especial. Tarjetas disponibles en cualquier denomination."
+  },
+  "faqs": [
+    { "q": "¿Necesito turno o puedo ir sin cita?", "a": "Recomendamos reservar con anticipación, especialmente para tratamientos y eventos. Podés pedir tu turno por WhatsApp. Sin embargo, si tenemos disponibilidad, te atendemos sin cita." },
+    { "q": "¿Cuál es el rango de precios?", "a": "Nuestros cortes van desde Gs. 50.000 hasta Gs. 90.000. Los tratamientos de coloración arrancan en Gs. 250.000. Keratina y peinados para eventos tienen precios según complejidad. Consultanos por WhatsApp para un presupuesto exacto." },
+    { "q": "¿Usan productos de calidad?", "a": "Sí, trabajamos exclusivamente con marcas internacionales premium como Wella, Schwarzkopf y Alfaparf. Cuidamos tu cabello usando productos profesionales en cada servicio." },
+    { "q": "¿Hacen servicios para novias?", "a": "Sí! Contamos con servicio completo de novias: peinado, maquillaje y prueba previa. Reservá con al menos 2 semanas de anticipación para garantizar disponibilidad." },
+    { "q": "¿Hay estacionamiento?", "a": "Estamos en zona céntrica de Asunción con fácil acceso. Hay estacionamiento público en las cercanías y algunos restaurantes vecinos que permiten uso de sus cocheras." }
+  ],
+  "cta": {
+    "title": "Reservá tu turno",
+    "subtitle": "Te esperamos para transformer tu look",
+    "whatsapp": "Hola!%20Quiero%20reservar%20un%20turno%20en%20Magnolia",
+    "button": "Reservar por WhatsApp"
+  },
+  "nav": {
+    "home": "Home",
+    "home_es": "Inicio",
+    "services": "Services",
+    "services_es": "Servicios",
+    "about": "About Us",
+    "about_es": "Nosotros",
+    "booking": "Book Now",
+    "booking_es": "Reservar",
+    "faq": "FAQ",
+    "faq_es": "Preguntas Frecuentes",
+    "contact": "Contact",
+    "contact_es": "Contacto",
+    "terms": "Terms",
+    "terms_es": "Términos",
+    "privacy": "Privacy",
+    "privacy_es": "Privacidad"
+  },
+  "footer": {
+    "links": "Links",
+    "services_label": "Services",
+    "about_label": "About Us",
+    "faq_label": "FAQ",
+    "contact_label": "Contact",
+    "legal": "Legal",
+    "privacy_label": "Privacy",
+    "terms_label": "Terms",
+    "copyright": "All rights reserved.",
+    "hours_label": "Hours",
+    "whatsapp_label": "WhatsApp",
+    "closed_days": "Sundays and Mondays closed"
+  },
+  "hero": {
+    "slides": [
+      {
+        "image": "https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1600&q=85",
+        "title": "Magnolia Peluquería",
+        "subtitle": "Where your hair finds its best version",
+        "badge": "Asunción, Paraguay"
+      },
+      {
+        "image": "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=1600&q=85",
+        "title": "Professional Coloring",
+        "subtitle": "Tones that enhance your natural beauty",
+        "badge": "Balayage · Highlights · Color"
+      },
+      {
+        "image": "https://images.unsplash.com/photo-1595476108010-b4d1ef1b45e9?w=1600&q=85",
+        "title": "Transformative Cuts",
+        "subtitle": "Personalized consultation for every face shape",
+        "badge": "Cuts · Styling · Events"
+      }
+    ],
+    "whatsappMessage": "Hi!%20I%20want%20information%20about%20your%20services",
+    "cta_button": "Book via WhatsApp",
+    "view_services": "View Services"
+  },
+  "about": {
+    "meta": {
+      "title": "About Magnolia | Your Best Look in Asunción",
+      "description": "18 years of experience in cuts, coloring, balayage and hair treatments. Meet our team and our story."
+    },
+    "heroTitle": "18 Years Making Asunción Shine",
+    "heroSubtitle": "Magnolia was born in 2008 from Lidia's passion to create a space where every woman feels unique.",
+    "valuesSectionTitle": "What Defines Us",
+    "valuesSectionSubtitle": "The values that guide every service.",
+    "values": [
+      { "icon": "Star", "label": "Excellence", "desc": "Every service is delivered with maximum care." },
+      { "icon": "Users", "label": "Community", "desc": "More than clients, we are a community." },
+      { "icon": "Award", "label": "Constant Training", "desc": "Regular updates with international courses." },
+      { "icon": "Clock", "label": "Punctuality", "desc": "We respect your time." }
+    ]
+  },
+  "booking": {
+    "meta": {
+      "title": "Book an Appointment | Magnolia Peluquería",
+      "description": "Book your appointment at Magnolia Peluquería. Fill in the form and we'll contact you via WhatsApp in under 5 minutes."
+    },
+    "title": "Book Your Appointment",
+    "subtitle": "Fill in the form and we'll contact you via WhatsApp in under 5 minutes.",
+    "form_name_label": "Your Name",
+    "form_name_placeholder": "Full name",
+    "form_phone_label": "Phone Number",
+    "form_phone_placeholder": "09XX XXX XXX",
+    "form_service_label": "Service",
+    "form_service_placeholder": "Select a service",
+    "form_date_label": "Preferred Date",
+    "form_notes_label": "Additional Notes",
+    "form_notes_placeholder": "Any details about what you need...",
+    "form_submit": "Book via WhatsApp",
+    "form_success": "We'll contact you shortly!",
+    "form_error": "Something went wrong. Try via WhatsApp.",
+    "whatsapp_fallback": "Or book directly via WhatsApp"
+  },
+  "faqs": {
+    "meta": {
+      "title": "FAQ | Magnolia Peluquería",
+      "description": "Frequently asked questions about Magnolia Peluquería services, prices, booking and more."
+    },
+    "title": "Frequently Asked Questions",
+    "subtitle": "Everything you need to know before your visit.",
+    "contact_prompt": "Still have questions?"
+  },
+  "contact": {
+    "meta": {
+      "title": "Contact | Magnolia Peluquería",
+      "description": "Contact Magnolia Peluquería. Visit us in Asunción, call or write via WhatsApp."
+    },
+    "title": "Get in Touch",
+    "subtitle": "We'd love to hear from you",
+    "whatsapp_cta": "Write via WhatsApp",
+    "phone_cta": "Call Us",
+    "hours_label": "Hours",
+    "visit_label": "Visit Us",
+    "map_label": "Find us on the map",
+    "cta_prompt": "Ready to transform your look?"
+  },
+  "terminos": {
+    "meta": {
+      "title": "Terms of Service | Magnolia Peluquería",
+      "description": "Terms and conditions for Magnolia Peluquería services."
+    },
+    "title": "Terms of Service",
+    "content": {
+      "intro": "By using Magnolia Peluquería services, you agree to these terms.",
+      "appointments": "Appointments can be booked via WhatsApp or in person. Please cancel or reschedule at least 24 hours in advance.",
+      "payments": "Payment is due at the time of service. We accept cash and mobile payment.",
+      "cancellations": "Cancellations with less than 24 hours notice may incur a 50% fee.",
+      "refunds": "Services are non-refundable once completed. Complaints must be raised within 48 hours."
+    }
+  },
+  "privacidad": {
+    "meta": {
+      "title": "Privacy Policy | Magnolia Peluquería",
+      "description": "Privacy policy for Magnolia Peluquería website and services."
+    },
+    "title": "Privacy Policy",
+    "content": {
+      "intro": "Magnolia Peluquería respects your privacy.",
+      "data_collection": "We collect your contact information only for appointment purposes. Your data is never shared with third parties.",
+      "cookies": "This website uses cookies to improve your experience. You can decline non-essential cookies.",
+      "contact": "For privacy concerns, contact us via WhatsApp."
+    }
+  },
+  "services": {
+    "title": "Our Services",
+    "description": "Professional hair services in Asunción. Cuts, coloring, balayage, keratin, and hair treatments.",
+    "categories": [
+      {
+        "name": "Haircuts",
+        "icon": "scissors",
+        "color": "rose",
+        "items": [
+          { "name": "Ladies Cut", "price": "Gs. 90,000", "desc": "Professional cut with personalized style consultation based on your face shape", "duration": "40 min", "popular": false },
+          { "name": "Mens Cut", "price": "Gs. 60,000", "desc": "Modern or classic cut with impeccable finish", "duration": "30 min", "popular": false },
+          { "name": "Kids Cut", "price": "Gs. 50,000", "desc": "Haircut for kids up to 12 years old in a fun environment", "duration": "25 min", "popular": false },
+          { "name": "Trim", "price": "Gs. 40,000", "desc": "Maintenance of length and shape without changing style", "duration": "20 min", "popular": false }
+        ]
+      },
+      {
+        "name": "Coloring",
+        "icon": "palette",
+        "color": "violet",
+        "items": [
+          { "name": "Full Color", "price": "Gs. 250,000", "desc": "Professional coloring with premium products that care for your hair", "duration": "90 min", "popular": false },
+          { "name": "Balayage", "price": "Gs. 400,000", "desc": "French technique of degraded highlights for a natural, sunny look", "duration": "2 hours", "popular": true },
+          { "name": "Highlights", "price": "Gs. 300,000", "desc": "Traditional foil highlights for a defined result", "duration": "90 min", "popular": false },
+          { "name": "Color Tonic", "price": "Gs. 80,000", "desc": "Ammonia-free color treatment for refreshing between visits", "duration": "45 min", "popular": false }
+        ]
+      },
+      {
+        "name": "Treatments",
+        "icon": "sparkles",
+        "color": "amber",
+        "items": [
+          { "name": "Keratin", "price": "Gs. 350,000", "desc": "Progressive keratin straightening. Smooth results for 3-4 months", "duration": "2 hours", "popular": true },
+          { "name": "Hair Botox", "price": "Gs. 200,000", "desc": "Intensive reconstructive treatment for damaged or dry hair", "duration": "60 min", "popular": false },
+          { "name": "Hair Nutrition", "price": "Gs. 120,000", "desc": "Nutritive treatment with essential oils for shine and softness", "duration": "40 min", "popular": false },
+          { "name": "Deep Hydration", "price": "Gs. 90,000", "desc": "Intensive hydration with nutritive mask for dry hair", "duration": "35 min", "popular": false }
+        ]
+      },
+      {
+        "name": "Styling",
+        "icon": "sparkle",
+        "color": "sky",
+        "items": [
+          { "name": "Event Styling", "price": "Gs. 150,000", "desc": "Special hairstyles for weddings, parties and formal events", "duration": "1 hour", "popular": false },
+          { "name": "Updo", "price": "Gs. 100,000", "desc": "Elegant hairstyles for special occasions", "duration": "45 min", "popular": false },
+          { "name": "Blowout", "price": "Gs. 50,000", "desc": "Blow dry and style with natural volume", "duration": "30 min", "popular": false }
+        ]
+      }
+    ]
+  },
+  "cta": {
+    "title": "Book Your Turn",
+    "subtitle": "We await to transform your look",
+    "whatsapp": "Hello!%20I%20want%20to%20book%20an%20appointment%20at%20Magnolia",
+    "button": "Book via WhatsApp"
+  },
+  "cookieConsent": {
+    "message": "We use cookies to improve your experience. By continuing to browse, you accept our cookie policy.",
+    "accept": "Accept",
+    "decline": "Decline"
+  }
+}

@@ -1,27 +1,57 @@
 "use client"
 import { useState } from "react"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { Menu, X, MessageCircle } from "lucide-react"
 import { business, waLink } from "@/lib/config"
 import { OpeningBadge } from "./opening-badge"
 
-const navItems = [
-  { label: "Inicio", href: "/" },
-  { label: "Servicios", href: "/servicios" },
-  { label: "Nosotros", href: "/nosotros" },
-  { label: "Reservar", href: "/booking" },
-  { label: "FAQ", href: "/faq" },
-  { label: "Contacto", href: "/contacto" },
+type Lang = "es" | "en"
+
+const NAV_ITEMS_ES = [
+  { label: "Inicio", href: "/es" },
+  { label: "Servicios", href: "/es/servicios" },
+  { label: "Nosotros", href: "/es/nosotros" },
+  { label: "Reservar", href: "/es/booking" },
+  { label: "FAQ", href: "/es/faq" },
+  { label: "Contacto", href: "/es/contacto" },
 ]
 
-export function Header() {
+const NAV_ITEMS_EN = [
+  { label: "Home", href: "/en" },
+  { label: "Services", href: "/en/servicios" },
+  { label: "About Us", href: "/en/nosotros" },
+  { label: "Book", href: "/en/booking" },
+  { label: "FAQ", href: "/en/faq" },
+  { label: "Contact", href: "/en/contacto" },
+]
+
+interface HeaderProps {
+  lang?: Lang
+}
+
+export function Header({ lang = "es" }: HeaderProps) {
   const [open, setOpen] = useState(false)
+  const pathname = usePathname()
+
+  const navItems = lang === "es" ? NAV_ITEMS_ES : NAV_ITEMS_EN
+  const bookingLabel = lang === "es" ? "Reservar" : "Book"
+  const mobileBookingLabel = lang === "es" ? "Reservar por WhatsApp" : "Book via WhatsApp"
+
+  // Current lang from URL prefix
+  const currentLang = pathname?.startsWith("/en") ? "en" : "es"
+  const langLabel = currentLang === "es" ? "EN" : "ES"
+  // Preserve current path when switching language
+  const currentPath = pathname ?? `/${lang}`
+  const switchLang = currentLang === "es"
+    ? `/en${currentPath.replace(/^\/(es|en)/, "") || "/"}`
+    : `/es${currentPath.replace(/^\/(es|en)/, "") || "/"}`
 
   return (
     <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm relative">
       <div className="container-page flex h-16 items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2.5" aria-label="Ir al inicio">
+        <Link href={`/${lang}`} className="flex items-center gap-2.5" aria-label="Ir al inicio">
           <div className="w-9 h-9 rounded-lg bg-primary flex items-center justify-center">
             <span className="text-white font-heading font-bold text-lg">M</span>
           </div>
@@ -42,6 +72,11 @@ export function Header() {
               {item.label}
             </Link>
           ))}
+          {/* Lang switcher */}
+          <a href={switchLang}
+            className="ml-2 px-2.5 py-1.5 text-xs font-bold rounded border border-gray-300 text-gray-500 hover:border-primary hover:text-primary transition-all">
+            {langLabel}
+          </a>
         </nav>
 
         {/* CTA */}
@@ -53,7 +88,7 @@ export function Header() {
           <a href={waLink(business.whatsappMessage)} target="_blank" rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-secondary text-white px-5 py-2.5 rounded-full font-semibold text-sm hover:bg-secondary-dark transition-all shadow-sm">
             <MessageCircle className="w-4 h-4" />
-            Reservar
+            {bookingLabel}
           </a>
         </div>
 
@@ -73,11 +108,16 @@ export function Header() {
                 {item.label}
               </Link>
             ))}
+            {/* Lang switcher mobile */}
+            <a href={switchLang}
+              className="block rounded-lg px-4 py-3 text-sm font-medium text-foreground-muted hover:bg-gray-50 transition-colors">
+              {langLabel} / {currentLang === "es" ? "English" : "Español"}
+            </a>
             <div className="pt-4 border-t border-gray-100 mt-2">
               <a href={waLink(business.whatsappMessage)} target="_blank" rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2 bg-secondary text-white px-6 py-3 rounded-xl font-semibold">
                 <MessageCircle className="w-5 h-5" />
-                Reservar por WhatsApp
+                {mobileBookingLabel}
               </a>
             </div>
           </div>

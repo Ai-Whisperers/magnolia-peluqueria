@@ -105,6 +105,15 @@ export default function AdminDashboard() {
             <Link href="/admin/content" className="text-sm text-zinc-400 hover:text-white transition-colors">
               Contenido
             </Link>
+            <button
+              onClick={async () => {
+                await fetch("/api/auth/logout", { method: "POST" });
+                window.location.href = "/admin/login";
+              }}
+              className="text-sm text-zinc-500 hover:text-red-400 transition-colors"
+            >
+              Cerrar sesión
+            </button>
             <Link href="/" className="text-sm text-zinc-500 hover:text-zinc-300 transition-colors flex items-center gap-1">
               <ExternalLink className="w-3.5 h-3.5" /> Ver sitio
             </Link>

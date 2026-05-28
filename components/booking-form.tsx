@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { waLink } from "@/lib/config";
+import { waLink, businessData, servicesData } from "@/lib/config";
 import { ScrollReveal } from "@/components/scroll-reveal";
 import {
   ChevronRight,
@@ -15,32 +15,48 @@ import {
   Clock,
 } from "lucide-react";
 
-const SERVICES = [
-  { value: "Corte Dama", label: "Corte Dama", duration: "45 min", icon: "✂️" },
-  { value: "Corte Caballero", label: "Corte Caballero", duration: "30 min", icon: "💇" },
-  { value: "Coloración Completa", label: "Coloración Completa", duration: "2.5 hrs", icon: "🎨" },
-  { value: "Balayage / Mechas", label: "Balayage / Mechas", duration: "3 hrs", icon: "✨" },
-  { value: "Keratina", label: "Keratina / Alisado", duration: "3 hrs", icon: "💆" },
-  { value: "Botox Capilar", label: "Botox Capilar", duration: "2 hrs", icon: "🧴" },
-  { value: "Peinado para Evento", label: "Peinado para Evento", duration: "1.5 hrs", icon: "👗" },
-  { value: "Maquillaje", label: "Maquillaje", duration: "1 hr", icon: "💄" },
-  { value: "Otro", label: "Otro / Consultar", duration: "—", icon: "❓" },
-];
+// Build service list from content JSON — flattened from all categories
+function buildServicesFromContent(lang: "es" | "en") {
+  const categories = servicesData(lang)
+  const ICON_MAP: Record<string, string> = {
+    scissors: "✂️", palette: "🎨", sparkles: "✨", sparkle: "✨",
+  }
+  const items: { value: string; label: string; duration: string; icon: string }[] = []
+  for (const cat of categories) {
+    const icon = ICON_MAP[cat.icon] ?? "💇"
+    for (const svc of cat.items ?? []) {
+      items.push({ value: svc.name, label: svc.name, duration: svc.duration ?? "—", icon })
+    }
+  }
+  return items
+}
 
-const STEPS = [
+const STEPS_ES = [
   { id: 1, label: "Servicio", icon: Scissors },
   { id: 2, label: "Tus datos", icon: User },
   { id: 3, label: "Fecha", icon: Calendar },
   { id: 4, label: "Confirmar", icon: Check },
 ];
 
-function StepIndicator({ current }: { current: number }) {
+const STEPS_EN = [
+  { id: 1, label: "Service", icon: Scissors },
+  { id: 2, label: "Your details", icon: User },
+  { id: 3, label: "Date", icon: Calendar },
+  { id: 4, label: "Confirm", icon: Check },
+];
+
+interface StepIndicatorProps {
+  current: number
+  steps: { id: number; label: string; icon: React.ElementType }[]
+}
+
+export function StepIndicator({ current, steps }: StepIndicatorProps) {
   return (
     <div className="flex items-center justify-center gap-2 mb-10">
-      {STEPS.map((step, i) => {
-        const done = step.id < current;
-        const active = step.id === current;
-        const Icon = step.icon;
+      {steps.map((step, i) => {
+        const done = step.id < current
+        const active = step.id === current
+        const Icon = step.icon
         return (
           <div key={step.id} className="flex items-center gap-2">
             <div
@@ -49,7 +65,7 @@ function StepIndicator({ current }: { current: number }) {
             >
               {done ? <Check className="w-5 h-5" /> : <Icon className="w-5 h-5" />}
             </div>
-            {i < STEPS.length - 1 && (
+            {i < steps.length - 1 && (
               <div className={`w-8 h-0.5 rounded ${step.id < current ? "bg-secondary" : "bg-gray-200"}`} />
             )}
           </div>
@@ -59,136 +75,238 @@ function StepIndicator({ current }: { current: number }) {
   );
 }
 
-export function BookingForm({ supabaseConfigured }: { supabaseConfigured: boolean }) {
-  const router = useRouter();
-  const [step, setStep] = useState(1);
-  const [service, setService] = useState("");
-  const [serviceLabel, setServiceLabel] = useState("");
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [preferredDate, setPreferredDate] = useState("");
-  const [notes, setNotes] = useState("");
-  const [submitting, setSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
+interface BookingFormProps {
+  supabaseConfigured: boolean
+  lang?: "es" | "en"
+}
 
-  const canNext = step === 1 ? service : step === 2 ? name.trim() && phone.trim() : true;
+export function BookingForm({ supabaseConfigured, lang = "es" }: BookingFormProps) {
+  const router = useRouter()
+  const [step, setStep] = useState(1)
+  const [service, setService] = useState("")
+  const [serviceLabel, setServiceLabel] = useState("")
+  const [name, setName] = useState("")
+  const [phone, setPhone] = useState("")
+  const [preferredDate, setPreferredDate] = useState("")
+  const [notes, setNotes] = useState("")
+  const [submitting, setSubmitting] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
+
+  const canNext = step === 1 ? service : step === 2 ? name.trim() && phone.trim() : true
 
   function handleNext() {
-    if (!canNext) return;
-    if (step < 4) setStep(step + 1);
-    else handleSubmit();
+    if (!canNext) return
+    if (step < 4) setStep(step + 1)
+    else handleSubmit()
   }
 
   function handleBack() {
-    if (step > 1) setStep(step - 1);
+    if (step > 1) setStep(step - 1)
   }
 
   async function handleSubmit() {
-    setSubmitting(true);
+    setSubmitting(true)
+    let apiError = null
+    let fallbackUrl = null
+
     if (supabaseConfigured) {
       try {
         const res = await fetch("/api/booking", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ client_name: name, phone, service: serviceLabel, preferred_date: preferredDate, notes }),
-        });
-        if (!res.ok) throw new Error("Failed");
+        })
+        const data = await res.json()
+        if (!res.ok) {
+          apiError = data.message ?? "No se pudo guardar la reserva."
+          fallbackUrl = data.fallback_url
+        }
+        // if ok, still show WA confirmation (desired behaviour)
       } catch (_) {
-        // fallback to WhatsApp
+        apiError = lang === "es"
+          ? "No se pudo conectar con el servidor. Podés reservar directo por WhatsApp."
+          : "Could not connect to the server. You can book directly via WhatsApp."
       }
     }
-    setSubmitted(true);
-    setSubmitting(false);
+
+    setSubmitted(true)
+    setSubmitting(false)
+
+    // Store for display
+    ;(window as unknown as Record<string, unknown>).__magnolia_booking_error = apiError
+    ;(window as unknown as Record<string, unknown>).__magnolia_booking_fallback = fallbackUrl
   }
 
   function getWhatsAppMessage() {
-    const dateText = preferredDate ? `\n📅 Fecha preferida: ${preferredDate}` : "";
-    const notesText = notes ? `\n📝 Notas: ${notes}` : "";
-    return `¡Hola! Quiero reservarme un turno en Magnolia Peluquería.\n\n👤 Nombre: ${name}\n📞 Teléfono: ${phone}\n✂️ Servicio: ${serviceLabel}${dateText}${notesText}`;
+    const dateText = preferredDate ? `\n📅 Fecha preferida: ${preferredDate}` : ""
+    const notesText = notes ? `\n📝 Notas: ${notes}` : ""
+    const isEs = lang === "es"
+    const intro = isEs
+      ? `¡Hola! Quiero reservarme un turno en Magnolia Peluquería.\n\n👤 Nombre: ${name}`
+      : `Hi! I'd like to book an appointment at Magnolia Peluquería.\n\n👤 Name: ${name}`
+    return `${intro}\n📞 WhatsApp: ${phone}\n✂️ Servicio: ${serviceLabel}${dateText}${notesText}`
   }
+
+  const waPhone = businessData(lang).whatsapp
 
   if (submitted) {
     return (
       <div className="text-center py-12">
-        <div className="w-20 h-20 rounded-full bg-secondary/10 flex items-center justify-center mx-auto mb-6">
-          <Check className="w-10 h-10 text-secondary" />
-        </div>
-        <h3 className="font-heading text-2xl font-bold text-primary mb-3">¡Casi listo!</h3>
-        <p className="text-foreground-light mb-8 max-w-sm mx-auto">
-          Completá tu reserva enviándonos un mensaje por WhatsApp con tus datos.
-        </p>
-        <a
-          href={`https://wa.me/595986106062?text=${encodeURIComponent(getWhatsAppMessage())}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-3 bg-[#25D366] text-white font-bold px-8 py-4 rounded-xl hover:bg-[#20BD5A] transition-all text-lg"
-        >
-          <MessageCircle className="w-6 h-6" />
-          Reservar por WhatsApp
-        </a>
-        <p className="text-xs text-foreground-muted mt-4">
-          Te respondemos en menos de 5 minutos
-        </p>
+        {(() => {
+          const apiError = (typeof window !== "undefined" ? (window as unknown as Record<string, unknown>).__magnolia_booking_error as string : null) ?? null
+          const fallbackUrl = (typeof window !== "undefined" ? (window as unknown as Record<string, unknown>).__magnolia_booking_fallback as string : null) ?? null
+          return (
+            <>
+              {apiError && (
+                <div className="mb-6 p-4 bg-amber-50 border border-amber-200 rounded-xl text-amber-800 text-sm">
+                  <strong>⚠️ {apiError}</strong>
+                </div>
+              )}
+              <div className="w-20 h-20 rounded-full bg-secondary/10 flex items-center justify-center mx-auto mb-6">
+                <Check className="w-10 h-10 text-secondary" />
+              </div>
+              <h3 className="font-heading text-2xl font-bold text-primary mb-3">{lang === "es" ? "¡Casi listo!" : "Almost done!"}</h3>
+              <p className="text-foreground-light mb-8 max-w-sm mx-auto">
+                {lang === "es"
+                  ? "Completá tu reserva enviándonos un mensaje por WhatsApp con tus datos."
+                  : "Complete your booking by sending us a WhatsApp message with your details."}
+              </p>
+              <a
+                href={fallbackUrl ?? `https://wa.me/${waPhone}?text=${encodeURIComponent(getWhatsAppMessage())}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-3 bg-[#25D366] text-white font-bold px-8 py-4 rounded-xl hover:bg-[#20BD5A] transition-all text-lg"
+              >
+                <MessageCircle className="w-6 h-6" />
+                {lang === "es" ? "Reservar por WhatsApp" : "Book via WhatsApp"}
+              </a>
+              <p className="text-xs text-foreground-muted mt-4">
+                {lang === "es" ? "Te respondemos en menos de 5 minutos" : "We reply in under 5 minutes"}
+              </p>
+            </>
+          )
+        })()}
       </div>
-    );
+    )
   }
 
-  return (
-    <div className="max-w-lg mx-auto">
-      <StepIndicator current={step} />
+  const LABELS = lang === "es"
+    ? {
+        step1Title: "¿Qué servicio necesitás?",
+        step1Sub: "Elegí el servicio principal para tu turno.",
+        step2Title: "Tus datos de contacto",
+        step2Sub: "Los usamos solo para confirmar tu turno.",
+        nameLabel: "Nombre completo",
+        namePlaceholder: "María García",
+        whatsappLabel: "WhatsApp",
+        whatsappPlaceholder: "0981 123 456",
+        step3Title: "¿Cuándo querés venir?",
+        step3Sub: "Martes a Sábado, 9:00 – 19:00.",
+        dateLabel: "Fecha preferida",
+        notesLabel: "Notas adicionales",
+        notesOptional: "(opcional)",
+        notesPlaceholder: "Tengo el cabello teñido de rubio, quiero mantener el tono...",
+        step4Title: "Confirmá tu reserva",
+        step4Sub: "Revisá que todo esté bien antes de enviar.",
+        serviceLabel: "Servicio",
+        nameField: "Nombre",
+        whatsappField: "WhatsApp",
+        dateField: "Fecha preferida",
+        notesField: "Notas",
+        noDate: "A confirmar",
+        back: "Volver",
+        continue: "Continuar",
+        submitWA: "Reservar por WhatsApp",
+        submitting: "Enviando...",
+      }
+    : {
+        step1Title: "Which service do you need?",
+        step1Sub: "Choose the main service for your appointment.",
+        step2Title: "Your contact details",
+        step2Sub: "We only use them to confirm your appointment.",
+        nameLabel: "Full name",
+        namePlaceholder: "María García",
+        whatsappLabel: "WhatsApp",
+        whatsappPlaceholder: "+595 981 123 456",
+        step3Title: "When do you want to come?",
+        step3Sub: "Tuesday to Saturday, 9:00 AM – 7:00 PM.",
+        dateLabel: "Preferred date",
+        notesLabel: "Additional notes",
+        notesOptional: "(optional)",
+        notesPlaceholder: "I have blonde dyed hair, I want to maintain the tone...",
+        step4Title: "Confirm your booking",
+        step4Sub: "Review everything before sending.",
+        serviceLabel: "Service",
+        nameField: "Name",
+        whatsappField: "WhatsApp",
+        dateField: "Preferred date",
+        notesField: "Notes",
+        noDate: "TBC",
+        back: "Back",
+        continue: "Continue",
+        submitWA: "Book via WhatsApp",
+        submitting: "Sending...",
+      }
 
-      {/* STEP 1: Service */}
+  const services = buildServicesFromContent(lang)
+  const steps = lang === "en" ? STEPS_EN : STEPS_ES
+
+  return (
+    <div className="space-y-6">
+      <StepIndicator current={step} steps={steps} />
+
+      {/* STEP 1: Service selection */}
       {step === 1 && (
         <ScrollReveal direction="up">
           <div className="space-y-3">
-            <h3 className="font-heading text-xl font-bold text-primary mb-1">¿Qué servicio necesitás?</h3>
-            <p className="text-foreground-light text-sm mb-6">Elegí el servicio principal para tu turno.</p>
-            <div className="grid grid-cols-1 gap-3">
-              {SERVICES.map((s) => (
-                <button
-                  key={s.value}
-                  onClick={() => { setService(s.value); setServiceLabel(s.label); }}
-                  className={`flex items-center gap-4 p-4 rounded-xl border-2 text-left transition-all
-                    ${service === s.value ? "border-secondary bg-secondary/5" : "border-gray-100 hover:border-gray-200 bg-white"}`}
-                >
-                  <span className="text-2xl">{s.icon}</span>
-                  <div className="flex-1">
-                    <p className="font-semibold text-foreground">{s.label}</p>
-                    <p className="text-xs text-foreground-muted flex items-center gap-1">
-                      <Clock className="w-3 h-3" /> {s.duration}
-                    </p>
-                  </div>
-                  {service === s.value && <Check className="w-5 h-5 text-secondary" />}
-                </button>
-              ))}
+            <h3 className="font-heading text-xl font-bold text-primary mb-1">{LABELS.step1Title}</h3>
+            <p className="text-foreground-light text-sm mb-6">{LABELS.step1Sub}</p>
+              <div className="grid grid-cols-1 gap-3">
+                {services.map((s) => (
+                  <button
+                    key={s.value}
+                    onClick={() => { setService(s.value); setServiceLabel(s.label); }}
+                    className={`flex items-center gap-4 p-4 rounded-xl border-2 text-left transition-all
+                      ${service === s.value ? "border-secondary bg-secondary/5" : "border-gray-100 hover:border-gray-200 bg-white"}`}
+                  >
+                    <span className="text-2xl">{s.icon}</span>
+                    <div className="flex-1">
+                      <p className="font-semibold text-foreground">{s.label}</p>
+                      <p className="text-xs text-foreground-muted flex items-center gap-1">
+                        <Clock className="w-3 h-3" /> {s.duration}
+                      </p>
+                    </div>
+                    {service === s.value && <Check className="w-5 h-5 text-secondary" />}
+                  </button>
+                ))}
+              </div>
             </div>
-          </div>
-        </ScrollReveal>
-      )}
+          </ScrollReveal>
+        )}
 
       {/* STEP 2: Personal info */}
       {step === 2 && (
         <ScrollReveal direction="up">
           <div className="space-y-5">
-            <h3 className="font-heading text-xl font-bold text-primary mb-1">Tus datos de contacto</h3>
-            <p className="text-foreground-light text-sm mb-4">Los usamos solo para confirmar tu turno.</p>
+            <h3 className="font-heading text-xl font-bold text-primary mb-1">{LABELS.step2Title}</h3>
+            <p className="text-foreground-light text-sm mb-4">{LABELS.step2Sub}</p>
             <div>
-              <label className="block text-sm font-semibold text-foreground mb-2">Nombre completo</label>
+              <label className="block text-sm font-semibold text-foreground mb-2">{LABELS.nameLabel}</label>
               <input
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                placeholder="María García"
+                placeholder={LABELS.namePlaceholder}
                 className="w-full px-4 py-3 rounded-xl border-2 border-gray-100 focus:border-secondary outline-none transition-all text-foreground bg-white"
               />
             </div>
             <div>
-              <label className="block text-sm font-semibold text-foreground mb-2">WhatsApp</label>
+              <label className="block text-sm font-semibold text-foreground mb-2">{LABELS.whatsappLabel}</label>
               <input
                 type="tel"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
-                placeholder="0981 123 456"
+                placeholder={LABELS.whatsappPlaceholder}
                 className="w-full px-4 py-3 rounded-xl border-2 border-gray-100 focus:border-secondary outline-none transition-all text-foreground bg-white"
               />
             </div>
@@ -200,10 +318,10 @@ export function BookingForm({ supabaseConfigured }: { supabaseConfigured: boolea
       {step === 3 && (
         <ScrollReveal direction="up">
           <div className="space-y-5">
-            <h3 className="font-heading text-xl font-bold text-primary mb-1">¿Cuándo querés venir?</h3>
-            <p className="text-foreground-light text-sm mb-4">Martes a Sábado, 9:00 – 19:00.</p>
+            <h3 className="font-heading text-xl font-bold text-primary mb-1">{LABELS.step3Title}</h3>
+            <p className="text-foreground-light text-sm mb-4">{LABELS.step3Sub}</p>
             <div>
-              <label className="block text-sm font-semibold text-foreground mb-2">Fecha preferida</label>
+              <label className="block text-sm font-semibold text-foreground mb-2">{LABELS.dateLabel}</label>
               <input
                 type="date"
                 value={preferredDate}
@@ -214,12 +332,12 @@ export function BookingForm({ supabaseConfigured }: { supabaseConfigured: boolea
             </div>
             <div>
               <label className="block text-sm font-semibold text-foreground mb-2">
-                Notas adicionales <span className="text-foreground-muted font-normal">(opcional)</span>
+                {LABELS.notesLabel} <span className="text-foreground-muted font-normal">{LABELS.notesOptional}</span>
               </label>
               <textarea
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
-                placeholder="Tengo el cabello teñido de rubio, quiero mantener el tono..."
+                placeholder={LABELS.notesPlaceholder}
                 rows={3}
                 className="w-full px-4 py-3 rounded-xl border-2 border-gray-100 focus:border-secondary outline-none transition-all text-foreground bg-white resize-none"
               />
@@ -232,14 +350,14 @@ export function BookingForm({ supabaseConfigured }: { supabaseConfigured: boolea
       {step === 4 && (
         <ScrollReveal direction="up">
           <div className="space-y-4">
-            <h3 className="font-heading text-xl font-bold text-primary mb-1">Confirmá tu reserva</h3>
-            <p className="text-foreground-light text-sm mb-4">Revisá que todo esté bien antes de enviar.</p>
+            <h3 className="font-heading text-xl font-bold text-primary mb-1">{LABELS.step4Title}</h3>
+            <p className="text-foreground-light text-sm mb-4">{LABELS.step4Sub}</p>
             {[
-              { label: "Servicio", value: serviceLabel },
-              { label: "Nombre", value: name },
-              { label: "WhatsApp", value: phone },
-              { label: "Fecha preferida", value: preferredDate || "A confirmar" },
-              ...(notes ? [{ label: "Notas", value: notes }] : []),
+              { label: LABELS.serviceLabel, value: serviceLabel },
+              { label: LABELS.nameField, value: name },
+              { label: LABELS.whatsappField, value: phone },
+              { label: LABELS.dateField, value: preferredDate || LABELS.noDate },
+              ...(notes ? [{ label: LABELS.notesField, value: notes }] : []),
             ].map(({ label, value }) => (
               <div key={label} className="flex items-start gap-3 bg-gray-50 rounded-xl p-4">
                 <div>
@@ -259,7 +377,7 @@ export function BookingForm({ supabaseConfigured }: { supabaseConfigured: boolea
             onClick={handleBack}
             className="flex items-center gap-2 text-foreground-light font-medium px-4 py-3 hover:text-foreground transition-colors"
           >
-            <ChevronLeft className="w-5 h-5" /> Volver
+            <ChevronLeft className="w-5 h-5" /> {LABELS.back}
           </button>
         )}
         <button
@@ -269,11 +387,11 @@ export function BookingForm({ supabaseConfigured }: { supabaseConfigured: boolea
             ${canNext ? "bg-secondary text-white hover:bg-secondary-dark" : "bg-gray-100 text-gray-400 cursor-not-allowed"}`}
         >
           {step === 4 ? (
-            submitting ? "Enviando..." : <>
-              <MessageCircle className="w-5 h-5" /> Reservar por WhatsApp
+            submitting ? LABELS.submitting : <>
+              <MessageCircle className="w-5 h-5" /> {LABELS.submitWA}
             </>
           ) : (
-            <>Continuar <ChevronRight className="w-5 h-5" /></>
+            <>{LABELS.continue} <ChevronRight className="w-5 h-5" /></>
           )}
         </button>
       </div>

@@ -1,9 +1,9 @@
 "use client"
 import { useState } from "react"
 import { ChevronDown, MessageCircle } from "lucide-react"
-import { waLink } from "@/lib/config"
+import { businessData } from "@/lib/config"
 
-const FAQ_ITEMS = [
+const FAQ_ITEMS_ES = [
   { q: "¿Cuáles son los horarios?", a: "Martes a sábado de 9:00 a 19:00. Lunes y domingos cerrados. Podés reservar por WhatsApp para coordinar tu turno." },
   { q: "¿Aceptan walk-ins?", a: "Preferimos con cita previa para garantizarte atención personalizada. Escribinos por WhatsApp y te confirmamos en minutos." },
   { q: "¿Qué servicios ofrecen?", a: "Cortes femeninos y masculinos, coloración, balayage, mechas, tratamientos capilares (keratina, botox, nutrición) y peinados para eventos." },
@@ -13,13 +13,33 @@ const FAQ_ITEMS = [
   { q: "¿Qué productos usan?", a: "Solo trabajamos con marcas profesionales de alta gama: Wella, L'Oréal Professionnel y Kérastase. Cuidamos tu cabello con lo mejor." },
   { q: "¿Puedo comprar tarjetas de regalo?", a: "Sí! Tenemos tarjetas de regalo desde Gs. 50.000. Perfectas para cumpleaños, Navidad o simplemente para mimar a alguien especial." },
   { q: "¿Hacen tratamientos para hombres?", a: "Sí! Cortés masculinos desde Gs. 60.000. También ofrecemos tratamientos de keratina y barbería básica." },
-  { q: "¿Cómo reservo mi turno?", a: "La forma más rápida es por WhatsApp: 0981 106 062. Te respondemos en menos de 5 minutos y coordinamos el mejor horario." },
+  { q: "¿Cómo reservo mi turno?", a: `La forma más rápida es por WhatsApp: ${businessData("es").phoneFormatted}. Te respondemos en menos de 5 minutos y coordinamos el mejor horario.` },
   { q: "¿Tienen estacionamiento?", a: "Estamos en zona céntrica con fácil acceso. Consultanos por WhatsApp y te enviamos opciones de estacionamiento cercanas." },
   { q: "¿Hacen descuentos por referidos?", a: "Sí! Con nuestro programa Magnolia Rewards, referí una amiga y ambas reciben 10% de descuento en su próximo turno." },
 ]
 
-export function FAQAccordion() {
+const FAQ_ITEMS_EN = [
+  { q: "What are your hours?", a: "Tuesday to Saturday, 9:00 AM to 7:00 PM. Closed Mondays and Sundays. Book via WhatsApp to schedule your appointment." },
+  { q: "Do you accept walk-ins?", a: "We prefer appointments to ensure personalized attention. Message us on WhatsApp and we'll confirm in minutes." },
+  { q: "What services do you offer?", a: "Women's and men's cuts, coloring, balayage, highlights, hair treatments (keratin, botox, nutrition) and event hairstyling." },
+  { q: "Do you work with extensions?", a: "Yes, we offer extension application and maintenance. Message us on WhatsApp to schedule." },
+  { q: "How much does a haircut cost?", a: "Women's cut from Gs. 90,000, men's cut from Gs. 60,000. All prices include personalized style consultation." },
+  { q: "Do you do bridal hairstyles?", a: "Yes! We offer complete hairstyling and makeup for brides. Includes trial and consultation. Book in advance." },
+  { q: "What products do you use?", a: "We only work with premium professional brands: Wella, L'Oréal Professionnel and Kérastase. We take care of your hair with the best." },
+  { q: "Can I buy gift cards?", a: "Yes! We have gift cards starting from Gs. 50,000. Perfect for birthdays, Christmas or just to pamper someone special." },
+  { q: "Do you offer men's treatments?", a: "Yes! Men's cuts from Gs. 60,000. We also offer keratin treatments and basic barber services." },
+  { q: "How do I book an appointment?", a: `The fastest way is via WhatsApp: ${businessData("en").phoneFormatted}. We reply in under 5 minutes and coordinate the best time.` },
+  { q: "Do you have parking?", a: "We are in a central area with easy access. Message us on WhatsApp and we'll send nearby parking options." },
+  { q: "Do you offer referral discounts?", a: "Yes! With our Magnolia Rewards program, refer a friend and both of you receive 10% off your next appointment." },
+]
+
+interface FAQAccordionProps {
+  lang?: "es" | "en"
+}
+
+export function FAQAccordion({ lang = "es" }: FAQAccordionProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(0)
+  const FAQ_ITEMS = lang === "es" ? FAQ_ITEMS_ES : FAQ_ITEMS_EN
 
   return (
     <div className="space-y-3">
