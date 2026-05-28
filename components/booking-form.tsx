@@ -135,16 +135,18 @@ export function BookingForm({ supabaseConfigured, lang = "es" }: BookingFormProp
     // Store for display
     ;(window as unknown as Record<string, unknown>).__magnolia_booking_error = apiError
     ;(window as unknown as Record<string, unknown>).__magnolia_booking_fallback = fallbackUrl
+    ;(window as unknown as Record<string, unknown>).__magnolia_booking_service = serviceLabel
   }
 
-  function getWhatsAppMessage() {
+  function getWhatsAppMessage(serviceOverride = "") {
+    const chosen = serviceOverride || serviceLabel
     const dateText = preferredDate ? `\n📅 Fecha preferida: ${preferredDate}` : ""
     const notesText = notes ? `\n📝 Notas: ${notes}` : ""
     const isEs = lang === "es"
     const intro = isEs
       ? `¡Hola! Quiero reservarme un turno en Magnolia Peluquería.\n\n👤 Nombre: ${name}`
       : `Hi! I'd like to book an appointment at Magnolia Peluquería.\n\n👤 Name: ${name}`
-    return `${intro}\n📞 WhatsApp: ${phone}\n✂️ Servicio: ${serviceLabel}${dateText}${notesText}`
+    return `${intro}\n📞 WhatsApp: ${phone}\n✂️ Servicio: ${chosen}${dateText}${notesText}`
   }
 
   const waPhone = businessData(lang).whatsapp
@@ -155,6 +157,7 @@ export function BookingForm({ supabaseConfigured, lang = "es" }: BookingFormProp
         {(() => {
           const apiError = (typeof window !== "undefined" ? (window as unknown as Record<string, unknown>).__magnolia_booking_error as string : null) ?? null
           const fallbackUrl = (typeof window !== "undefined" ? (window as unknown as Record<string, unknown>).__magnolia_booking_fallback as string : null) ?? null
+          const savedService = (typeof window !== "undefined" ? (window as unknown as Record<string, unknown>).__magnolia_booking_service as string : null) ?? ""
           return (
             <>
               {apiError && (
@@ -174,7 +177,7 @@ export function BookingForm({ supabaseConfigured, lang = "es" }: BookingFormProp
                   : "Complete your booking by sending us a WhatsApp message."}
               </p>
               <a
-                href={fallbackUrl ?? `https://wa.me/${waPhone}?text=${encodeURIComponent(getWhatsAppMessage())}`}
+                href={fallbackUrl ?? `https://wa.me/${waPhone}?text=${encodeURIComponent(getWhatsAppMessage(savedService))}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-3 bg-[#25D366] text-white font-bold px-8 py-3.5 rounded-xl hover:bg-[#20BD5A] transition-all text-base mb-6"

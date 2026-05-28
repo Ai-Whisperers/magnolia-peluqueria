@@ -2,7 +2,7 @@ import { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { getPostBySlug, getRelatedPosts, calculateReadingTime, getAllPosts } from "@/lib/blog"
 import { ScrollReveal } from "@/components/scroll-reveal"
-import { Calendar, Clock, ArrowLeft, Share2, ExternalLink, CheckCircle2, Crown, Star } from "lucide-react"
+import { Calendar, Clock, ArrowLeft, Share2, ExternalLink, CheckCircle2, Crown, Star, MessageCircle } from "lucide-react"
 
 type Lang = "es" | "en"
 
@@ -158,6 +158,32 @@ export default async function BlogPostPage({ params }: { params: Promise<{ lang:
                 }),
               }}
             />
+
+            {/* ─── Booking CTA ──────────────────────────────── */}
+            <div className="mt-12 pt-8 border-t border-border">
+              <div className="bg-gradient-to-r from-primary/5 via-secondary/5 to-primary/5 rounded-2xl p-6 md:p-8 text-center">
+                <p className="text-xs font-bold text-secondary uppercase tracking-widest mb-2">
+                  {lang === "es" ? "💇 ¿Listo para tu turno?" : "💇 Ready for your appointment?"}
+                </p>
+                <h3 className="font-heading text-2xl md:text-3xl font-bold text-primary mb-3">
+                  {lang === "es"
+                    ? "Reservá tu turno en Magnolia"
+                    : "Book your appointment at Magnolia"}
+                </h3>
+                <p className="text-foreground-light text-sm mb-6 max-w-md mx-auto">
+                  {lang === "es"
+                    ? "Completá el formulario y te confirmamos por WhatsApp en minutos."
+                    : "Fill out the form and we'll confirm via WhatsApp in minutes."}
+                </p>
+                <a
+                  href={`/${lang}/booking`}
+                  className="inline-flex items-center gap-2 bg-secondary text-white font-bold px-8 py-3.5 rounded-xl hover:bg-secondary-dark transition-all text-base"
+                >
+                  <MessageCircle className="w-5 h-5" />
+                  {lang === "es" ? "Reservar Ahora" : "Book Now"}
+                </a>
+              </div>
+            </div>
           </article>
 
           {/* Sidebar */}

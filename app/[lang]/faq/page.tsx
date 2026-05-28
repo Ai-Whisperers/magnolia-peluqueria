@@ -24,17 +24,26 @@ const FAQ_SCHEMA_EN = [
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const { lang } = await params
+  const faqSchema = lang === "en" ? FAQ_SCHEMA_EN : FAQ_SCHEMA_ES
   const c = getContent(lang as "es" | "en")
   return {
     title: `Preguntas Frecuentes | ${c.business.name}`,
     description: `Preguntas frecuentes sobre ${c.business.name} — turnos, pagos, tratamientos y más.`,
+    openGraph: {
+      title: `Preguntas Frecuentes | ${c.business.name}`,
+      description: `Preguntas frecuentes sobre ${c.business.name} — turnos, pagos, tratamientos y más.`,
+    },
+    alternates: {
+      canonical: `/${lang}/faq`,
+    },
   }
 }
 
 export default async function FaqPage({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params
   const c = getContent(lang as "es" | "en")
-  const faqSchema = lang === "en" ? FAQ_SCHEMA_EN : FAQ_SCHEMA_ES
+  // Derive JSON-LD from content.json FAQs so structured data matches visible content
+  const faqSchema = c.faqs.slice(0, 10).map((f: { q: string; a: string }) => ({ q: f.q, a: f.a }))
 
   return (
     <>

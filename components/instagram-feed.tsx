@@ -13,19 +13,21 @@ interface IgPost {
 
 const SHOWN = 6
 
-export function InstagramFeed() {
+export function InstagramFeed({ lang = "es" as "es" | "en" }: { lang?: "es" | "en" }) {
   const [posts, setPosts] = useState<IgPost[] | null>(null)
   const [fallback, setFallback] = useState(false)
 
+  const isEs = lang === "es"
+
   useEffect(() => {
-    fetch("/api/instagram")
+    fetch(`/api/instagram?lang=${lang}`)
       .then(r => r.json())
       .then(d => {
         if (d.fallback || !d.posts) setFallback(true)
         else setPosts(d.posts.slice(0, SHOWN))
       })
       .catch(() => setFallback(true))
-  }, [])
+  }, [lang, isEs])
 
   const IgIcon = () => (
     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
@@ -57,8 +59,14 @@ export function InstagramFeed() {
               <span className="text-xs text-secondary">· preview</span>
             )}
           </div>
-          <h2 className="font-heading text-3xl md:text-4xl font-bold text-white mb-3">Vida en Magnolia</h2>
-          <p className="text-white/60 max-w-md mx-auto">Seguinos para ver trabajos diarios, tips de cuidado capilar y ofertas exclusivas.</p>
+          <h2 className="font-heading text-3xl md:text-4xl font-bold text-white mb-3">
+            {isEs ? "Vida en Magnolia" : "Life at Magnolia"}
+          </h2>
+          <p className="text-white/60 max-w-md mx-auto">
+            {isEs
+              ? "Seguinos para ver trabajos diarios, tips de cuidado capilar y ofertas exclusivas."
+              : "Follow us for daily work, hair care tips and exclusive offers."}
+          </p>
         </div>
 
         <div className="grid grid-cols-3 md:grid-cols-6 gap-3">
@@ -89,10 +97,10 @@ export function InstagramFeed() {
         </div>
 
         <div className="text-center mt-6">
-          <a href="https://instagram.com/magnolia_peluqueria" target="_blank" rel="noopener noreferrer"
+          <a href={`https://instagram.com/magnolia_peluqueria`} target="_blank" rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-white/60 hover:text-white text-sm font-semibold transition-colors">
             <IgIcon />
-            <span>Seguir en Instagram</span>
+            <span>{isEs ? "Seguir en Instagram" : "Follow on Instagram"}</span>
           </a>
         </div>
       </div>
