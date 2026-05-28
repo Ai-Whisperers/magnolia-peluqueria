@@ -1,0 +1,38 @@
+{
+  "name": "Magnolia Peluquería",
+  "short_name": "Magnolia",
+  "description": "Tu mejor look en Asunción — Peluquería profesional con más de 18 años de experiencia.",
+  "start_url": "/es",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#c9a55c",
+  "orientation": "portrait",
+  "scope": "/",
+  "lang": "es",
+  "categories": ["beauty", "lifestyle"],
+  "icons": [
+    {
+      "src": "/images/logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Reservar turno",
+      "short_name": "Reservar",
+      "description": "Reservá tu turno por WhatsApp",
+      "url": "/es/booking",
+      "icons": [{ "src": "/images/logo.svg", "sizes": "any" }]
+    },
+    {
+      "name": "Servicios",
+      "short_name": "Servicios",
+      "description": "Ver todos los servicios",
+      "url": "/es/servicios",
+      "icons": [{ "src": "/images/logo.svg", "sizes": "any" }]
+    }
+  ]
+}

@@ -2,16 +2,13 @@ import type { Metadata } from "next"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { WhatsAppFloat } from "@/components/whatsapp-float"
+import { Breadcrumb } from "@/components/breadcrumb"
 import { BookingForm } from "@/components/booking-form"
 import { isSupabaseConfigured } from "@/lib/supabase"
-import { Calendar } from "lucide-react"
 import { getContent } from "@/lib/config"
+import { Calendar } from "lucide-react"
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ lang: string }>
-}): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const { lang } = await params
   const c = getContent(lang as "es" | "en")
   return {
@@ -20,36 +17,36 @@ export async function generateMetadata({
   }
 }
 
-export default async function BookingPage({
-  params,
-}: {
-  params: Promise<{ lang: string }>
-}) {
+export default async function BookingPage({ params }: { params: Promise<{ lang: string }> }) {
   const { lang } = await params
   const c = getContent(lang as "es" | "en")
   const t = c.booking ?? {}
-  const title = t.title ?? (lang === "es" ? "Reservá tu Turno" : "Book an Appointment")
-  const subtitle = t.subtitle ?? (lang === "es"
-    ? "Completá los datos y te contactamos por WhatsApp en menos de 5 minutos."
-    : "Fill in the form and we'll contact you via WhatsApp in under 5 minutes.")
+  const isEs = lang === "es"
 
   return (
     <>
       <Header lang={lang as "es" | "en"} />
-      <section className="py-20 bg-gradient-to-br from-background to-amber-50/30">
-        <div className="max-w-2xl mx-auto px-4">
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-secondary/10 mb-6">
-              <Calendar className="w-8 h-8 text-secondary" />
-            </div>
-            <h1 className="font-heading text-4xl font-bold text-primary mb-3">{title}</h1>
-            <p className="text-foreground-light">{subtitle}</p>
-          </div>
-          <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
-            <BookingForm supabaseConfigured={isSupabaseConfigured} />
+      <div className="pt-24">
+        <div className="container-page max-w-5xl">
+          <Breadcrumb lang={lang as "es" | "en"} />
+          <div className="mt-6">
+            <section className="text-center py-12 mb-10">
+              <div className="w-16 h-16 rounded-2xl bg-secondary/10 flex items-center justify-center mx-auto mb-4">
+                <Calendar className="w-8 h-8 text-secondary" />
+              </div>
+              <h1 className="font-heading text-5xl font-bold text-primary mb-4">
+                {t.title ?? (isEs ? "Reservar Turno" : "Book Appointment")}
+              </h1>
+              <p className="text-foreground-light text-lg max-w-xl mx-auto">
+                {t.subtitle ?? (isEs
+                  ? "Completá el formulario y te confirmamos por WhatsApp en minutos"
+                  : "Fill out the form and we'll confirm via WhatsApp in minutes")}
+              </p>
+            </section>
+            <BookingForm lang={lang as "es" | "en"} supabaseConfigured={isSupabaseConfigured} />
           </div>
         </div>
-      </section>
+      </div>
       <Footer
         businessName={c.business.name}
         tagline={c.business.tagline}

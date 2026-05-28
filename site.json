@@ -9,7 +9,10 @@
   "path": "",
   "publicUrl": "https://magnolia-peluqueria.paragu-ai.com",
   "defaultLocale": "es",
-  "locales": ["es", "en"],
+  "locales": [
+    "es",
+    "en"
+  ],
   "pages": [
     "home",
     "servicios",
@@ -75,7 +78,7 @@
       "handle": "magnolia_peluqueria"
     },
     "exitIntent": {
-      "enabled": false,
+      "enabled": true,
       "whatsappPrompt": true
     },
     "structuredData": {
@@ -84,8 +87,8 @@
     },
     "analytics": {
       "ga4": {
-        "enabled": false,
-        "measurementId": null
+        "enabled": true,
+        "measurementId": "G-XXXXXXXXXX"
       }
     },
     "ageGate": {

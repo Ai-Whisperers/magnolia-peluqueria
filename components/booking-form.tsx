@@ -396,5 +396,5 @@ export function BookingForm({ supabaseConfigured, lang = "es" }: BookingFormProp
         </button>
       </div>
     </div>
-  );
+  )
 }

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
@@ -16,15 +16,16 @@ function AdminAuthGuard({ children }: { children: React.ReactNode }) {
   const [checked, setChecked] = useState(false)
 
   useEffect(() => {
-    const hasSession = document.cookie
-      .split("; ")
-      .some((row) => row.startsWith("admin_session="))
-
-    if (!hasSession) {
-      router.replace("/admin/login")
-    } else {
-      setChecked(true)
-    }
+    fetch("/api/auth/check", { credentials: "include" })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.authenticated === true) {
+          setChecked(true)
+        } else {
+          router.replace("/admin/login")
+        }
+      })
+      .catch(() => router.replace("/admin/login"))
   }, [router])
 
   if (!checked) {
