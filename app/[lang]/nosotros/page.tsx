@@ -18,8 +18,8 @@ export async function generateMetadata({
   const { lang } = await params
   const c = getContent(lang as "es" | "en")
   return {
-    title: c.about?.meta?.title ?? (lang === "es" ? "Nosotros" : "About Us"),
-    description: c.about?.meta?.description,
+    title: `Nosotros | ${c.business.name}`,
+    description: `${c.business.name} — Conocé a nuestro equipo, nuestra historia y por qué nos eligen miles de clientas en Asunción.`,
   }
 }
 

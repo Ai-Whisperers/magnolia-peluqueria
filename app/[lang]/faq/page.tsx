@@ -26,8 +26,8 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   const { lang } = await params
   const c = getContent(lang as "es" | "en")
   return {
-    title: c.faqs?.meta?.title ?? (lang === "es" ? "Preguntas Frecuentes" : "FAQ"),
-    description: c.faqs?.meta?.description,
+    title: `Preguntas Frecuentes | ${c.business.name}`,
+    description: `Preguntas frecuentes sobre ${c.business.name} — turnos, pagos, tratamientos y más.`,
   }
 }
 

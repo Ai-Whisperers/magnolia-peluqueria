@@ -13,8 +13,8 @@ export async function generateMetadata({
   const { lang } = await params
   const c = getContent(lang as "es" | "en")
   return {
-    title: `${c.services.title} | ${c.business.name}`,
-    description: c.services.description,
+    title: `Servicios | ${c.business.name}`,
+    description: `${c.business.name} — Cortes, coloración, balayage, keratina y tratamientos capilares en Asunción. Más de 18 años de experiencia.`,
   }
 }
 

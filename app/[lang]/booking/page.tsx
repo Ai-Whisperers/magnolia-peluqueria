@@ -15,8 +15,8 @@ export async function generateMetadata({
   const { lang } = await params
   const c = getContent(lang as "es" | "en")
   return {
-    title: `${c.booking?.title ?? "Reservar"} | ${c.business.name}`,
-    description: c.booking?.description ?? "Reservá tu turno",
+    title: `Reservar | ${c.business.name}`,
+    description: `Reservá tu turno en ${c.business.name} vía WhatsApp o completa el formulario.`,
   }
 }
 

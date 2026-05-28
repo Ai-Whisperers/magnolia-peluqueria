@@ -8,8 +8,8 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   const { lang } = await params
   const c = getContent(lang as "es" | "en")
   return {
-    title: c.privacidad?.meta?.title ?? (lang === "es" ? "Política de Privacidad" : "Privacy Policy"),
-    description: c.privacidad?.meta?.description,
+    title: `${c.business.name} | Política de Privacidad`,
+    description: `Política de privacidad de ${c.business.name} — cómo protegemos tus datos personales.`,
   }
 }
 

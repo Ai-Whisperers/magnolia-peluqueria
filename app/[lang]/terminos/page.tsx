@@ -8,8 +8,8 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   const { lang } = await params
   const c = getContent(lang as "es" | "en")
   return {
-    title: c.terminos?.meta?.title ?? (lang === "es" ? "Términos y Condiciones" : "Terms of Service"),
-    description: c.terminos?.meta?.description,
+    title: `${c.business.name} | Términos y Condiciones`,
+    description: `Términos y condiciones de ${c.business.name} — servicios, turnos, pagos y cancelaciones.`,
   }
 }
 

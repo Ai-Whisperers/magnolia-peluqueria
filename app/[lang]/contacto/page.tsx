@@ -13,8 +13,8 @@ export async function generateMetadata({
   const { lang } = await params
   const c = getContent(lang as "es" | "en")
   return {
-    title: c.contact?.meta?.title ?? (lang === "es" ? "Contacto" : "Contact"),
-    description: c.contact?.meta?.description,
+    title: c.contactPage?.title ?? (lang === "es" ? "Contacto" : "Contact"),
+    description: c.contactPage?.subtitle ?? (lang === "es" ? "Contactanos por WhatsApp o visítanos en Asunción" : "Contact us via WhatsApp or visit us in Asunción"),
   }
 }
 

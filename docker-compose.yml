@@ -22,7 +22,7 @@ services:
         - "traefik.enable=true"
         - "traefik.docker.network=agent-net"
         - "traefik.http.routers.magnolia.entrypoints=websecure"
-        - "traefik.http.routers.magnolia.rule=Host(`magnolia-flower.paragu-ai.com`)"
+        - "traefik.http.routers.magnolia.rule=Host(`magnolia-peluqueria.paragu-ai.com`)"
         - "traefik.http.routers.magnolia.tls=true"
         - "traefik.http.routers.magnolia.tls.certresolver=letsencryptresolver"
         - "traefik.http.services.magnolia.loadbalancer.server.port=3000"
