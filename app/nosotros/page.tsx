@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { WhatsAppFloat } from "@/components/whatsapp-float"
@@ -9,14 +10,22 @@ import { business } from "@/lib/config"
 import { ScrollReveal } from "@/components/scroll-reveal"
 import { Award, Clock, Users, Star } from "lucide-react"
 
+export const metadata: Metadata = {
+  title: "Nosotros | Magnolia Peluquería",
+  description: "18 años haciendo brillar a Asunción. Conocé a nuestro equipo de estilistas profesionales. Reservá tu turno.",
+  keywords: ["peluquería Asunción historia", "equipo Magnolia peluquería", "estilistas profesionales Asunción"],
+  openGraph: {
+    title: "Nosotros | Magnolia Peluquería",
+    description: "18 años haciendo brillar a Asunción. Conocé a nuestro equipo de estilistas profesionales.",
+  },
+}
+
 const values = [
-  { icon: Star, label: "Excelencia", desc: "Cada servicio se entrega con el maximo cuidado y atencion al detalle." },
-  { icon: Users, label: "Comunidad", desc: "Mas que clientas, somos una comunidad que se siente comoda y bienvenida." },
-  { icon: Award, label: "Formacion Constante", desc: "Nuestro equipo se actualiza constantemente con cursos internacionales." },
+  { icon: Star, label: "Excelencia", desc: "Cada servicio se entrega con el máximo cuidado y atención al detalle." },
+  { icon: Users, label: "Comunidad", desc: "Más que clientas, somos una comunidad que se siente cómoda y bienvenida." },
+  { icon: Award, label: "Formación Constante", desc: "Nuestro equipo se actualiza constantemente con cursos internacionales." },
   { icon: Clock, label: "Puntualidad", desc: "Respetamos tu tiempo. Los turnos empiezan a horario." },
 ]
-
-export const metadata = { title: "Nosotros — Magnolia Peluqueria" }
 
 export default function NosotrosPage() {
   return (
@@ -29,8 +38,8 @@ export default function NosotrosPage() {
           <span className="inline-flex items-center gap-2 text-sm font-bold text-secondary uppercase tracking-widest mb-4">Nuestra Historia</span>
           <h1 className="font-heading text-4xl md:text-5xl font-bold text-white mb-6">18 Años Haciendo Brillar a Asunción</h1>
           <p className="text-white/70 text-lg max-w-2xl mx-auto leading-relaxed">
-            Magnolia nacio en 2008 de la pasion de Lidia por crear un espacio donde cada mujer se sienta unica.
-            Hoy, mas de 800 clientas confian en nosotros para su mejor look.
+            Magnolia nació en 2008 de la pasión de Lidia por crear un espacio donde cada mujer se sienta única.
+            Hoy, más de 800 clientas confían en nosotros para su mejor look.
           </p>
         </div>
       </section>
@@ -41,7 +50,7 @@ export default function NosotrosPage() {
           <ScrollReveal direction="up">
             <div className="text-center mb-14">
               <h2 className="font-heading text-4xl font-bold text-primary mb-3">Lo que nos Define</h2>
-              <p className="text-foreground-light">Los valores que guian cada servicio que brindamos.</p>
+              <p className="text-foreground-light">Los valores que guían cada servicio que brindamos.</p>
             </div>
           </ScrollReveal>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">

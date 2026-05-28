@@ -1,14 +1,23 @@
+import type { Metadata } from "next"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { WhatsAppFloat } from "@/components/whatsapp-float"
 import { MapPin, Phone, Clock, MessageCircle } from "lucide-react"
 import { business } from "@/lib/config"
 
+export const metadata: Metadata = {
+  title: "Contacto | Magnolia Peluquería",
+  description: "Encontranos en Asunción. Escribinos por WhatsApp o visitanos. Estamos para ayudarte.",
+  keywords: ["contacto peluquería Asunción", "ubicación Magnolia peluquería", "whatsapp peluquería Asunción"],
+  openGraph: {
+    title: "Contacto | Magnolia Peluquería",
+    description: "Encontranos en Asunción. Escribinos por WhatsApp o visitanos.",
+  },
+}
+
 function waLinkStatic(msg: string) {
   return `https://wa.me/${business.whatsapp}?text=${encodeURIComponent(decodeURIComponent(msg))}`
 }
-
-export const metadata = { title: "Contacto — Magnolia Peluquería" }
 
 export default function ContactoPage() {
   return (

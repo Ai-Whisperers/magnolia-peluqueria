@@ -16,8 +16,8 @@
     "hoursClosed": "Domingos y Lunes cerrados",
     "instagram": "magnolia_peluqueria",
     "instagramUrl": "https://instagram.com/magnolia_peluqueria",
-    "mapsUrl": "https://maps.google.com/?q=Magnolia+Peluqueria+Asuncion+Paraguay",
-    "mapsEmbed": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d21606.37701864!2d-57.63535!3d-25.26327!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjXCsDE1JzQyLjIiUyA1N8KwMzcnNTguMSJX!5e0!3m2!1ses!2spy!4v1600000000000!5m2!1ses!2spy",
+    "mapsEmbed": "https://www.google.com/maps?q=Asunci%C3%B3n+Centro,+Paraguay&z=15&output=embed",
+    "mapsUrl": "https://www.google.com/maps?q=Magnolia+Peluqueria+Asuncion+Paraguay&hl=es&entry=ttu",
     "email": "info@magnolia-peluqueria.com",
     "ctaMessage": "Hola!%20Quiero%20reservar%20una%20cita%20en%20Magnolia"
   },
@@ -235,8 +235,7 @@
     "reviewCount": "100",
     "latitude": -25.26327,
     "longitude": -57.63535,
-    "priceRange": "$$",
-    "aggregateRating": "4.9"
+    "priceRange": "$$"
   },
   "contactPage": {
     "title": "Contactanos",

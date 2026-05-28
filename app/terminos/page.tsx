@@ -1,8 +1,16 @@
+import type { Metadata } from "next"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { WhatsAppFloat } from "@/components/whatsapp-float"
 
-export const metadata = { title: "Términos y Condiciones — Magnolia Peluquería" }
+export const metadata: Metadata = {
+  title: "Términos y Condiciones | Magnolia Peluquería",
+  description: "Términos y condiciones de Magnolia Peluquería. Información sobre nuestros servicios, reservas y políticas.",
+  openGraph: {
+    title: "Términos y Condiciones | Magnolia Peluquería",
+    description: "Conocé nuestras políticas y condiciones de servicio.",
+  },
+}
 
 export default function TerminosPage() {
   return (

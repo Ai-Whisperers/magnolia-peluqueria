@@ -48,18 +48,28 @@ export const metadata: Metadata = {
       alt: "Magnolia Peluquería - Asunción",
     }],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Magnolia Peluquería | Cortés y Coloración Profesional",
+    description: "Peluquería profesional en Asunción. Cortes, coloración, balayage, keratina y tratamientos capilares.",
+    images: ["https://magnolia-peluqueria.paragu-ai.com/images/og-default.jpg"],
+  },
 }
+
+// ─── Honest JSON-LD (no fake ratings) ───────────────────────────────
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "HairSalon",
   name: "Magnolia Peluquería",
-  description: "Peluquería profesional en Asunción. Cortes, coloración y tratamientos capilares.",
+  description: "Peluquería profesional en Asunción. Cortes, coloración, balayage, keratina y tratamientos capilares. 18 años de experiencia.",
   url: "https://magnolia-peluqueria.paragu-ai.com",
-  telephone: "+595986106062",
+  telephone: "+595981106062",
   address: {
     "@type": "PostalAddress",
+    streetAddress: "Zona céntrica",
     addressLocality: "Asunción",
+    addressRegion: "Central",
     addressCountry: "PY",
   },
   geo: {
@@ -76,15 +86,27 @@ const jsonLd = {
     },
   ],
   priceRange: "$$",
-  aggregateRating: {
-    "@type": "AggregateRating",
-    ratingValue: "4.9",
-    reviewCount: "100",
-  },
   image: "https://magnolia-peluqueria.paragu-ai.com/images/og-default.jpg",
-  sameAs: [
-    "https://instagram.com/magnolia_peluqueria",
-  ],
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Servicios de peluquería",
+    itemListElement: [
+      { "@type": "Offer", name: "Corte Dama", priceCurrency: "PYG" },
+      { "@type": "Offer", name: "Balayage / Mechas", priceCurrency: "PYG" },
+      { "@type": "Offer", name: "Keratina", priceCurrency: "PYG" },
+      { "@type": "Offer", name: "Botox Capilar", priceCurrency: "PYG" },
+    ],
+  },
+  potentialAction: {
+    "@type": "ReserveAction",
+    target: {
+      "@type": "EntryPoint",
+      urlTemplate: "https://magnolia-peluqueria.paragu-ai.com/booking",
+      actionPlatform: ["https://schema.org/WebPage"],
+    },
+    result: { "@type": "Reservation", name: "Reserva de turno" },
+  },
+  sameAs: ["https://instagram.com/magnolia_peluqueria"],
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

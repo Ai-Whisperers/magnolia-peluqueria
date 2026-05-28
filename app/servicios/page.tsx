@@ -1,9 +1,18 @@
+import type { Metadata } from "next"
 import { Header } from "@/components/header";
 import { Services } from "@/components/services";
 import { Footer } from "@/components/footer";
 import { WhatsAppFloat } from "@/components/whatsapp-float";
 
-export const metadata = { title: "Servicios — Magnolia Peluquería", description: "Conocé todos nuestros servicios con precios y duración." };
+export const metadata: Metadata = {
+  title: "Servicios y Precios | Magnolia Peluquería",
+  description: "Todos nuestros servicios con precios: cortes, coloración, balayage, keratina, botox capilar, peinados para eventos. Reserva por WhatsApp.",
+  keywords: ["servicios peluquería Asunción", "precios corte Asunción", "balayage Paraguay precio", "keratina Asunción"],
+  openGraph: {
+    title: "Servicios y Precios | Magnolia Peluquería",
+    description: "Todos nuestros servicios con precios. Cortes, coloración, balayage, keratina y tratamientos capilares.",
+  },
+};
 
 export default function ServiciosPage() {
   return (

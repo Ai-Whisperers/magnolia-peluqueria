@@ -1,8 +1,16 @@
+import type { Metadata } from "next"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { WhatsAppFloat } from "@/components/whatsapp-float"
 
-export const metadata = { title: "Política de Privacidad — Magnolia Peluquería" }
+export const metadata: Metadata = {
+  title: "Política de Privacidad | Magnolia Peluquería",
+  description: "Política de privacidad de Magnolia Peluquería. Cómo recopilamos, usamos y protegemos tus datos personales en cumplimiento con la ley paraguaya.",
+  openGraph: {
+    title: "Política de Privacidad | Magnolia Peluquería",
+    description: "Información sobre cómo protegemos tus datos personales.",
+  },
+}
 
 export default function PrivacidadPage() {
   return (

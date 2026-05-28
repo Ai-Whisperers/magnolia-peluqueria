@@ -10,7 +10,7 @@ import { Location } from "@/components/location"
 import { CtaBanner } from "@/components/cta-banner"
 import { AnimatedStats } from "@/components/animated-stats"
 import { TeamSection } from "@/components/team-section"
-import { PromotionsSection } from "@/components/promotions"
+import { DynamicPromotions } from "@/components/dynamic-promotions"
 import { LoyaltySection } from "@/components/loyalty"
 import { GiftCardsSection } from "@/components/gift-cards"
 import { business } from "@/lib/config"
@@ -24,7 +24,7 @@ export default function HomePage() {
       <AnimatedStats />
       <Services />
       <BeforeAfterSection />
-      <PromotionsSection />
+      <DynamicPromotions />
       <LoyaltySection />
       <GiftCardsSection />
       <TeamSection />

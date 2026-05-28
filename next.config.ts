@@ -11,7 +11,7 @@ const securityHeaders = [
 ]
 
 const config: NextConfig = {
-  output: "export",
+  output: "standalone",
   poweredByHeader: false,
   images: {
     unoptimized: true,
