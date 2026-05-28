@@ -4,12 +4,13 @@ on:
     branches: [main]
   push:
     branches: [main]
+  workflow_dispatch:
 
 jobs:
   ci:
     uses: Ai-Whisperers/ci-cd/.github/workflows/ci-nextjs.yml@main
     with:
-      site-url: 'https://magnolia.paragu-ai.com'
+      site-url: 'https://magnolia-peluqueria.paragu-ai.com'
       package-manager: 'npm'
       node-version: '20'
     secrets: inherit
