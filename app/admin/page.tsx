@@ -1,191 +1,215 @@
 "use client";
 import { useState, useEffect } from "react";
-import { supabaseAdmin, isSupabaseConfigured } from "@/lib/supabase";
+import Link from "next/link";
+import { CalendarDays, Tag, Clock, ChevronRight, AlertCircle, CheckCircle, ExternalLink } from "lucide-react";
 
-type Booking = {
-  id: string;
-  created_at: string;
-  client_name: string;
-  phone: string;
-  service: string;
-  preferred_date: string | null;
-  notes: string | null;
-  status: string;
+type Booking = { id: string; client_name: string; phone: string; service: string; preferred_date: string | null; status: string; created_at: string };
+type Promotion = { id: string; title: string; badge: string | null; is_active: boolean; expires_at: string | null };
+
+const STATUS_STYLES: Record<string, string> = {
+  pending: "bg-amber-100 text-amber-700",
+  confirmed: "bg-green-100 text-green-700",
+  cancelled: "bg-red-100 text-red-700",
+  completed: "bg-blue-100 text-blue-700",
 };
 
-type Promotion = {
-  id: string;
-  title: string;
-  subtitle: string | null;
-  badge: string | null;
-  wa_message: string | null;
-  is_active: boolean;
-  expires_at: string | null;
-  sort_order: number;
-};
+function StatCard({ icon: Icon, label, value, sub, color }: { icon: any; label: string; value: string | number; sub?: string; color: string }) {
+  return (
+    <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6">
+      <div className="flex items-start justify-between mb-4">
+        <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${color}`}>
+          <Icon className="w-6 h-6" />
+        </div>
+      </div>
+      <p className="text-3xl font-bold text-white mb-1">{value}</p>
+      <p className="text-sm font-medium text-zinc-400">{label}</p>
+      {sub && <p className="text-xs text-zinc-600 mt-1">{sub}</p>}
+    </div>
+  );
+}
 
 export default function AdminDashboard() {
-  const [tab, setTab] = useState<"bookings" | "promotions">("bookings");
   const [bookings, setBookings] = useState<Booking[]>([]);
-  const [promotions, setPromotions] = useState<Promotion[]>([]);
+  const [promos, setPromos] = useState<Promotion[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
-  const [lastRefresh, setLastRefresh] = useState(new Date());
-
-  async function loadBookings() {
-    if (!isSupabaseConfigured || !supabaseAdmin) return;
-    const { data } = await supabaseAdmin.from("bookings").select("*").order("created_at", { ascending: false }).limit(50);
-    setBookings(data || []);
-  }
-
-  async function loadPromotions() {
-    if (!isSupabaseConfigured || !supabaseAdmin) return;
-    const { data } = await supabaseAdmin.from("promotions").select("*").order("sort_order");
-    setPromotions(data || []);
-  }
-
-  async function updateBookingStatus(id: string, status: string) {
-    if (!supabaseAdmin) return;
-    await supabaseAdmin.from("bookings").update({ status }).eq("id", id);
-    setBookings(prev => prev.map(b => b.id === id ? { ...b, status } : b));
-  }
-
-  async function togglePromotion(id: string, is_active: boolean) {
-    if (!supabaseAdmin) return;
-    await supabaseAdmin.from("promotions").update({ is_active }).eq("id", id);
-    setPromotions(prev => prev.map(p => p.id === id ? { ...p, is_active } : p));
-  }
+  const [notConfigured, setNotConfigured] = useState(false);
 
   useEffect(() => {
-    if (tab === "bookings") loadBookings();
-    else loadPromotions();
-    setLoading(false);
-  }, [tab]);
+    async function load() {
+      const [bRes, pRes] = await Promise.allSettled([
+        fetch("/api/admin/bookings"),
+        fetch("/api/admin/promotions"),
+      ]);
+      if (bRes.status === "fulfilled" && bRes.value.ok) {
+        const bData = await bRes.value.json();
+        if (Array.isArray(bData)) { setBookings(bData); }
+        else { setNotConfigured(true); }
+      } else {
+        setNotConfigured(true);
+      }
+      if (pRes.status === "fulfilled" && pRes.value.ok) {
+        const pData = await pRes.value.json();
+        if (Array.isArray(pData)) setPromos(pData);
+      }
+      setLoading(false);
+    }
+    load();
+  }, []);
+
+  const lastBooking = bookings[0];
+  const activePromos = promos.filter(p => p.is_active).length;
+  const pendingBookings = bookings.filter(b => b.status === "pending").length;
 
   function formatDate(iso: string) {
-    return new Date(iso).toLocaleString("es-PY", { day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit" });
+    return new Date(iso).toLocaleDateString("es-PY", { day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit" });
   }
 
-  const pending = bookings.filter(b => b.status === "pending").length;
+  if (notConfigured) {
+    return (
+      <div className="min-h-screen bg-zinc-950 flex items-center justify-center p-4">
+        <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-8 max-w-lg w-full text-center">
+          <div className="w-16 h-16 rounded-full bg-amber-500/10 flex items-center justify-center mx-auto mb-6">
+            <AlertCircle className="w-8 h-8 text-amber-500" />
+          </div>
+          <h2 className="text-2xl font-bold text-white mb-3">Supabase no está configurado</h2>
+          <p className="text-zinc-400 mb-6 leading-relaxed">
+            Para activar el panel admin, agregá las variables de entorno en el archivo <code className="text-amber-400 font-mono">.env.local</code> del proyecto:
+          </p>
+          <div className="bg-zinc-950 rounded-xl p-4 text-left mb-6 font-mono text-sm space-y-2">
+            <p className="text-zinc-300">NEXT_PUBLIC_SUPABASE_URL=</p>
+            <p className="text-zinc-300">SUPABASE_SERVICE_ROLE_KEY=</p>
+          </div>
+          <p className="text-xs text-zinc-600">
+            Luego corré el schema SQL en el editor de Supabase: <code className="text-zinc-500">supabase/schema.sql</code>
+          </p>
+          <div className="mt-6 flex gap-3 justify-center">
+            <Link href="/admin/content" className="text-sm text-amber-400 hover:text-amber-300 font-medium">
+              Editar contenido →
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="min-h-screen bg-zinc-950 text-white">
-      {/* Top bar */}
-      <div className="bg-zinc-900 border-b border-zinc-800 px-6 py-4 flex items-center justify-between">
-        <div>
-          <h1 className="text-xl font-bold text-white">Panel Magnolia</h1>
-          <p className="text-xs text-zinc-400 mt-0.5">
-            {isSupabaseConfigured ? "Conectado a Supabase" : "Supabase no configurado — modo demo"}
-          </p>
-        </div>
-        <div className="flex items-center gap-3">
-          <div className="text-right">
-            <p className="text-xs text-zinc-400">Última actualización</p>
-            <p className="text-sm text-zinc-300">{lastRefresh.toLocaleTimeString("es-PY")}</p>
+    <div className="min-h-screen bg-zinc-950">
+      {/* Header */}
+      <div className="border-b border-zinc-800 bg-zinc-900 px-6 py-4">
+        <div className="max-w-7xl mx-auto flex items-center justify-between">
+          <div>
+            <h1 className="text-xl font-bold text-white">Panel de Administración</h1>
+            <p className="text-sm text-zinc-500">Magnolia Peluquería</p>
           </div>
-          <button
-            onClick={() => { loadBookings(); loadPromotions(); setLastRefresh(new Date()); }}
-            className="text-xs bg-zinc-800 hover:bg-zinc-700 text-zinc-300 px-3 py-1.5 rounded-lg transition-colors"
-          >
-            ↻ Refrescar
-          </button>
+          <div className="flex items-center gap-4">
+            <Link href="/admin/content" className="text-sm text-zinc-400 hover:text-white transition-colors">
+              Contenido
+            </Link>
+            <Link href="/" className="text-sm text-zinc-500 hover:text-zinc-300 transition-colors flex items-center gap-1">
+              <ExternalLink className="w-3.5 h-3.5" /> Ver sitio
+            </Link>
+          </div>
         </div>
       </div>
 
-      {/* Tabs */}
-      <div className="flex gap-1 px-6 pt-6">
-        {(["bookings", "promotions"] as const).map(t => (
-          <button
-            key={t}
-            onClick={() => setTab(t)}
-            className={`px-5 py-2.5 rounded-t-lg text-sm font-semibold transition-all relative
-              ${tab === t ? "bg-zinc-900 text-white" : "text-zinc-500 hover:text-zinc-300"}`}
-          >
-            {t === "bookings" ? "Reservas" : "Promociones"}
-            {t === "bookings" && pending > 0 && (
-              <span className="ml-2 bg-amber-500 text-black text-xs font-bold px-1.5 py-0.5 rounded-full">{pending}</span>
-            )}
-          </button>
-        ))}
-      </div>
+      <div className="max-w-7xl mx-auto px-6 py-8">
+        {/* Stat cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10">
+          <StatCard icon={CalendarDays} label="Total reservas" value={bookings.length} sub="todas" color="bg-secondary/10 text-secondary" />
+          <StatCard icon={Clock} label="Pendientes" value={pendingBookings} sub="requieren confirmación" color="bg-amber-500/10 text-amber-400" />
+          <StatCard icon={Tag} label="Promociones activas" value={activePromos} sub={`de ${promos.length} totales`} color="bg-violet-500/10 text-violet-400" />
+        </div>
 
-      {/* Content */}
-      <div className="p-6">
-        {!isSupabaseConfigured ? (
-          <div className="bg-amber-500/10 border border-amber-500/20 rounded-xl p-6 text-center">
-            <p className="text-amber-400 font-bold mb-1">Supabase no configurado</p>
-            <p className="text-zinc-400 text-sm">Agregá las variables de entorno para activar el panel.</p>
-          </div>
-        ) : tab === "bookings" ? (
-          <>
-            {loading ? (
-              <div className="text-zinc-500 text-center py-12">Cargando reservas...</div>
-            ) : bookings.length === 0 ? (
-              <div className="bg-zinc-900 rounded-xl p-12 text-center">
-                <p className="text-zinc-400">No hay reservas todavía.</p>
+        {/* Last booking info */}
+        {lastBooking && (
+          <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 mb-8">
+            <div className="flex items-center gap-2 mb-4">
+              <CheckCircle className="w-5 h-5 text-green-400" />
+              <h2 className="text-white font-semibold">Última reserva recibida</h2>
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+              <div>
+                <p className="text-xs text-zinc-500 uppercase tracking-wide">Cliente</p>
+                <p className="text-white font-medium">{lastBooking.client_name}</p>
               </div>
-            ) : (
-              <div className="space-y-3">
-                {bookings.map(b => (
-                  <div key={b.id} className="bg-zinc-900 rounded-xl p-5 border border-zinc-800">
-                    <div className="flex items-start justify-between gap-4">
-                      <div className="flex-1">
-                        <div className="flex items-center gap-3 mb-2">
-                          <span className="font-bold text-white">{b.client_name}</span>
-                          <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${
-                            b.status === "pending" ? "bg-amber-500/20 text-amber-400" :
-                            b.status === "confirmed" ? "bg-green-500/20 text-green-400" :
-                            "bg-red-500/20 text-red-400"
-                          }`}>
-                            {b.status === "pending" ? "Pendiente" : b.status === "confirmed" ? "Confirmado" : "Cancelado"}
-                          </span>
-                        </div>
-                        <div className="grid grid-cols-2 gap-x-6 gap-y-1 text-sm text-zinc-400">
-                          <p>📞 <a href={`https://wa.me/${b.phone.replace(/\D/g,"")}`} className="text-secondary hover:underline" target="_blank" rel="noopener noreferrer">{b.phone}</a></p>
-                          <p>✂️ {b.service}</p>
-                          {b.preferred_date && <p>📅 {b.preferred_date}</p>}
-                          {b.notes && <p className="col-span-2 text-zinc-500">📝 {b.notes}</p>}
-                        </div>
-                      </div>
-                      <div className="text-right shrink-0">
-                        <p className="text-xs text-zinc-500 mb-2">{formatDate(b.created_at)}</p>
-                        {b.status === "pending" && (
-                          <div className="flex gap-2">
-                            <button onClick={() => updateBookingStatus(b.id, "confirmed")} className="text-xs bg-green-600 hover:bg-green-500 text-white px-3 py-1.5 rounded-lg transition-colors">✓ Confirmar</button>
-                            <button onClick={() => updateBookingStatus(b.id, "cancelled")} className="text-xs bg-red-600/50 hover:bg-red-500/50 text-white px-3 py-1.5 rounded-lg transition-colors">✗ Cancelar</button>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                ))}
+              <div>
+                <p className="text-xs text-zinc-500 uppercase tracking-wide">Servicio</p>
+                <p className="text-white font-medium">{lastBooking.service}</p>
               </div>
-            )}
-          </>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {promotions.map(p => (
-              <div key={p.id} className={`bg-zinc-900 rounded-xl p-5 border ${p.is_active ? "border-zinc-700" : "border-zinc-800 opacity-60"}`}>
-                <div className="flex items-start justify-between mb-3">
-                  <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${p.is_active ? "bg-green-500/20 text-green-400" : "bg-zinc-700 text-zinc-500"}`}>
-                    {p.is_active ? "Activa" : "Inactiva"}
-                  </span>
-                  <button
-                    onClick={() => togglePromotion(p.id, !p.is_active)}
-                    className={`text-xs px-3 py-1 rounded-lg transition-all ${p.is_active ? "bg-zinc-700 hover:bg-zinc-600 text-zinc-300" : "bg-green-600 hover:bg-green-500 text-white"}`}
-                  >
-                    {p.is_active ? "Desactivar" : "Activar"}
-                  </button>
-                </div>
-                <h3 className="font-bold text-white mb-1">{p.title}</h3>
-                <p className="text-sm text-zinc-400">{p.subtitle}</p>
-                {p.expires_at && (
-                  <p className="text-xs text-zinc-500 mt-2">⏱️ Vence: {new Date(p.expires_at).toLocaleDateString("es-PY")}</p>
-                )}
+              <div>
+                <p className="text-xs text-zinc-500 uppercase tracking-wide">Fecha</p>
+                <p className="text-white font-medium">{lastBooking.preferred_date || "—"}</p>
               </div>
-            ))}
+              <div>
+                <p className="text-xs text-zinc-500 uppercase tracking-wide">Recibida</p>
+                <p className="text-white font-medium">{formatDate(lastBooking.created_at)}</p>
+              </div>
+            </div>
           </div>
         )}
+
+        {/* Recent bookings */}
+        <div className="bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden mb-8">
+          <div className="flex items-center justify-between px-6 py-4 border-b border-zinc-800">
+            <h2 className="text-white font-semibold">Reservas recientes</h2>
+            <Link href="/admin/bookings" className="text-sm text-secondary hover:text-secondary-dark font-medium flex items-center gap-1">
+              Ver todas <ChevronRight className="w-4 h-4" />
+            </Link>
+          </div>
+          {bookings.length === 0 && !loading ? (
+            <div className="p-12 text-center text-zinc-500">
+              <CalendarDays className="w-10 h-10 mx-auto mb-3 opacity-30" />
+              <p>No hay reservas todavía</p>
+            </div>
+          ) : (
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-zinc-800 text-left">
+                    <th className="px-6 py-3 text-xs text-zinc-500 uppercase tracking-wide font-semibold">Cliente</th>
+                    <th className="px-6 py-3 text-xs text-zinc-500 uppercase tracking-wide font-semibold">Teléfono</th>
+                    <th className="px-6 py-3 text-xs text-zinc-500 uppercase tracking-wide font-semibold">Servicio</th>
+                    <th className="px-6 py-3 text-xs text-zinc-500 uppercase tracking-wide font-semibold">Fecha pref.</th>
+                    <th className="px-6 py-3 text-xs text-zinc-500 uppercase tracking-wide font-semibold">Estado</th>
+                    <th className="px-6 py-3 text-xs text-zinc-500 uppercase tracking-wide font-semibold">Recibida</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {bookings.slice(0, 10).map((b) => (
+                    <tr key={b.id} className="border-b border-zinc-800/50 hover:bg-zinc-800/50 transition-colors">
+                      <td className="px-6 py-4 text-white font-medium">{b.client_name}</td>
+                      <td className="px-6 py-4 text-zinc-400">{b.phone}</td>
+                      <td className="px-6 py-4 text-zinc-400">{b.service}</td>
+                      <td className="px-6 py-4 text-zinc-400">{b.preferred_date || "—"}</td>
+                      <td className="px-6 py-4">
+                        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold ${STATUS_STYLES[b.status] || "bg-zinc-700 text-zinc-300"}`}>
+                          {b.status}
+                        </span>
+                      </td>
+                      <td className="px-6 py-4 text-zinc-500">{formatDate(b.created_at)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </div>
+
+        {/* Quick actions */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <Link href="/admin/bookings" className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 hover:border-secondary/30 transition-all group">
+            <CalendarDays className="w-8 h-8 text-secondary mb-4" />
+            <h3 className="text-white font-semibold mb-1">Gestionar Reservas</h3>
+            <p className="text-zinc-500 text-sm">Confirmar, cancelar o exportar reservas</p>
+            <p className="text-secondary text-sm font-medium mt-3 group-hover:underline">Ir a reservas →</p>
+          </Link>
+          <Link href="/admin/promotions" className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 hover:border-secondary/30 transition-all group">
+            <Tag className="w-8 h-8 text-amber-400 mb-4" />
+            <h3 className="text-white font-semibold mb-1">Promociones</h3>
+            <p className="text-zinc-500 text-sm">Crear y editar promociones activas</p>
+            <p className="text-secondary text-sm font-medium mt-3 group-hover:underline">Ir a promociones →</p>
+          </Link>
+        </div>
       </div>
     </div>
   );

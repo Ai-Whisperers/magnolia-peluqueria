@@ -3,6 +3,8 @@ import { Montserrat, Playfair_Display } from "next/font/google"
 import "./globals.css"
 import CookieConsent from "@/components/CookieConsent"
 import { WhatsAppFloat } from "@/components/whatsapp-float"
+import { Analytics } from "@vercel/analytics/react"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -64,7 +66,7 @@ const jsonLd = {
   name: "Magnolia Peluquería",
   description: "Peluquería profesional en Asunción. Cortes, coloración, balayage, keratina y tratamientos capilares. 18 años de experiencia.",
   url: "https://magnolia-peluqueria.paragu-ai.com",
-  telephone: "+595981106062",
+  telephone: "+595 986 106 062",
   address: {
     "@type": "PostalAddress",
     streetAddress: "Zona céntrica",
@@ -109,6 +111,53 @@ const jsonLd = {
   sameAs: ["https://instagram.com/magnolia_peluqueria"],
 }
 
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "¿Cuáles son los horarios?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Martes a sábado de 9:00 a 19:00. Lunes y domingos cerrados. Podés reservar por WhatsApp para coordinar tu turno.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "¿Aceptan walk-ins?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Preferimos con cita previa para garantizarte atención personalizada. Escribinos por WhatsApp y te confirmamos en minutos.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "¿Cuánto cuesta un corte?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Corte dama desde Gs. 90.000, caballero desde Gs. 60.000. Todos los precios incluyen asesoría de estilo personalizada.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "¿Cómo reservo mi turno?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "La forma más rápida es por WhatsApp: 0981 106 062. Te respondemos en menos de 5 minutos y coordinamos el mejor horario.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "¿Hacen peinados de novia?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Sí! Tenemos servicio completo de peinado y maquillaje para novias. Incluye prueba y asesoramiento. Reservá con anticipación.",
+      },
+    },
+  ],
+}
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es" className={montserrat.variable + " " + playfair.variable}>
@@ -117,11 +166,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
       </head>
       <body className="font-body antialiased bg-background text-foreground">
         {children}
         <WhatsAppFloat />
         <CookieConsent />
+        <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   )
