@@ -1,8 +1,8 @@
 import type { Metadata } from "next"
 import { Montserrat, Playfair_Display } from "next/font/google"
 import "./globals.css"
-import { CookieConsent } from "@ai-whisperers/seo"
-import { WhatsAppFloat } from "@ai-whisperers/whatsapp"
+import CookieConsent from "@/components/CookieConsent"
+import { WhatsAppFloat } from "@/components/whatsapp-float"
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -120,7 +120,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="font-body antialiased bg-background text-foreground">
         {children}
-        <WhatsAppFloat phone="+595986106062" />
+        <WhatsAppFloat />
         <CookieConsent />
       </body>
     </html>

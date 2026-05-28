@@ -1,7 +1,6 @@
 "use client"
 
-// @ai-whisperers/client-kit no está disponible en este entorno
-// Reemplazado por un placeholder simple
+// Contenido editado directamente en content/es.json
 export default function AdminContentPage() {
   return (
     <div className="flex items-center justify-center min-h-screen bg-zinc-950 text-zinc-400">
