@@ -2,7 +2,8 @@ import { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { getPostBySlug, getRelatedPosts, calculateReadingTime, getAllPosts } from "@/lib/blog"
 import { ScrollReveal } from "@/components/scroll-reveal"
-import { Calendar, Clock, ArrowLeft, Share2, ExternalLink, CheckCircle2, Crown, Star, MessageCircle } from "lucide-react"
+import { Calendar, Clock, ArrowLeft, ExternalLink, CheckCircle2, Crown, Star, MessageCircle } from "lucide-react"
+import { CopyLinkButton } from "@/components/copy-link-button"
 
 type Lang = "es" | "en"
 
@@ -44,7 +45,7 @@ function renderMd(content: string): string {
     .replace(/^(\d+)\. (.+)$/gm, "<li>$2</li>")
 
   // Wrap list items
-  html = html.replace(/(<li>.*<\/li>)/gs, "<ul>$1</ul>")
+  html = html.replace(/(<li>[\s\S]*?<\/li>)/g, "<ul>$1</ul>")
 
   // Paragraphs
   const blocks = html.split(/\n{2,}/)
@@ -131,13 +132,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ lang:
                 >
                   <ExternalLink className="w-4 h-4" /> WhatsApp
                 </a>
-                <button
-                  onClick={() => {}}
-                  data-copy-url={`https://magnolia-peluqueria.paragu-ai.com/${lang}/blog/${post.slug}`}
-                  className="copy-link-btn inline-flex items-center gap-2 bg-surface-muted text-foreground text-sm font-semibold px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors"
-                >
-                  <Share2 className="w-4 h-4" /> {labels.copyLink}
-                </button>
+                <CopyLinkButton url={`https://magnolia-peluqueria.paragu-ai.com/${lang}/blog/${post.slug}`} label={labels.copyLink} />
               </div>
             </div>
 
@@ -197,14 +192,14 @@ export default async function BlogPostPage({ params }: { params: Promise<{ lang:
                 <h3 className="font-heading text-lg font-bold mb-2">{labels.loyalty}</h3>
                 <p className="text-white/60 text-sm mb-4">{labels.loyaltyDesc}</p>
                 <div className="space-y-2">
-                  {[
+                  {([
                     [CheckCircle2, lang === "es" ? "Reservaste tu cita" : "Booked"],
                     [CheckCircle2, lang === "es" ? "Completaste tu visita" : "Visit done"],
                     [Crown, lang === "es" ? "Tercera visita" : "Third visit"],
                     [Star, lang === "es" ? "Premio especial" : "Special reward"],
-                  ].map(([Icon, label], i) => (
+                  ] as const).map(([Icon, label], i) => (
                     <div key={i} className="flex items-center gap-2 text-sm text-white/40">
-                      {(() => { const Ic = Icon as React.ComponentType<{ className?: string }>; return <Ic className="w-4 h-4 shrink-0" /> })()}
+                      <Icon className="w-4 h-4 shrink-0" />
                       <span>{label}</span>
                     </div>
                   ))}

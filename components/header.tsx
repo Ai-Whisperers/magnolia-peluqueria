@@ -11,21 +11,31 @@ type Lang = "es" | "en"
 const NAV_ITEMS_ES = [
   { label: "Inicio", href: "/es" },
   { label: "Servicios", href: "/es/servicios" },
-  { label: "Blog", href: "/es/blog" },
   { label: "Nosotros", href: "/es/nosotros" },
   { label: "Reservar", href: "/es/booking" },
-  { label: "FAQ", href: "/es/faq" },
   { label: "Contacto", href: "/es/contacto" },
+]
+
+const MORE_ITEMS_ES = [
+  { label: "Ofertas", href: "/es/ofertas" },
+  { label: "Tarjetas de Regalo", href: "/es/tarjetas-de-regalo" },
+  { label: "Blog", href: "/es/blog" },
+  { label: "FAQ", href: "/es/faq" },
 ]
 
 const NAV_ITEMS_EN = [
   { label: "Home", href: "/en" },
   { label: "Services", href: "/en/servicios" },
-  { label: "Blog", href: "/en/blog" },
   { label: "About Us", href: "/en/nosotros" },
   { label: "Book", href: "/en/booking" },
-  { label: "FAQ", href: "/en/faq" },
   { label: "Contact", href: "/en/contacto" },
+]
+
+const MORE_ITEMS_EN = [
+  { label: "Offers", href: "/en/ofertas" },
+  { label: "Gift Cards", href: "/en/tarjetas-de-regalo" },
+  { label: "Blog", href: "/en/blog" },
+  { label: "FAQ", href: "/en/faq" },
 ]
 
 interface HeaderProps {
@@ -36,7 +46,10 @@ export function Header({ lang = "es" }: HeaderProps) {
   const [open, setOpen] = useState(false)
   const pathname = usePathname()
 
+  const [moreOpen, setMoreOpen] = useState(false)
   const navItems = lang === "es" ? NAV_ITEMS_ES : NAV_ITEMS_EN
+  const moreItems = lang === "es" ? MORE_ITEMS_ES : MORE_ITEMS_EN
+  const moreLabel = lang === "es" ? "Más" : "More"
   const bookingLabel = lang === "es" ? "Reservar" : "Book"
   const mobileBookingLabel = lang === "es" ? "Reservar por WhatsApp" : "Book via WhatsApp"
 
@@ -74,6 +87,23 @@ export function Header({ lang = "es" }: HeaderProps) {
               {item.label}
             </Link>
           ))}
+          {/* Más dropdown */}
+          <div className="relative" onMouseEnter={() => setMoreOpen(true)} onMouseLeave={() => setMoreOpen(false)}>
+            <button className="rounded-lg px-4 py-2 text-sm font-medium text-foreground/80 hover:text-primary hover:bg-primary/5 transition-all flex items-center gap-1">
+              {moreLabel}
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`transition-transform ${moreOpen ? 'rotate-180' : ''}`}><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            {moreOpen && (
+              <div className="absolute right-0 mt-1 w-52 bg-white rounded-xl shadow-lg border border-gray-100 py-2 z-50">
+                {moreItems.map(item => (
+                  <Link key={item.href} href={item.href}
+                    className="block px-4 py-2.5 text-sm text-foreground/80 hover:text-primary hover:bg-primary/5 transition-all">
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
           {/* Lang switcher */}
           <a href={switchLang}
             className="ml-2 px-2.5 py-1.5 text-xs font-bold rounded border border-gray-300 text-gray-500 hover:border-primary hover:text-primary transition-all">

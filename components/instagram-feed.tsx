@@ -1,6 +1,5 @@
 "use client"
 import { useEffect, useState } from "react"
-import { Instagram } from "lucide-react"
 
 interface IgPost {
   id: string
@@ -39,10 +38,10 @@ export function InstagramFeed({ lang = "es" as "es" | "en" }: { lang?: "es" | "e
   const fallbackPosts = [
     { id: "f1", type: "IMAGE", url: "https://images.unsplash.com/photo-1562322140-8baeececf3df?w=400&q=80", caption: "Trabajo del día en Magnolia ✨", likes: 247, permalink: "https://instagram.com/magnolia_peluqueria" },
     { id: "f2", type: "IMAGE", url: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=400&q=80", caption: "Coloración profesional 💇‍♀️", likes: 189, permalink: "https://instagram.com/magnolia_peluqueria" },
-    { id: "f3", type: "IMAGE", url: "https://images.unsplash.com/photo-1605491668644-b82e54f9f2af?w=400&q=80", caption: "Corte y peinado para evento", likes: 156, permalink: "https://instagram.com/magnolia_peluqueria" },
+    { id: "f3", type: "IMAGE", url: "https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=400&q=80", caption: "Corte y peinado para evento", likes: 156, permalink: "https://instagram.com/magnolia_peluqueria" },
     { id: "f4", type: "IMAGE", url: "https://images.unsplash.com/photo-1559599101-f09722fb4948?w=400&q=80", caption: "Balayage technique 🌟", likes: 312, permalink: "https://instagram.com/magnolia_peluqueria" },
     { id: "f5", type: "IMAGE", url: "https://images.unsplash.com/photo-1634449571010-02389ed0f9b0?w=400&q=80", caption: "Antes y después del tratamiento", likes: 198, permalink: "https://instagram.com/magnolia_peluqueria" },
-    { id: "f6", type: "IMAGE", url: "https://images.unsplash.com/photo-1595476108010-b4d1ef1b45e9?w=400&q=80", caption: "Transformación completa 🌈", likes: 275, permalink: "https://instagram.com/magnolia_peluqueria" },
+    { id: "f6", type: "IMAGE", url: "https://images.unsplash.com/photo-1583445095369-9c651e7e5d34?w=400&q=80", caption: "Transformación completa 🌈", likes: 275, permalink: "https://instagram.com/magnolia_peluqueria" },
   ]
 
   const displayPosts = posts ?? fallbackPosts

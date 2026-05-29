@@ -11,11 +11,13 @@ interface HeroProps {
 export function Hero({ lang }: HeroProps) {
   const [current, setCurrent] = useState(0)
   const [isTransitioning, setIsTransitioning] = useState(false)
+  const [isHovered, setIsHovered] = useState(false)
 
   const slides = heroSlidesStatic
   const stats = statsStatic
 
   useEffect(() => {
+    if (isHovered) return
     const timer = setInterval(() => {
       setIsTransitioning(true)
               setTimeout(() => {
@@ -24,7 +26,7 @@ export function Hero({ lang }: HeroProps) {
               }, 300)
     }, 5000)
     return () => clearInterval(timer)
-  }, [slides.length])
+  }, [slides.length, isHovered])
 
   const slide = slides[current]
 
@@ -35,7 +37,9 @@ export function Hero({ lang }: HeroProps) {
   const l = labels[lang] ?? labels.es
 
   return (
-    <section className="relative h-[92vh] min-h-[580px] max-h-[900px] overflow-hidden">
+    <section className="relative h-[92vh] min-h-[580px] max-h-[900px] overflow-hidden"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}>
       {/* Slides */}
       {slides.map((s, i) => (
         <div key={i}
@@ -72,25 +76,16 @@ export function Hero({ lang }: HeroProps) {
               </a>
             </div>
 
-            {/* Stats bar */}
-            <div className="flex flex-wrap gap-8 mt-12">
-              {stats.map((s, i) => (
-                <div key={i} className="text-white">
-                  <div className="text-2xl font-bold">{s.value}{s.suffix ?? ""}</div>
-                  <div className="text-sm text-white/70">{s.label}</div>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </div>
 
       {/* Nav arrows */}
-      <button onClick={() => { setIsTransitioning(true); setCurrent((c: number) => (c - 1 + slides.length) % slides.length); setTimeout(() => setIsTransitioning(false), 300); }}
+      <button aria-label="Anterior slide" onClick={() => { setIsTransitioning(true); setCurrent((c: number) => (c - 1 + slides.length) % slides.length); setTimeout(() => setIsTransitioning(false), 300); }}
         className="absolute left-4 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm text-white hover:bg-white/30 transition-all hidden md:flex items-center justify-center">
         <ChevronLeft className="w-6 h-6" />
       </button>
-      <button onClick={() => { setIsTransitioning(true); setCurrent((c: number) => (c + 1) % slides.length); setTimeout(() => setIsTransitioning(false), 300); }}
+      <button aria-label="Siguiente slide" onClick={() => { setIsTransitioning(true); setCurrent((c: number) => (c + 1) % slides.length); setTimeout(() => setIsTransitioning(false), 300); }}
         className="absolute right-4 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm text-white hover:bg-white/30 transition-all hidden md:flex items-center justify-center">
         <ChevronRight className="w-6 h-6" />
       </button>

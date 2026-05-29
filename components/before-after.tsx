@@ -66,8 +66,8 @@ export function BeforeAfterSection() {
   const items = [
     ...beforeAfter,
     {
-      before: "https://images.unsplash.com/photo-1595476108010-b4d1ef1b45e9?w=800&q=80",
-      after: "https://images.unsplash.com/photo-1605491668644-b82e54f9f2af?w=800&q=80",
+      before: "https://images.unsplash.com/photo-1583445095369-9c651e7e5d34?w=800&q=80",
+      after: "https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=800&q=80",
       label: "Corte Transformador",
       description: "Corte moderno con acabado profesional y styled de volumen"
     }

@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from "react"
 import { Star, ChevronLeft, ChevronRight, Quote } from "lucide-react"
 import { testimonials } from "@/lib/config"
 import { getColorMap } from "@/lib/config"
+import { ScrollReveal } from "./scroll-reveal"
 
 function StarRating({ rating }: { rating: number }) {
   return (
@@ -62,17 +63,7 @@ function TestimonialCard({
 
 export function Testimonials() {
   const [active, setActive] = useState(0)
-  const [isPaused, setIsPaused] = useState(false)
   const trackRef = useRef<HTMLDivElement>(null)
-
-  // Auto-scroll
-  useEffect(() => {
-    if (isPaused) return
-    const id = setInterval(() => {
-      setActive(prev => (prev + 1) % testimonials.length)
-    }, 4000)
-    return () => clearInterval(id)
-  }, [isPaused])
 
   const prev = () => setActive(p => (p - 1 + testimonials.length) % testimonials.length)
   const next = () => setActive(p => (p + 1) % testimonials.length)
@@ -94,18 +85,20 @@ export function Testimonials() {
     <section className="py-20 bg-surface-muted">
       <div className="max-w-6xl mx-auto px-4">
         {/* Header */}
-        <div className="text-center mb-12">
-          <span className="inline-flex items-center gap-2 text-sm font-bold text-secondary uppercase tracking-widest mb-3">
-            <Star className="w-4 h-4 fill-secondary text-secondary" />
-            Lo que dicen nuestras clientas
-          </span>
-          <h2 className="font-heading text-4xl font-bold text-primary mb-3">
-            Testimonios Reales
-          </h2>
-          <p className="text-foreground-light max-w-xl mx-auto">
-            Más de 100 clientas nos recomiendan. Estas son opiniones reales verificadas.
-          </p>
-        </div>
+        <ScrollReveal direction="up">
+          <div className="text-center mb-12">
+            <span className="inline-flex items-center gap-2 text-sm font-bold text-secondary uppercase tracking-widest mb-3">
+              <Star className="w-4 h-4 fill-secondary text-secondary" />
+              Lo que dicen nuestras clientas
+            </span>
+            <h2 className="font-heading text-4xl font-bold text-primary mb-3">
+              Testimonios Reales
+            </h2>
+            <p className="text-foreground-light max-w-xl mx-auto">
+              Más de 100 clientas nos recomiendan. Estas son opiniones reales verificadas.
+            </p>
+          </div>
+        </ScrollReveal>
 
         {/* Google rating pill */}
         <div className="flex items-center justify-center gap-3 mb-8">
@@ -129,8 +122,6 @@ export function Testimonials() {
         {/* Carousel */}
         <div
           className="relative"
-          onMouseEnter={() => setIsPaused(true)}
-          onMouseLeave={() => setIsPaused(false)}
         >
           {/* Fade masks */}
           <div className="absolute left-0 top-0 bottom-0 w-12 bg-gradient-to-r from-surface-muted to-transparent z-10 pointer-events-none" />
@@ -145,7 +136,7 @@ export function Testimonials() {
             {testimonials.map((t, i) => (
               <div
                 key={i}
-                className={`transition-all duration-300 ${i === active ? "scale-100 opacity-100" : "scale-95 opacity-50"}`}
+                className={`transition-all duration-300 ${i === active ? "scale-100 opacity-100" : "scale-95 opacity-60"}`}
               >
                 <TestimonialCard t={t} index={i} />
               </div>

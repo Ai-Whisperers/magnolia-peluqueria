@@ -12,7 +12,7 @@ export async function GET(request: Request) {
 
   try {
     const { default: Stripe } = await import("stripe")
-    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: "2024-04-10" })
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: "2026-05-27.dahlia" })
     const session = await stripe.checkout.sessions.retrieve(sessionId)
     return NextResponse.json({
       paid: session.payment_status === "paid",
@@ -50,7 +50,7 @@ export async function POST(request: Request) {
 
   try {
     const { default: Stripe } = await import("stripe")
-    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: "2024-04-10" })
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: "2026-05-27.dahlia" })
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
       mode: "payment",
@@ -61,7 +61,7 @@ export async function POST(request: Request) {
             name: card_name || "Tarjeta de Regalo – Magnolia Peluquería",
             description: `Regalo de Gs. ${numAmount.toLocaleString("es-PY")}`,
           },
-          unit_amount: Math.round(numAmount / 6500 * 100), // approximate CLP/USD conversion
+          unit_amount: Math.round(numAmount / 7600 * 100), // approximate Gs/USD conversion
         },
         quantity: 1,
       }],

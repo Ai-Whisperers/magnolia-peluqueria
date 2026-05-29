@@ -3,6 +3,7 @@ import "../globals.css"
 import { MagnoliaLocalBusinessJsonLd } from "@/components/JsonLd"
 import { CookieConsent } from "@/components/CookieConsent"
 import { ExitIntentPopup } from "@/components/exit-intent-popup"
+import { ErrorBoundary } from "@/components/ErrorBoundary"
 import { siteConfig } from "@/lib/config"
 
 export async function generateMetadata({
@@ -57,7 +58,9 @@ export default async function LangLayout({
         <MagnoliaLocalBusinessJsonLd url={`https://magnolia-peluqueria.paragu-ai.com/${lang}`} />
       </head>
       <body className="antialiased">
-        {children}
+        <ErrorBoundary>
+          {children}
+        </ErrorBoundary>
         {siteConfig?.features?.exitIntentPopup !== false && (
           <ExitIntentPopup lang={lang as "es" | "en"} />
         )}

@@ -2,6 +2,7 @@
 import { useState } from "react"
 import { Camera, ExternalLink, X } from "lucide-react"
 import { gallery, business, waLink } from "@/lib/config"
+import { ScrollReveal } from "./scroll-reveal"
 
 export function Gallery() {
   const [selected, setSelected] = useState<number | null>(null)
@@ -15,15 +16,17 @@ export function Gallery() {
       <section className="py-20 bg-white">
         <div className="container-page">
           {/* Header */}
-          <div className="text-center mb-12">
-            <span className="inline-flex items-center gap-2 text-sm font-bold text-secondary uppercase tracking-widest mb-4">
-              <Camera className="w-4 h-4" /> Nuestros Trabajos
-            </span>
-            <h2 className="font-heading text-4xl font-bold text-primary mb-4">Resultados que Hablan</h2>
-            <p className="text-foreground-light max-w-xl mx-auto">
-              Cada trabajo es único. Consultanos para encontrar el estilo que mejor se adapte a vos.
-            </p>
-          </div>
+          <ScrollReveal direction="up">
+            <div className="text-center mb-12">
+              <span className="inline-flex items-center gap-2 text-sm font-bold text-secondary uppercase tracking-widest mb-4">
+                <Camera className="w-4 h-4" /> Nuestros Trabajos
+              </span>
+              <h2 className="font-heading text-4xl font-bold text-primary mb-4">Resultados que Hablan</h2>
+              <p className="text-foreground-light max-w-xl mx-auto">
+                Cada trabajo es único. Consultanos para encontrar el estilo que mejor se adapte a vos.
+              </p>
+            </div>
+          </ScrollReveal>
 
           {/* Filter tabs */}
           <div className="flex flex-wrap justify-center gap-2 mb-8">

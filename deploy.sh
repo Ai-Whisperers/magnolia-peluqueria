@@ -1,21 +1,19 @@
 #!/bin/bash
-set -euo pipefail
-cd "$(dirname "$0")"
-[ -f .env ] && { set -a; source ./.env; set +a; }
+set -e
 
-VERSION=$(git rev-parse --short HEAD)
-DATE=$(date +%Y%m%d-%H%M)
-TAG="magnolia-peluqueria:prod-$VERSION-$DATE"
-LATEST="magnolia-peluqueria:prod"
+echo "→ Installing deps..."
+pnpm install --frozen-lockfile
 
-echo "--- build: $TAG"
-npm run build
+echo "→ Building app (local — resolves @ai-whisperers file: deps)..."
+pnpm build
 
-echo "--- docker: $TAG"
-docker build \
-  -t "$TAG" -t "$LATEST" .
+echo "→ Building Docker image..."
+docker build -t magnolia-peluqueria:prod .
 
-echo "--- deploy: magnolia-peluqueria_web (rolling update)"
-docker service update --image "$TAG" magnolia-peluqueria_web
+echo "→ Deploying to Swarm..."
+docker stack deploy -c docker-compose.yml magnolia
 
-echo "--- done: $TAG"
+echo "✓ Done. Waiting for rollout..."
+sleep 5
+docker service ps magnolia_web --no-trunc | head -3
+echo "→ Site: https://magnolia-peluqueria.paragu-ai.com"

@@ -36,7 +36,7 @@
         "badge": "Balayage · Highlights · Color"
       },
       {
-        "image": "https://images.unsplash.com/photo-1595476108010-b4d1ef1b45e9?w=1600&q=85",
+        "image": "https://images.unsplash.com/photo-1583445095369-9c651e7e5d34?w=1600&q=85",
         "title": "Transformative Cuts",
         "subtitle": "Personalized consultation for every face shape",
         "badge": "Cuts · Styling · Events"
@@ -103,14 +103,14 @@
   },
   "gallery": [
     { "src": "https://images.unsplash.com/photo-1562322140-8baeececf3df?w=600&q=80", "alt": "Professional balayage with honey tones", "tag": "Balayage" },
-    { "src": "https://images.unsplash.com/photo-1595476108010-b4d1ef1b45e9?w=600&q=80", "alt": "Modern cut with degradation", "tag": "Cut" },
+    { "src": "https://images.unsplash.com/photo-1583445095369-9c651e7e5d34?w=600&q=80", "alt": "Modern cut with degradation", "tag": "Cut" },
     { "src": "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&q=80", "alt": "Full color with blonde highlights", "tag": "Color" },
-    { "src": "https://images.unsplash.com/photo-1605491668644-b82e54f9f2af?w=600&q=80", "alt": "Highlights with foil professional technique", "tag": "Highlights" },
+    { "src": "https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=600&q=80", "alt": "Highlights with foil professional technique", "tag": "Highlights" },
     { "src": "https://images.unsplash.com/photo-1559599101-f09722fb4948?w=600&q=80", "alt": "Keratin treatment result smooth and shiny", "tag": "Keratin" },
     { "src": "https://images.unsplash.com/photo-1634449571010-02389ed0f9b0?w=600&q=80", "alt": "Hairstyle for special event", "tag": "Events" },
     { "src": "https://images.unsplash.com/photo-1560066984-138dadb4c035?w=600&q=80", "alt": "Magnolia salon environment", "tag": "Salon" },
     { "src": "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&q=80", "alt": "Professional coloring process", "tag": "Color" },
-    { "src": "https://images.unsplash.com/photo-1605491668644-b82e54f9f2af?w=600&q=80", "alt": "Highlights before and after", "tag": "Highlights" },
+    { "src": "https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=600&q=80", "alt": "Highlights before and after", "tag": "Highlights" },
     { "src": "https://images.unsplash.com/photo-1562322140-8baeececf3df?w=600&q=80", "alt": "Balayage natural tones", "tag": "Balayage" },
     { "src": "https://images.unsplash.com/photo-1634449571010-02389ed0f9b0?w=600&q=80", "alt": "Elegant party hairstyle", "tag": "Events" },
     { "src": "https://images.unsplash.com/photo-1559599101-f09722fb4948?w=600&q=80", "alt": "Keratin straight hair", "tag": "Keratin" }
@@ -120,7 +120,7 @@
       "name": "Lidia González",
       "role": "Founder & Head Stylist",
       "bio": "Over 18 years of experience in cuts and coloring. Specialist in balayage and French coloring techniques. Trained in São Paulo and Buenos Aires.",
-      "image": "https://images.unsplash.com/photo-1580618672591-eb180b1cd973?w=400&q=80",
+      "image": "https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=400&q=80",
       "specialties": ["Balayage", "Coloring", "Ladies Cuts"]
     },
     {
@@ -167,8 +167,8 @@
       "description": "De cabello sin vida a tonos miel naturales con balayage francés"
     },
     {
-      "before": "https://images.unsplash.com/photo-1595476108010-b4d1ef1b45e9?w=800&q=80",
-      "after": "https://images.unsplash.com/photo-1605491668644-b82e54f9f2af?w=800&q=80",
+      "before": "https://images.unsplash.com/photo-1583445095369-9c651e7e5d34?w=800&q=80",
+      "after": "https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=800&q=80",
       "label": "Corte + Color",
       "description": "Corte moderno con dégradé y coloración en tonos castaño-rojizo"
     }
@@ -255,7 +255,7 @@
         "badge": "Balayage · Highlights · Color"
       },
       {
-        "image": "https://images.unsplash.com/photo-1595476108010-b4d1ef1b45e9?w=1600&q=85",
+        "image": "https://images.unsplash.com/photo-1583445095369-9c651e7e5d34?w=1600&q=85",
         "title": "Transformative Cuts",
         "subtitle": "Personalized consultation for every face shape",
         "badge": "Cuts · Styling · Events"
