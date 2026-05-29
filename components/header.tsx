@@ -65,18 +65,20 @@ export function Header({ lang = "es" }: HeaderProps) {
   return (
     <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm relative">
       <div className="container-page flex h-16 items-center justify-between">
-        {/* Logo */}
-        <Link href={`/${lang}`} className="flex items-center gap-2.5" aria-label="Ir al inicio">
-          <div className="w-9 h-9 rounded-lg bg-primary flex items-center justify-center">
-            <span className="text-white font-heading font-bold text-lg">M</span>
+        {/* Logo + Badge */}
+        <div className="flex items-center gap-4 shrink-0">
+          <Link href={`/${lang}`} className="flex items-center gap-2.5" aria-label="Ir al inicio">
+            <div className="w-9 h-9 rounded-lg bg-primary flex items-center justify-center">
+              <span className="text-white font-heading font-bold text-lg">M</span>
+            </div>
+            <div className="flex flex-col">
+              <span className="font-heading font-bold text-primary text-lg leading-none block">Magnolia</span>
+              <span className="text-xs text-foreground-muted tracking-wider uppercase">Peluquería</span>
+            </div>
+          </Link>
+          <div className="hidden md:block">
+            <OpeningBadge />
           </div>
-          <div className="flex flex-col">
-            <span className="font-heading font-bold text-primary text-lg leading-none block">Magnolia</span>
-            <span className="text-xs text-foreground-muted tracking-wider uppercase">Peluquería</span>
-          </div>
-        </Link>
-        <div className="hidden md:block absolute left-1/2 -translate-x-1/2">
-          <OpeningBadge />
         </div>
 
         {/* Desktop Nav */}

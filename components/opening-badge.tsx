@@ -63,11 +63,11 @@ export function OpeningBadge() {
   const dotClass = open ? "bg-green-500 animate-pulse" : "bg-red-500"
 
   return (
-    <span className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-xs font-bold ${colorClass}`}>
-      <span className={`w-2 h-2 rounded-full ${dotClass}`} />
-      {open ? "Abierto ahora" : "Cerrado"}
+    <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border text-[10px] font-bold leading-tight ${colorClass}`}>
+      <span className={`w-1.5 h-1.5 rounded-full ${dotClass}`} />
+      {open ? "Abierto" : "Cerrado"}
       {!open && nextOpen && (
-        <span className="font-normal opacity-80 ml-1">· {nextOpen}</span>
+        <span className="font-normal opacity-80 ml-0.5 hidden lg:inline">· {nextOpen}</span>
       )}
     </span>
   )
