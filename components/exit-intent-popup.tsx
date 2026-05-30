@@ -1,12 +1,74 @@
 "use client"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import { X, MessageCircle, Star, ChevronLeft, ChevronRight } from "lucide-react"
 import { business } from "@/lib/config"
 
+const STORAGE_DISMISSED = "magnolia_popup_dismissed"
+const STORAGE_VISITOR = "magnolia_returning_visitor"
+
 export function ExitIntentPopup({ lang = "es" }: { lang?: "es" | "en" }) {
   const [visible, setVisible] = useState(false)
-  const [dismissed, setDismissed] = useState(false)
-  const [currentTestimonial, setCurrentTestimonial] = useState(0)
+  const [permanentlyDismissed, setPermanentlyDismissed] = useState(false)
+
+  const isHomepage = useCallback(() => {
+    if (typeof window === "undefined") return false
+    const p = window.location.pathname
+    return p === "/" || p === "/es" || p === "/en" || p === "/es/" || p === "/en/"
+  }, [])
+
+  const isReturningVisitor = useCallback(() => {
+    if (typeof window === "undefined") return false
+    const flag = localStorage.getItem(STORAGE_VISITOR)
+    if (!flag) {
+      localStorage.setItem(STORAGE_VISITOR, "true")
+      return false
+    }
+    return true
+  }, [])
+
+  const wasRecentlyDismissed = useCallback(() => {
+    const val = localStorage.getItem(STORAGE_DISMISSED)
+    if (!val) return false
+    const sevenDays = 7 * 24 * 60 * 60 * 1000
+    return Date.now() - parseInt(val) < sevenDays
+  }, [])
+
+  useEffect(() => {
+    if (isReturningVisitor()) return
+    if (!isHomepage()) return
+    if (wasRecentlyDismissed()) return
+
+    let active = true
+    let timer: ReturnType<typeof setTimeout> | null = null
+
+    const handleMouseLeave = (e: MouseEvent) => {
+      if (!active || e.clientY > 0) return
+      active = false
+      setVisible(true)
+    }
+
+    timer = setTimeout(() => {
+      if (!active) return
+      active = false
+      setVisible(true)
+    }, 45000)
+
+    document.addEventListener("mouseleave", handleMouseLeave)
+
+    return () => {
+      document.removeEventListener("mouseleave", handleMouseLeave)
+      if (timer) clearTimeout(timer)
+    }
+  }, [isHomepage, isReturningVisitor, wasRecentlyDismissed])
+
+  function dismiss(permanent: boolean = false) {
+    setVisible(false)
+    localStorage.setItem(STORAGE_DISMISSED, Date.now().toString())
+    if (permanent) {
+      setPermanentlyDismissed(true)
+      localStorage.setItem(STORAGE_VISITOR, "true")
+    }
+  }
 
   const testimonials = [
     { name: "María Fernández", quote: "El mejor balayage que me han hecho en mi vida. La atención es impecable.", service: "Balayage + Corte", stars: 5 },
@@ -15,46 +77,7 @@ export function ExitIntentPopup({ lang = "es" }: { lang?: "es" | "en" }) {
     { name: "Carmen López", quote: "El tratamiento de keratina me duró más de 3 meses. Relación calidad-precio excelente.", service: "Keratina", stars: 5 },
   ]
 
-  useEffect(() => {
-    const key = "magnolia_exit_intent_dismissed"
-    const dismissedAt = localStorage.getItem(key)
-    const now = Date.now()
-    const oneDay = 24 * 60 * 60 * 1000
-
-    if (dismissedAt && now - parseInt(dismissedAt) < oneDay) {
-      setDismissed(true)
-      return
-    }
-
-    const handleMouseLeave = (e: MouseEvent) => {
-      if (e.clientY <= 0 && !dismissed) {
-        setVisible(true)
-      }
-    }
-
-    const handleScroll = () => {
-      const scrollHeight = document.documentElement.scrollHeight
-      const scrollTop = document.documentElement.scrollTop
-      const clientHeight = document.documentElement.clientHeight
-      if (scrollTop / (scrollHeight - clientHeight) > 0.6 && !dismissed) {
-        setVisible(true)
-      }
-    }
-
-    document.addEventListener("mouseleave", handleMouseLeave)
-    window.addEventListener("scroll", handleScroll, { passive: true })
-
-    return () => {
-      document.removeEventListener("mouseleave", handleMouseLeave)
-      window.removeEventListener("scroll", handleScroll)
-    }
-  }, [dismissed])
-
-  function dismiss() {
-    setVisible(false)
-    setDismissed(true)
-    localStorage.setItem("magnolia_exit_intent_dismissed", Date.now().toString())
-  }
+  const [currentTestimonial, setCurrentTestimonial] = useState(0)
 
   const labels = lang === "es"
     ? {
@@ -65,8 +88,7 @@ export function ExitIntentPopup({ lang = "es" }: { lang?: "es" | "en" }) {
         promoCode: "PRIMERA20",
         testimonialLabel: "Lo que dicen nuestras clientas",
         close: "Cerrar",
-        next: "Siguiente",
-        prev: "Anterior",
+        dontShowAgain: "No mostrar de nuevo",
       }
     : {
         badge: "Only today",
@@ -76,16 +98,8 @@ export function ExitIntentPopup({ lang = "es" }: { lang?: "es" | "en" }) {
         promoCode: "PRIMERA20",
         testimonialLabel: "What our clients say",
         close: "Close",
-        next: "Next",
-        prev: "Prev",
+        dontShowAgain: "Don't show again",
       }
-
-  function goNext() {
-    setCurrentTestimonial((prev) => (prev + 1) % testimonials.length)
-  }
-  function goPrev() {
-    setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length)
-  }
 
   const waMsg = encodeURIComponent(
     lang === "es"
@@ -93,28 +107,25 @@ export function ExitIntentPopup({ lang = "es" }: { lang?: "es" | "en" }) {
       : "Hi! I have the code PRIMERA20 and I want to book my first visit with a discount."
   )
 
-  if (!visible) return null
+  if (!visible || permanentlyDismissed) return null
 
   return (
     <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
       <div className="relative bg-white rounded-3xl shadow-2xl max-w-lg w-full overflow-hidden">
-        {/* Close button */}
         <button
-          onClick={dismiss}
+          onClick={() => dismiss()}
           className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-colors z-10"
           aria-label={labels.close}
         >
           <X className="w-4 h-4 text-gray-600" />
         </button>
 
-        {/* Badge */}
         <div className="bg-secondary px-6 py-3">
           <p className="text-center text-sm font-bold text-white uppercase tracking-widest">
             🎁 {labels.badge}
           </p>
         </div>
 
-        {/* Content */}
         <div className="p-8">
           <h2 className="font-heading text-3xl font-bold text-primary text-center mb-3">
             {labels.title}
@@ -123,7 +134,6 @@ export function ExitIntentPopup({ lang = "es" }: { lang?: "es" | "en" }) {
             {labels.subtitle}
           </p>
 
-          {/* Promo code */}
           <div className="bg-gray-50 border-2 border-dashed border-secondary rounded-xl p-4 text-center mb-6">
             <p className="text-xs font-bold text-secondary uppercase tracking-widest mb-1">
               {lang === "es" ? "Tu código de descuento" : "Your discount code"}
@@ -133,25 +143,31 @@ export function ExitIntentPopup({ lang = "es" }: { lang?: "es" | "en" }) {
             </p>
           </div>
 
-          {/* CTA */}
           <a
             href={`https://wa.me/${business.whatsapp}?text=${waMsg}`}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => dismiss()}
             className="flex items-center justify-center gap-3 bg-[#25D366] text-white font-bold w-full py-4 rounded-xl hover:bg-[#20BD5A] transition-all text-lg"
           >
             <MessageCircle className="w-6 h-6" />
             {labels.cta}
           </a>
+
+          <button
+            onClick={() => dismiss(true)}
+            className="mt-3 w-full text-center text-xs text-foreground-muted hover:text-foreground transition-colors py-1"
+          >
+            {labels.dontShowAgain}
+          </button>
         </div>
 
-        {/* Testimonials carousel */}
         <div className="bg-gray-50 px-8 py-6">
           <p className="text-xs font-bold text-secondary uppercase tracking-widest mb-4">
             ⭐ {labels.testimonialLabel}
           </p>
           <div className="flex items-center gap-3">
-            <button onClick={goPrev} className="shrink-0 w-8 h-8 rounded-full bg-white flex items-center justify-center shadow hover:bg-gray-100 transition-colors">
+            <button onClick={() => setCurrentTestimonial((p) => (p - 1 + testimonials.length) % testimonials.length)} className="shrink-0 w-8 h-8 rounded-full bg-white flex items-center justify-center shadow hover:bg-gray-100 transition-colors">
               <ChevronLeft className="w-4 h-4 text-gray-600" />
             </button>
             <div className="flex-1 min-w-0">
@@ -167,7 +183,7 @@ export function ExitIntentPopup({ lang = "es" }: { lang?: "es" | "en" }) {
                 — {testimonials[currentTestimonial].name} · {testimonials[currentTestimonial].service}
               </p>
             </div>
-            <button onClick={goNext} className="shrink-0 w-8 h-8 rounded-full bg-white flex items-center justify-center shadow hover:bg-gray-100 transition-colors">
+            <button onClick={() => setCurrentTestimonial((p) => (p + 1) % testimonials.length)} className="shrink-0 w-8 h-8 rounded-full bg-white flex items-center justify-center shadow hover:bg-gray-100 transition-colors">
               <ChevronRight className="w-4 h-4 text-gray-600" />
             </button>
           </div>

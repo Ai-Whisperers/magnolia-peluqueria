@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react"
+import { useState, useRef, useCallback } from "react"
 import Link from "next/link"
 import { Menu, X, MessageCircle } from "lucide-react"
 import { business, waLink } from "@/lib/config"
@@ -27,6 +27,19 @@ interface HeaderProps {
 export function Header({ lang = "es" }: HeaderProps) {
   const [open, setOpen] = useState(false)
   const [moreOpen, setMoreOpen] = useState(false)
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  const scheduleClose = useCallback(() => {
+    closeTimer.current = setTimeout(() => setMoreOpen(false), 300)
+  }, [])
+
+  const cancelClose = useCallback(() => {
+    if (closeTimer.current) {
+      clearTimeout(closeTimer.current)
+      closeTimer.current = null
+    }
+    setMoreOpen(true)
+  }, [])
   const bookingLabel = "Reservar"
   const mobileBookingLabel = "Reservar por WhatsApp"
 
@@ -58,19 +71,21 @@ export function Header({ lang = "es" }: HeaderProps) {
             </Link>
           ))}
           {/* Más dropdown */}
-          <div className="relative" onMouseEnter={() => setMoreOpen(true)} onMouseLeave={() => setMoreOpen(false)}>
+          <div className="relative" onMouseEnter={cancelClose} onMouseLeave={scheduleClose}>
             <button className="rounded-lg px-4 py-2 text-sm font-medium text-foreground/80 hover:text-primary hover:bg-primary/5 transition-all flex items-center gap-1">
               Más
               <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`transition-transform ${moreOpen ? 'rotate-180' : ''}`}><polyline points="6 9 12 15 18 9" /></svg>
             </button>
             {moreOpen && (
-              <div className="absolute right-0 mt-1 w-52 bg-white rounded-xl shadow-lg border border-gray-100 py-2 z-50">
-                {MORE_ITEMS.map(item => (
-                  <Link key={item.href} href={item.href}
-                    className="block px-4 py-2.5 text-sm text-foreground/80 hover:text-primary hover:bg-primary/5 transition-all">
-                    {item.label}
-                  </Link>
-                ))}
+              <div className="absolute right-0 top-full pt-2 z-50" onMouseEnter={cancelClose} onMouseLeave={scheduleClose}>
+                <div className="w-52 bg-white rounded-xl shadow-lg border border-gray-100 py-2">
+                  {MORE_ITEMS.map(item => (
+                    <Link key={item.href} href={item.href}
+                      className="block px-4 py-2.5 text-sm text-foreground/80 hover:text-primary hover:bg-primary/5 transition-all">
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
               </div>
             )}
           </div>

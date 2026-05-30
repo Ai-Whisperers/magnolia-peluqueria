@@ -81,16 +81,50 @@ export async function createBooking(booking: Omit<Booking, "id" | "created_at" |
 
   if (isSupabaseConfigured && supabaseAdmin) {
     try {
-      const { error } = await supabaseAdmin.from("bookings").insert({
-        client_name: booking.client_name,
-        phone: booking.phone,
-        service: booking.service,
-        preferred_date: booking.preferred_date || null,
-        notes: booking.notes || null,
-        source: booking.source || "website",
-        status: "pending",
-      })
-      if (!error) return newBooking
+      const { data: biz } = await supabaseAdmin
+        .from("businesses")
+        .select("id")
+        .ilike("slug", "%magnolia%")
+        .limit(1)
+        .maybeSingle()
+
+      const businessId = biz?.id
+      if (businessId) {
+        const { error } = await supabaseAdmin.from("bookings").insert({
+          business_id: businessId,
+          customer_name: booking.client_name,
+          customer_phone: booking.phone,
+          service_id: null,
+          booking_date: booking.preferred_date || null,
+          booking_time: "00:00",
+          duration_minutes: 60,
+          customer_notes: [booking.service, booking.notes].filter(Boolean).join(" — "),
+          source: booking.source || "website",
+          status: "pending",
+        })
+        if (!error) {
+          await supabaseAdmin
+            .from("clients")
+            .upsert(
+              { phone: booking.phone, name: booking.client_name, visits: 1 },
+              { onConflict: "phone", ignoreDuplicates: false }
+            )
+          if (!error) {
+            const { data: client } = await supabaseAdmin
+              .from("clients")
+              .select("id, visits")
+              .eq("phone", booking.phone)
+              .maybeSingle()
+            if (client) {
+              await supabaseAdmin
+                .from("clients")
+                .update({ visits: (client.visits || 0) + 1 })
+                .eq("id", client.id)
+            }
+          }
+          return newBooking
+        }
+      }
     } catch { /* fallback */ }
   }
 
@@ -106,7 +140,44 @@ export async function updateBookingStatus(id: string, status: string): Promise<b
       const allowed = ["pending", "confirmed", "cancelled", "completed"]
       if (!allowed.includes(status)) return false
       const { error } = await supabaseAdmin.from("bookings").update({ status }).eq("id", id)
-      if (!error) return true
+      if (!error) {
+        if (status === "completed") {
+          const { data: booking } = await supabaseAdmin
+            .from("bookings")
+            .select("customer_phone, customer_name, customer_notes")
+            .eq("id", id)
+            .maybeSingle()
+          if (booking?.customer_phone) {
+            const { data: client } = await supabaseAdmin
+              .from("clients")
+              .select("id")
+              .eq("phone", booking.customer_phone)
+              .maybeSingle()
+            if (client) {
+              await supabaseAdmin.from("loyalty_transactions").insert({
+                client_id: client.id,
+                points: 10,
+                reason: "Visita completada",
+                booking_id: id,
+              })
+              await supabaseAdmin
+                .from("clients")
+                .update({ visits: supabaseAdmin.rpc ? undefined : undefined })
+                .eq("id", client.id)
+              const { data: totalPoints } = await supabaseAdmin
+                .from("loyalty_transactions")
+                .select("points")
+                .eq("client_id", client.id)
+              const sum = (totalPoints || []).reduce((acc, t) => acc + (t.points || 0), 0)
+              let tier = "bronce"
+              if (sum >= 200) tier = "oro"
+              else if (sum >= 80) tier = "plata"
+              await supabaseAdmin.from("clients").update({ tier }).eq("id", client.id)
+            }
+          }
+        }
+        return true
+      }
     } catch { /* fallback */ }
   }
 

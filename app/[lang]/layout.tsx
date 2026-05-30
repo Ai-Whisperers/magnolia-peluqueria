@@ -1,5 +1,4 @@
 import type { Metadata } from "next"
-import "../globals.css"
 import { MagnoliaLocalBusinessJsonLd } from "@/components/JsonLd"
 import { CookieConsent } from "@/components/CookieConsent"
 import { ExitIntentPopup } from "@/components/exit-intent-popup"
@@ -47,27 +46,16 @@ export default async function LangLayout({
 }) {
   const { lang } = await params
   return (
-    <html lang={lang} suppressHydrationWarning>
-      <head>
-        <link rel="icon" href="/images/logo.svg" type="image/svg+xml" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
-        <MagnoliaLocalBusinessJsonLd url={`https://magnolia-peluqueria.paragu-ai.com/${lang}`} />
-      </head>
-      <body className="antialiased">
-        <ScrollToTop />
-        <ErrorBoundary>
-          {children}
-        </ErrorBoundary>
-        {siteConfig?.features?.exitIntentPopup !== false && (
-          <ExitIntentPopup lang={lang as "es" | "en"} />
-        )}
-        <CookieConsent lang={lang as "es" | "en"} />
-      </body>
-    </html>
+    <>
+      <MagnoliaLocalBusinessJsonLd url={`https://magnolia-peluqueria.paragu-ai.com/${lang}`} />
+      <ScrollToTop />
+      <ErrorBoundary>
+        {children}
+      </ErrorBoundary>
+      {siteConfig?.features?.exitIntentPopup !== false && (
+        <ExitIntentPopup lang={lang as "es" | "en"} />
+      )}
+      <CookieConsent lang={lang as "es" | "en"} />
+    </>
   )
 }

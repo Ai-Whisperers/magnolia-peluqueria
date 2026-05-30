@@ -1,5 +1,12 @@
 import { NextResponse } from "next/server"
 import { businessData, waLink } from "@/lib/config"
+import { supabaseAdmin, isSupabaseConfigured } from "@/lib/supabase"
+
+function generateCode(): string {
+  const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"
+  const seg = () => Array.from({ length: 4 }, () => chars[Math.floor(Math.random() * chars.length)]).join("")
+  return `MAGNOLIA-${seg()}-${seg()}`
+}
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)
@@ -19,16 +26,15 @@ export async function GET(request: Request) {
       amount: session.amount_total,
       customer_email: session.customer_details?.email ?? null,
     })
-  } catch (err) {
+  } catch {
     return NextResponse.json({ error: "stripe_error" }, { status: 500 })
   }
 }
 
 export async function POST(request: Request) {
   const body = await request.json()
-  const { amount, card_name } = body
+  const { amount, card_name, buyer_phone, recipient_phone, recipient_name, message } = body
 
-  // Validate amount: 50,000 – 500,000 Gs, multiples of 10,000
   const MIN = 50000, MAX = 500000, STEP = 10000
   const numAmount = Number(amount)
   if (!numAmount || numAmount < MIN || numAmount > MAX || numAmount % STEP !== 0) {
@@ -38,7 +44,6 @@ export async function POST(request: Request) {
     )
   }
 
-  // If Stripe is not configured, fall back to WhatsApp
   if (!process.env.STRIPE_SECRET_KEY) {
     return NextResponse.json({
       waFallback: true,
@@ -51,6 +56,22 @@ export async function POST(request: Request) {
   try {
     const { default: Stripe } = await import("stripe")
     const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: "2026-05-27.dahlia" })
+
+    let code = generateCode()
+    if (isSupabaseConfigured && supabaseAdmin) {
+      let attempts = 0
+      while (attempts < 5) {
+        const { data: existing } = await supabaseAdmin
+          .from("gift_cards")
+          .select("id")
+          .eq("code", code)
+          .maybeSingle()
+        if (!existing) break
+        code = generateCode()
+        attempts++
+      }
+    }
+
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
       mode: "payment",
@@ -61,17 +82,24 @@ export async function POST(request: Request) {
             name: card_name || "Tarjeta de Regalo – Magnolia Peluquería",
             description: `Regalo de Gs. ${numAmount.toLocaleString("es-PY")}`,
           },
-          unit_amount: Math.round(numAmount / 7600 * 100), // approximate Gs/USD conversion
+          unit_amount: Math.round(numAmount / 7600 * 100),
         },
         quantity: 1,
       }],
       success_url: `${process.env.NEXT_PUBLIC_BASE_URL || "https://magnolia-peluqueria.paragu-ai.com"}/es/reserva/success?session_id={CHECKOUT_SESSION_ID}&gift_card=true`,
       cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL || "https://magnolia-peluqueria.paragu-ai.com"}/es/reserva?cancelled=1`,
-      metadata: { gifter_name: card_name || "", amount_gs: String(numAmount) },
+      metadata: {
+        gifter_name: card_name || "",
+        amount_gs: String(numAmount),
+        code,
+        buyer_phone: buyer_phone || "",
+        recipient_phone: recipient_phone || "",
+        recipient_name: recipient_name || "",
+        message: message || "",
+      },
     })
     return NextResponse.json({ url: session.url })
-  } catch (err) {
-    // Any Stripe error → WhatsApp fallback
+  } catch {
     return NextResponse.json({
       waFallback: true,
       url: `https://wa.me/${businessData().whatsapp}?text=${encodeURIComponent(
