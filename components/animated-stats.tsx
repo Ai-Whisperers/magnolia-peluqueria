@@ -78,9 +78,16 @@ interface AnimatedStatsProps {
   lang?: "es" | "en"
 }
 
+const STATS_LABELS: Record<string, Record<string, string>> = {
+  es: { customers: "Clientas felices", years: "Años de experiencia", services: "Servicios", rating: "Calificación" },
+  en: { customers: "Happy clients", years: "Years of experience", services: "Services", rating: "Rating" },
+}
+
 export function AnimatedStats({ lang = "es" }: AnimatedStatsProps) {
-  const rawStats = statsData(lang)
-  const stats: StatItem[] = rawStats.map((s: { value: string; label: string }) => ({
+  const rawStats = statsData()
+  const labels = STATS_LABELS[lang] ?? STATS_LABELS.es
+  const entries = Array.isArray(rawStats) ? rawStats : Object.entries(rawStats).map(([key, value]) => ({ value: String(value), label: labels[key] ?? key }))
+  const stats: StatItem[] = entries.map((s: { value: string; label: string }) => ({
     value: s.value,
     label: s.label,
     suffix: s.value.includes("★") ? "★" : s.value.match(/\d/) ? "+" : "",

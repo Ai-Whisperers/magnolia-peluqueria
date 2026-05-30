@@ -4,7 +4,6 @@ export const dynamic = "force-static"
 
 // Direct import from JSON so we don't need to fight ESM/CJS
 import postsEs from "@/content/blog/posts-es.json"
-import postsEn from "@/content/blog/posts-en.json"
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const domain = "https://magnolia-peluqueria.paragu-ai.com"
@@ -19,14 +18,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/es/privacidad", priority: 0.3, freq: "yearly" as const },
     { path: "/es/terminos", priority: 0.3, freq: "yearly" as const },
     { path: "/es/blog", priority: 0.8, freq: "weekly" as const },
-    { path: "/en", priority: 0.7, freq: "weekly" as const },
-    { path: "/en/servicios", priority: 0.6, freq: "monthly" as const },
-    { path: "/en/blog", priority: 0.6, freq: "weekly" as const },
+    { path: "/es/ofertas", priority: 0.7, freq: "weekly" as const },
+    { path: "/es/tarjetas-de-regalo", priority: 0.7, freq: "monthly" as const },
   ]
 
-  const allPosts = [...(postsEs.posts ?? []), ...(postsEn.posts ?? [])]
-  const blogPages = allPosts.map((p: { slug: string; lang?: string }) => ({
-    url: `${domain}/${p.lang === "en" ? "en" : "es"}/blog/${p.slug}`,
+  const allPosts = postsEs.posts ?? []
+  const blogPages = allPosts.map((p: { slug: string }) => ({
+    url: `${domain}/es/blog/${p.slug}`,
     lastModified: new Date(),
     changeFrequency: "monthly" as const,
     priority: 0.7,

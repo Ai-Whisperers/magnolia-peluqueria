@@ -10,13 +10,13 @@ importers:
     dependencies:
       '@ai-whisperers/admin':
         specifier: file:/root/ai-whisperers-base/packages/admin
-        version: file:../ai-whisperers-base/packages/admin(lucide-react@1.17.0(react@19.2.4))(next@16.2.4(@babel/core@7.29.7)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        version: file:../ai-whisperers-base/packages/admin(lucide-react@0.510.0(react@19.2.4))(next@16.2.4(@babel/core@7.29.7)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@ai-whisperers/auth':
         specifier: file:/root/ai-whisperers-base/packages/auth
         version: file:../ai-whisperers-base/packages/auth(next@16.2.4(@babel/core@7.29.7)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@ai-whisperers/commerce':
         specifier: file:/root/ai-whisperers-base/packages/commerce
-        version: file:../ai-whisperers-base/packages/commerce(lucide-react@1.17.0(react@19.2.4))(next@16.2.4(@babel/core@7.29.7)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        version: file:../ai-whisperers-base/packages/commerce(lucide-react@0.510.0(react@19.2.4))(next@16.2.4(@babel/core@7.29.7)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@ai-whisperers/i18n':
         specifier: file:/root/ai-whisperers-base/packages/i18n
         version: file:../ai-whisperers-base/packages/i18n(react@19.2.4)
@@ -31,7 +31,7 @@ importers:
         version: file:../ai-whisperers-base/packages/theme
       '@ai-whisperers/ui':
         specifier: file:/root/ai-whisperers-base/packages/ui
-        version: file:../ai-whisperers-base/packages/ui(lucide-react@1.17.0(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react-is@18.3.1)(react@19.2.4)(redux@5.0.1)
+        version: file:../ai-whisperers-base/packages/ui(lucide-react@0.510.0(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react-is@18.3.1)(react@19.2.4)(redux@5.0.1)
       '@ai-whisperers/whatsapp':
         specifier: file:/root/ai-whisperers-base/packages/whatsapp
         version: file:../ai-whisperers-base/packages/whatsapp(react@19.2.4)
@@ -54,8 +54,8 @@ importers:
         specifier: ^1.2.0
         version: 1.3.1(next@16.2.4(@babel/core@7.29.7)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)
       lucide-react:
-        specifier: ^1.14.0
-        version: 1.17.0(react@19.2.4)
+        specifier: ^0.510.0
+        version: 0.510.0(react@19.2.4)
       next:
         specifier: 16.2.4
         version: 16.2.4(@babel/core@7.29.7)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -2680,8 +2680,8 @@ packages:
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
-  lucide-react@1.17.0:
-    resolution: {integrity: sha512-9FA9evdox/JQL5PT57fdA1x/yg8T7knJ98+zjTL3UfKza6pflQUUh3XtaQIHKvnsJw1lmsEyHVlt5jchYxOQ5w==}
+  lucide-react@0.510.0:
+    resolution: {integrity: sha512-p8SQRAMVh7NhsAIETokSqDrc5CHnDLbV29mMnzaXx+Vc/hnqQzwI2r0FMWCcoTXnbw2KEjy48xwpGdEL+ck06Q==}
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
@@ -3488,12 +3488,12 @@ snapshots:
 
   '@adobe/css-tools@4.5.0': {}
 
-  '@ai-whisperers/admin@file:../ai-whisperers-base/packages/admin(lucide-react@1.17.0(react@19.2.4))(next@16.2.4(@babel/core@7.29.7)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
+  '@ai-whisperers/admin@file:../ai-whisperers-base/packages/admin(lucide-react@0.510.0(react@19.2.4))(next@16.2.4(@babel/core@7.29.7)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
     dependencies:
       '@ai-whisperers/auth': 0.2.0(next@16.2.4(@babel/core@7.29.7)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@types/react': 19.2.15
       '@types/react-dom': 19.2.3(@types/react@19.2.15)
-      lucide-react: 1.17.0(react@19.2.4)
+      lucide-react: 0.510.0(react@19.2.4)
       next: 16.2.4(@babel/core@7.29.7)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       react: 19.2.4
       react-dom: 19.2.4(react@19.2.4)
@@ -3515,11 +3515,11 @@ snapshots:
       react: 19.2.4
       react-dom: 19.2.4(react@19.2.4)
 
-  '@ai-whisperers/commerce@file:../ai-whisperers-base/packages/commerce(lucide-react@1.17.0(react@19.2.4))(next@16.2.4(@babel/core@7.29.7)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
+  '@ai-whisperers/commerce@file:../ai-whisperers-base/packages/commerce(lucide-react@0.510.0(react@19.2.4))(next@16.2.4(@babel/core@7.29.7)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
     dependencies:
       '@types/react': 19.2.15
       '@types/react-dom': 19.2.3(@types/react@19.2.15)
-      lucide-react: 1.17.0(react@19.2.4)
+      lucide-react: 0.510.0(react@19.2.4)
       next: 16.2.4(@babel/core@7.29.7)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       react: 19.2.4
       react-dom: 19.2.4(react@19.2.4)
@@ -3552,7 +3552,7 @@ snapshots:
     dependencies:
       tailwindcss: 4.3.0
 
-  '@ai-whisperers/ui@file:../ai-whisperers-base/packages/ui(lucide-react@1.17.0(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react-is@18.3.1)(react@19.2.4)(redux@5.0.1)':
+  '@ai-whisperers/ui@file:../ai-whisperers-base/packages/ui(lucide-react@0.510.0(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react-is@18.3.1)(react@19.2.4)(redux@5.0.1)':
     dependencies:
       '@radix-ui/react-accordion': 1.2.12(@types/react-dom@19.2.3(@types/react@19.2.15))(@types/react@19.2.15)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@radix-ui/react-checkbox': 1.3.3(@types/react-dom@19.2.3(@types/react@19.2.15))(@types/react@19.2.15)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -3569,7 +3569,7 @@ snapshots:
       '@types/react-dom': 19.2.3(@types/react@19.2.15)
       class-variance-authority: 0.7.1
       clsx: 2.1.1
-      lucide-react: 1.17.0(react@19.2.4)
+      lucide-react: 0.510.0(react@19.2.4)
       react: 19.2.4
       react-dom: 19.2.4(react@19.2.4)
       recharts: 3.8.1(@types/react@19.2.15)(react-dom@19.2.4(react@19.2.4))(react-is@18.3.1)(react@19.2.4)(redux@5.0.1)
@@ -6050,7 +6050,7 @@ snapshots:
     dependencies:
       react: 19.2.4
 
-  lucide-react@1.17.0(react@19.2.4):
+  lucide-react@0.510.0(react@19.2.4):
     dependencies:
       react: 19.2.4
 

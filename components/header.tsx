@@ -1,14 +1,11 @@
 "use client"
 import { useState } from "react"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
 import { Menu, X, MessageCircle } from "lucide-react"
 import { business, waLink } from "@/lib/config"
 import { OpeningBadge } from "./opening-badge"
 
-type Lang = "es" | "en"
-
-const NAV_ITEMS_ES = [
+const NAV_ITEMS = [
   { label: "Inicio", href: "/es" },
   { label: "Servicios", href: "/es/servicios" },
   { label: "Nosotros", href: "/es/nosotros" },
@@ -16,51 +13,22 @@ const NAV_ITEMS_ES = [
   { label: "Contacto", href: "/es/contacto" },
 ]
 
-const MORE_ITEMS_ES = [
+const MORE_ITEMS = [
   { label: "Ofertas", href: "/es/ofertas" },
   { label: "Tarjetas de Regalo", href: "/es/tarjetas-de-regalo" },
   { label: "Blog", href: "/es/blog" },
   { label: "FAQ", href: "/es/faq" },
 ]
 
-const NAV_ITEMS_EN = [
-  { label: "Home", href: "/en" },
-  { label: "Services", href: "/en/servicios" },
-  { label: "About Us", href: "/en/nosotros" },
-  { label: "Book", href: "/en/booking" },
-  { label: "Contact", href: "/en/contacto" },
-]
-
-const MORE_ITEMS_EN = [
-  { label: "Offers", href: "/en/ofertas" },
-  { label: "Gift Cards", href: "/en/tarjetas-de-regalo" },
-  { label: "Blog", href: "/en/blog" },
-  { label: "FAQ", href: "/en/faq" },
-]
-
 interface HeaderProps {
-  lang?: Lang
+  lang?: "es"
 }
 
 export function Header({ lang = "es" }: HeaderProps) {
   const [open, setOpen] = useState(false)
-  const pathname = usePathname()
-
   const [moreOpen, setMoreOpen] = useState(false)
-  const navItems = lang === "es" ? NAV_ITEMS_ES : NAV_ITEMS_EN
-  const moreItems = lang === "es" ? MORE_ITEMS_ES : MORE_ITEMS_EN
-  const moreLabel = lang === "es" ? "Más" : "More"
-  const bookingLabel = lang === "es" ? "Reservar" : "Book"
-  const mobileBookingLabel = lang === "es" ? "Reservar por WhatsApp" : "Book via WhatsApp"
-
-  // Current lang from URL prefix
-  const currentLang = pathname?.startsWith("/en") ? "en" : "es"
-  const langLabel = currentLang === "es" ? "EN" : "ES"
-  // Preserve current path when switching language
-  const currentPath = pathname ?? `/${lang}`
-  const switchLang = currentLang === "es"
-    ? `/en${currentPath.replace(/^\/(es|en)/, "") || "/"}`
-    : `/es${currentPath.replace(/^\/(es|en)/, "") || "/"}`
+  const bookingLabel = "Reservar"
+  const mobileBookingLabel = "Reservar por WhatsApp"
 
   return (
     <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm relative">
@@ -83,7 +51,7 @@ export function Header({ lang = "es" }: HeaderProps) {
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-1" aria-label="Navegación principal">
-          {navItems.map(item => (
+          {NAV_ITEMS.map(item => (
             <Link key={item.href} href={item.href}
               className="rounded-lg px-4 py-2 text-sm font-medium text-foreground/80 hover:text-primary hover:bg-primary/5 transition-all">
               {item.label}
@@ -92,12 +60,12 @@ export function Header({ lang = "es" }: HeaderProps) {
           {/* Más dropdown */}
           <div className="relative" onMouseEnter={() => setMoreOpen(true)} onMouseLeave={() => setMoreOpen(false)}>
             <button className="rounded-lg px-4 py-2 text-sm font-medium text-foreground/80 hover:text-primary hover:bg-primary/5 transition-all flex items-center gap-1">
-              {moreLabel}
-              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`transition-transform ${moreOpen ? 'rotate-180' : ''}`}><polyline points="6 9 12 15 18 9"/></svg>
+              Más
+              <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`transition-transform ${moreOpen ? 'rotate-180' : ''}`}><polyline points="6 9 12 15 18 9" /></svg>
             </button>
             {moreOpen && (
               <div className="absolute right-0 mt-1 w-52 bg-white rounded-xl shadow-lg border border-gray-100 py-2 z-50">
-                {moreItems.map(item => (
+                {MORE_ITEMS.map(item => (
                   <Link key={item.href} href={item.href}
                     className="block px-4 py-2.5 text-sm text-foreground/80 hover:text-primary hover:bg-primary/5 transition-all">
                     {item.label}
@@ -106,11 +74,6 @@ export function Header({ lang = "es" }: HeaderProps) {
               </div>
             )}
           </div>
-          {/* Lang switcher */}
-          <a href={switchLang}
-            className="ml-2 px-2.5 py-1.5 text-xs font-bold rounded border border-gray-300 text-gray-500 hover:border-primary hover:text-primary transition-all">
-            {langLabel}
-          </a>
         </nav>
 
         {/* CTA */}
@@ -136,17 +99,12 @@ export function Header({ lang = "es" }: HeaderProps) {
       {open && (
         <div className="md:hidden border-t border-gray-100 bg-white">
           <div className="container-page py-4 space-y-1">
-            {navItems.map(item => (
+            {NAV_ITEMS.map(item => (
               <Link key={item.href} href={item.href} onClick={() => setOpen(false)}
                 className="block rounded-lg px-4 py-3 text-sm font-medium text-foreground hover:bg-gray-50 transition-colors">
                 {item.label}
               </Link>
             ))}
-            {/* Lang switcher mobile */}
-            <a href={switchLang}
-              className="block rounded-lg px-4 py-3 text-sm font-medium text-foreground-muted hover:bg-gray-50 transition-colors">
-              {langLabel} / {currentLang === "es" ? "English" : "Español"}
-            </a>
             <div className="pt-4 border-t border-gray-100 mt-2">
               <a href={waLink(business.whatsappMessage)} target="_blank" rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2 bg-secondary text-white px-6 py-3 rounded-xl font-semibold">

@@ -71,16 +71,6 @@ export function Testimonials() {
   const visibleCount = 3
   const totalCards = testimonials.length
 
-  // Scroll track into view when active changes
-  useEffect(() => {
-    const track = trackRef.current
-    if (!track) return
-    const card = track.children[active] as HTMLElement
-    if (card) {
-      card.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" })
-    }
-  }, [active])
-
   return (
     <section className="py-20 bg-surface-muted">
       <div className="max-w-6xl mx-auto px-4">

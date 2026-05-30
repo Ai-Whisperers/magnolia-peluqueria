@@ -1,15 +1,17 @@
 "use client"
 import { useState } from "react"
 import { Camera, ExternalLink, X } from "lucide-react"
-import { gallery, business, waLink } from "@/lib/config"
+import { galleryData, business, waLink } from "@/lib/config"
 import { ScrollReveal } from "./scroll-reveal"
 
 export function Gallery() {
   const [selected, setSelected] = useState<number | null>(null)
   const [filter, setFilter] = useState<string>("all")
+  const gallerySection = galleryData()
+  const images: { src: string; alt: string; tag?: string }[] = Array.isArray(gallerySection) ? gallerySection : gallerySection.images ?? []
 
-  const tags = ["all", ...Array.from(new Set(gallery.map(img => img.tag)))]
-  const filtered = filter === "all" ? gallery : gallery.filter(img => img.tag === filter)
+  const tags = ["all", ...Array.from(new Set(images.map(img => img.tag).filter(Boolean)))]
+  const filtered = filter === "all" ? images : images.filter(img => img.tag === filter)
 
   return (
     <>

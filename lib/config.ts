@@ -1,69 +1,64 @@
-import contentEsData from "@/content/es.json"
-import contentEnData from "@/content/en.json"
+import contentData from "@/content.json"
 import siteConfigData from "@/content/site.json"
 
 export type ColorName = "rose" | "violet" | "amber" | "sky"
 export type IconName = "scissors" | "palette" | "sparkles" | "sparkle"
-export type Lang = "es" | "en"
 
 export const siteConfig = siteConfigData
 export const theme = siteConfigData.site.theme
 export const siteUrl = siteConfigData.site.url
 
-// ── i18n content accessors ──────────────────────────────────────
+// ── Content accessors ───────────────────────────────────────────
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type JsonContent = Record<string, any>
-const contents: Record<Lang, JsonContent> = {
-  es: contentEsData as JsonContent,
-  en: contentEnData as JsonContent,
+const content = contentData as JsonContent
+
+export function getContent() { return content }
+
+export function businessData()  { return content.business }
+export function heroSlidesData() { return content.hero.slides }
+export function statsData()        { return content.stats }
+export function servicesData()    { return content.services.categories }
+export function galleryData()     { return content.gallery }
+export function testimonialsData(){ return content.testimonials }
+export function reasonsData()    { return content.reasons }
+export function ctaData()         { return content.cta }
+export function teamData()        { return content.team }
+export function beforeAfterData(){ return content.beforeAfter }
+export function promotionsData() { return content.promotions }
+export function loyaltyData()    { return content.loyalty }
+export function giftCardsData()   { return content.giftCards }
+export function faqsData()        { return content.faqs }
+
+export function formatHours(hours: Record<string, string> | string): string {
+  if (typeof hours === "string") return hours
+  const entries = Object.entries(hours)
+  if (entries.length === 0) return ""
+  const dayAbbr: Record<string, string> = { lunes: "Lun", martes: "Mar", miércoles: "Mié", jueves: "Jue", viernes: "Vie", sábado: "Sáb", domingo: "Dom" }
+  return entries.map(([day, time]) => `${dayAbbr[day] ?? day}: ${time}`).join(" · ")
 }
 
-export function getContent(lang: Lang = "es") {
-  return contents[lang] ?? contents.es
-}
-
-export function businessData(lang: Lang = "es")  { return getContent(lang).business }
-export function heroSlidesData(lang: Lang = "es") { return getContent(lang).hero.slides }
-export function statsData(lang: Lang = "es")        { return getContent(lang).stats }
-export function servicesData(lang: Lang = "es")    { return getContent(lang).services.categories }
-export function galleryData(lang: Lang = "es")     { return getContent(lang).gallery }
-export function testimonialsData(lang: Lang = "es"){ return getContent(lang).testimonials }
-export function reasonsData(lang: Lang = "es")    { return getContent(lang).reasons }
-export function ctaData(lang: Lang = "es")         { return getContent(lang).cta }
-export function teamData(lang: Lang = "es")        { return getContent(lang).team }
-export function beforeAfterData(lang: Lang = "es"){ return getContent(lang).beforeAfter }
-export function promotionsData(lang: Lang = "es") { return getContent(lang).promotions }
-export function loyaltyData(lang: Lang = "es")    { return getContent(lang).loyalty }
-export function giftCardsData(lang: Lang = "es")   { return getContent(lang).giftCards }
-export function faqsData(lang: Lang = "es")        { return getContent(lang).faqs }
-
-// ── Backwards-compatible static exports (Spanish default) ───────
-export const content     = contentEsData
-export const business    = contentEsData.business
-export const heroSlides  = contentEsData.hero.slides
-export const stats       = contentEsData.stats
-export const services    = contentEsData.services.categories
-export const gallery     = contentEsData.gallery
-export const testimonials= contentEsData.testimonials
-export const reasons     = contentEsData.reasons
-export const cta         = contentEsData.cta
-export const team        = contentEsData.team
-export const beforeAfter = contentEsData.beforeAfter
-export const promotions  = contentEsData.promotions
-export const loyalty     = contentEsData.loyalty
-export const giftCards   = contentEsData.giftCards
-export const faqs        = contentEsData.faqs
+// ── Backwards-compatible static exports ─────────────────────────
+export const business    = content.business
+export const heroSlides  = content.hero.slides
+export const stats       = content.stats
+export const services    = content.services.categories
+export const gallery     = content.gallery
+export const testimonials= content.testimonials
+export const reasons     = content.reasons
+export const cta         = content.cta
+export const team        = content.team
+export const beforeAfter = content.beforeAfter
+export const promotions  = content.promotions
+export const loyalty     = content.loyalty
+export const giftCards   = content.giftCards
+export const faqs        = content.faqs
 
 // ── WhatsApp helpers ─────────────────────────────────────────────
 export function waLink(message?: string): string {
-  const b = contentEsData.business
+  const b = content.business
   const msg = message ?? b.ctaMessage
   return `https://wa.me/${b.whatsapp}?text=${encodeURIComponent(decodeURIComponent(msg))}`
-}
-
-export function waLinkLang(message: string, lang: Lang): string {
-  const b = getContent(lang).business
-  return `https://wa.me/${b.whatsapp}?text=${encodeURIComponent(decodeURIComponent(message))}`
 }
 
 export function waLinkForService(serviceName: string): string {
@@ -97,18 +92,10 @@ export function getInitialsBg(color: ColorName): string {
 
 // ── Translations ────────────────────────────────────────────────
 export const t = {
-  es: {
-    navHome: "Inicio", navServices: "Servicios", navAbout: "Nosotros",
-    navBooking: "Reservar", navFAQ: "FAQ", navContact: "Contacto",
-    bookCta: "Reservar", bookCtaMobile: "Reservar por WhatsApp",
-    closed: "Cerrado", openNow: "Abierto ahora",
-  },
-  en: {
-    navHome: "Home", navServices: "Services", navAbout: "About",
-    navBooking: "Book", navFAQ: "FAQ", navContact: "Contact",
-    bookCta: "Book Now", bookCtaMobile: "Book via WhatsApp",
-    closed: "Closed", openNow: "Open now",
-  },
+  navHome: "Inicio", navServices: "Servicios", navAbout: "Nosotros",
+  navBooking: "Reservar", navFAQ: "FAQ", navContact: "Contacto",
+  bookCta: "Reservar", bookCtaMobile: "Reservar por WhatsApp",
+  closed: "Cerrado", openNow: "Abierto ahora",
 } as const
 
-export type Translations = typeof t.es
+export type Translations = typeof t

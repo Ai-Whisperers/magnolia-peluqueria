@@ -6,8 +6,8 @@ services:
       - "3000"
     networks:
       - agent-net
-    environment:
-      - NODE_ENV=production
+    env_file:
+      - .env.production
     deploy:
       mode: replicated
       replicas: 2

@@ -1,5 +1,5 @@
 import { MapPin, Phone, Clock, Navigation } from "lucide-react"
-import { business, waLink } from "@/lib/config"
+import { business, waLink, formatHours } from "@/lib/config"
 
 export function Location() {
   return (
@@ -40,7 +40,7 @@ export function Location() {
                 </div>
                 <div>
                   <p className="font-semibold text-foreground mb-0.5">Horarios</p>
-                  <p className="text-foreground-light text-sm">{business.hours}</p>
+                  <p className="text-foreground-light text-sm">{formatHours(business.hours)}</p>
                   <p className="text-xs text-foreground-muted mt-0.5">{business.hoursClosed}</p>
                 </div>
               </div>

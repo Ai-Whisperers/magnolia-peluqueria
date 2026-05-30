@@ -120,3 +120,49 @@ INSERT INTO public.site_content (key, value) VALUES
 ON CONFLICT (key) DO NOTHING;
 
 COMMENT ON TABLE public.site_content IS 'CMS content overrides para Magnolia';
+
+-- ══════════════════════════════════════════════════════
+-- GALLERY_IMAGES  (real photos from salon)
+-- ══════════════════════════════════════════════════════
+CREATE TABLE IF NOT EXISTS public.gallery_images (
+  id          UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  src         TEXT NOT NULL,
+  alt         TEXT NOT NULL,
+  tag         TEXT NOT NULL,
+  display_order INTEGER DEFAULT 0,
+  created_at  TIMESTAMPTZ DEFAULT now(),
+  updated_at  TIMESTAMPTZ DEFAULT now()
+);
+
+-- Auto-update updated_at
+CREATE TRIGGER gallery_images_updated_at
+  BEFORE UPDATE ON public.gallery_images
+  FOR EACH ROW EXECUTE FUNCTION public.handle_updated_at();
+
+-- Index for querying by tag
+CREATE INDEX IF NOT EXISTS idx_gallery_images_tag ON public.gallery_images(tag);
+
+-- Index for display order
+CREATE INDEX IF NOT EXISTS idx_gallery_images_order ON public.gallery_images(display_order);
+
+-- RLS
+ALTER TABLE public.gallery_images ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Allow read for anon" ON public.gallery_images
+  FOR SELECT USING (true);
+CREATE POLICY "Allow write for service role" ON public.gallery_images
+  FOR ALL USING (auth.role() = 'service_role');
+
+-- Seed default gallery images (will be skipped if rows exist)
+INSERT INTO public.gallery_images (src, alt, tag, display_order) VALUES
+  ('/images/gallery/balayage-1.jpg', 'Balayage experto', 'color', 1),
+  ('/images/gallery/corte-bob.jpg', 'Corte moderno', 'corte', 2),
+  ('/images/gallery/keratina.jpg', 'Tratamiento capilar', 'tratamiento', 3),
+  ('/images/gallery/rubio-platinado.jpg', 'Coloración profesional', 'color', 4),
+  ('/images/gallery/mechas-naturales.jpg', 'Mechas naturales', 'color', 5),
+  ('/images/gallery/peinado-novia.jpg', 'Estilizado elegante', 'estilizado', 6),
+  ('/images/gallery/color-bronce.jpg', 'Trabajo de Tinte', 'color', 7),
+  ('/images/gallery/corte-masculino.jpg', 'Corte caballero', 'corte', 8),
+  ('/images/gallery/ombre.jpg', 'Ombre natural', 'color', 9)
+ON CONFLICT DO NOTHING;
+
+COMMENT ON TABLE public.gallery_images IS 'Fotos reales del salón Magnolia';

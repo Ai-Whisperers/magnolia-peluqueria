@@ -42,7 +42,7 @@ export async function POST(request: Request) {
   if (!process.env.STRIPE_SECRET_KEY) {
     return NextResponse.json({
       waFallback: true,
-      url: `https://wa.me/${businessData("es").whatsapp}?text=${encodeURIComponent(
+      url: `https://wa.me/${businessData().whatsapp}?text=${encodeURIComponent(
         `¡Hola! Quiero comprar una Tarjeta de Regalo de Gs. ${numAmount.toLocaleString("es-PY")}${card_name ? ` (${card_name})` : ""}`
       )}`,
     })
@@ -74,7 +74,7 @@ export async function POST(request: Request) {
     // Any Stripe error → WhatsApp fallback
     return NextResponse.json({
       waFallback: true,
-      url: `https://wa.me/${businessData("es").whatsapp}?text=${encodeURIComponent(
+      url: `https://wa.me/${businessData().whatsapp}?text=${encodeURIComponent(
         `¡Hola! Quiero comprar una Tarjeta de Regalo de Gs. ${numAmount.toLocaleString("es-PY")}`
       )}`,
     })

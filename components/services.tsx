@@ -1,7 +1,7 @@
 "use client"
 import { useState } from "react"
-import { Scissors, Palette, Sparkles, Sparkle, Clock, ChevronDown } from "lucide-react"
-import { services, waLinkForService, getColorMap, ColorName } from "@/lib/config"
+import { Scissors, Palette, Sparkles, Sparkle, Clock, ChevronDown, CheckCircle, Gift, Percent } from "lucide-react"
+import { services, waLinkForService, getColorMap, ColorName, waLink } from "@/lib/config"
 import type { Lang } from "@/lib/config"
 
 const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -10,6 +10,36 @@ const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
   sparkles: Sparkles,
   sparkle: Sparkle,
 }
+
+const PACKAGES = [
+  {
+    name: "Pack Color + Protección",
+    originalPrice: "Gs. 490.000",
+    packagePrice: "Gs. 420.000",
+    badge: "Ahorrás Gs. 70.000",
+    icon: Palette,
+    color: "rose",
+    services: ["Coloración completa", "Corte de cabello", "Tratamiento capilar hidratante"],
+  },
+  {
+    name: "Pack Novia Completo",
+    originalPrice: "Gs. 650.000",
+    packagePrice: "Gs. 550.000",
+    badge: "Pack especial",
+    icon: Gift,
+    color: "violet",
+    services: ["Balayage o coloración", "Corte personalizado", "Peinado para evento", "Maquillaje social"],
+  },
+  {
+    name: "Pack Keratina + Corte",
+    originalPrice: "Gs. 450.000",
+    packagePrice: "Gs. 380.000",
+    badge: "Más popular",
+    icon: Percent,
+    color: "amber",
+    services: ["Tratamiento de keratina", "Corte dama", "Blow-dry profesional"],
+  },
+]
 
 interface ServicesProps {
   lang: Lang
@@ -105,6 +135,67 @@ export function Services({ lang }: ServicesProps) {
                       </div>
                     </div>
                   ))}
+                </div>
+              </div>
+            )
+          })}
+        </div>
+      </div>
+
+      {/* ─── PACKS / COMBOS ──────────────────────────────── */}
+      <div className="mt-16 mb-8">
+        <div className="text-center mb-10">
+          <span className="inline-flex items-center gap-2 text-sm font-bold text-secondary uppercase tracking-widest mb-3">
+            <Gift className="w-4 h-4" /> Packs
+          </span>
+          <h2 className="font-heading text-3xl font-bold text-primary">Combos Especiales</h2>
+          <p className="text-foreground-light text-sm mt-2 max-w-lg mx-auto">
+            Servicios combinados con descuento. Ahorrá en tu tratamiento completo.
+          </p>
+        </div>
+
+        <div className="grid gap-6 md:grid-cols-3 max-w-5xl mx-auto">
+          {PACKAGES.map((pkg, idx) => {
+            const Icon = pkg.icon
+            const colors = getColorMap(pkg.color as ColorName)
+            return (
+              <div key={idx} className="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md transition-shadow relative flex flex-col">
+                {/* Badge */}
+                <div className={`absolute top-3 right-3 ${colors.bg} text-white text-[10px] font-bold px-2.5 py-1 rounded-full`}>
+                  {pkg.badge}
+                </div>
+                {/* Header */}
+                <div className={`px-6 pt-6 pb-4 bg-gradient-to-br ${colors.light} to-white`}>
+                  <div className={`w-12 h-12 rounded-xl ${colors.bg}/10 flex items-center justify-center mb-3`}>
+                    <Icon className={`w-6 h-6 ${colors.text}`} />
+                  </div>
+                  <h3 className="font-heading text-xl font-bold text-primary">{pkg.name}</h3>
+                </div>
+                {/* Body */}
+                <div className="px-6 py-4 flex-1">
+                  <ul className="space-y-2.5">
+                    {pkg.services.map((s, si) => (
+                      <li key={si} className="flex items-start gap-2 text-sm text-foreground-light">
+                        <CheckCircle className={`w-4 h-4 ${colors.text} shrink-0 mt-0.5`} />
+                        {s}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                {/* Footer */}
+                <div className="px-6 pb-6 pt-2">
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="text-sm text-foreground-muted line-through">{pkg.originalPrice}</span>
+                    <span className="text-xl font-bold text-primary">{pkg.packagePrice}</span>
+                  </div>
+                  <a
+                    href={waLink(`Hola! Quiero el pack: ${pkg.name}`)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block w-full text-center bg-secondary text-white font-semibold text-sm px-4 py-3 rounded-xl hover:bg-secondary-dark transition-colors"
+                  >
+                    Consultar pack
+                  </a>
                 </div>
               </div>
             )
