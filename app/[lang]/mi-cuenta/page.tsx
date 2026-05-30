@@ -8,12 +8,9 @@ export const metadata: Metadata = {
 
 export default async function MiCuentaPage({
   params,
-  searchParams,
 }: {
   params: Promise<{ lang: string }>
-  searchParams: Promise<{ login?: string; phone?: string }>
 }) {
-  const [{ lang }, sp] = await Promise.all([params, searchParams])
-  const showLogin = sp.login === "1" || !!sp.phone
-  return <ClientPortalApp lang={lang === "en" ? "en" : "es"} initialShowLogin={showLogin} />
+  const { lang } = await params
+  return <ClientPortalApp lang={lang === "en" ? "en" : "es"} />
 }

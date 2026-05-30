@@ -41,8 +41,8 @@ const STATUS_COLORS: Record<string, string> = {
 
 type Step = "phone" | "otp" | "portal"
 
-export default function ClientPortalApp({ lang, initialShowLogin }: { lang: "es" | "en"; initialShowLogin: boolean }) {
-  const [step, setStep] = useState<Step>(initialShowLogin ? "phone" : "portal")
+export default function ClientPortalApp({ lang }: { lang: "es" | "en"; initialShowLogin?: boolean }) {
+  const [step, setStep] = useState<Step>("phone")
   const [phone, setPhone] = useState("")
   const [otpCode, setOtpCode] = useState("")
   const [waUrl, setWaUrl] = useState<string | null>(null)
@@ -51,6 +51,7 @@ export default function ClientPortalApp({ lang, initialShowLogin }: { lang: "es"
   const [client, setClient] = useState<ClientData | null>(null)
   const [tab, setTab] = useState<"overview" | "visits" | "cards" | "loyalty">("overview")
   const [registerName, setRegisterName] = useState("")
+  const [checkingSession, setCheckingSession] = useState(true)
 
   const t = lang === "es" ? {
     title: "Mi Cuenta",
@@ -100,15 +101,17 @@ export default function ClientPortalApp({ lang, initialShowLogin }: { lang: "es"
   }, [])
 
   useEffect(() => {
-    if (step === "portal" && !client) {
-      fetch("/api/auth/me").then(async (r) => {
-        if (r.ok) {
-          const data = await r.json()
-          if (data.phone) loadClient(data.phone)
+    fetch("/api/auth/me").then(async (r) => {
+      if (r.ok) {
+        const data = await r.json()
+        if (data.phone) {
+          await loadClient(data.phone)
+          return
         }
-      }).catch(() => {})
-    }
-  }, [step, client, loadClient])
+      }
+      setStep("phone")
+    }).catch(() => setStep("phone")).finally(() => setCheckingSession(false))
+  }, [loadClient])
 
   async function handleSendOtp() {
     const cleaned = phone.replace(/\D/g, "")
@@ -172,6 +175,14 @@ export default function ClientPortalApp({ lang, initialShowLogin }: { lang: "es"
     setOtpCode("")
     setWaUrl(null)
     setStep("phone")
+  }
+
+  if (checkingSession) {
+    return (
+      <div className="min-h-[80vh] flex items-center justify-center">
+        <Loader2 className="w-8 h-8 animate-spin text-rose-400" />
+      </div>
+    )
   }
 
   if (step === "phone") {
