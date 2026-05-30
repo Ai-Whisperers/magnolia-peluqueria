@@ -1,7 +1,7 @@
 "use client"
 
-import { useState } from "react"
-import { Phone, Gift, Star, Clock, ArrowLeft, Loader2, MessageCircle, History, Award } from "lucide-react"
+import { useState, useEffect, useCallback } from "react"
+import { Phone, Gift, Star, Clock, ArrowLeft, Loader2, MessageCircle, History, Award, LogOut, UserPlus, ShieldCheck } from "lucide-react"
 import { business } from "@/lib/config"
 
 type ClientData = {
@@ -39,38 +39,142 @@ const STATUS_COLORS: Record<string, string> = {
   expired: "text-red-400",
 }
 
-export default function ClientPortal({ lang }: { lang: "es" | "en" }) {
-  const [phone, setPhone] = useState("")
-  const [loading, setLoading] = useState(false)
-  const [client, setClient] = useState<ClientData | null>(null)
-  const [error, setError] = useState<string | null>(null)
-  const [tab, setTab] = useState<"overview" | "visits" | "cards" | "loyalty">("overview")
+type Step = "phone" | "otp" | "portal"
 
-  async function lookup() {
+export default function ClientPortalApp({ lang, initialShowLogin }: { lang: "es" | "en"; initialShowLogin: boolean }) {
+  const [step, setStep] = useState<Step>(initialShowLogin ? "phone" : "portal")
+  const [phone, setPhone] = useState("")
+  const [otpCode, setOtpCode] = useState("")
+  const [waUrl, setWaUrl] = useState<string | null>(null)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const [client, setClient] = useState<ClientData | null>(null)
+  const [tab, setTab] = useState<"overview" | "visits" | "cards" | "loyalty">("overview")
+  const [registerName, setRegisterName] = useState("")
+
+  const t = lang === "es" ? {
+    title: "Mi Cuenta",
+    subtitle: "Ingresá tu número de WhatsApp para acceder a tu cuenta",
+    sendCode: "Enviar código por WhatsApp",
+    enterCode: "Ingresá el código de 6 dígitos",
+    verify: "Verificar",
+    resend: "Reenviar código",
+    back: "Volver",
+    noAccount: "¿No tenés cuenta?",
+    autoCreate: "Se crea automáticamente al verificar tu número",
+    codeSent: "Te enviamos un código por WhatsApp. Ingresalo abajo.",
+    openWa: "Abrir WhatsApp para ver el código",
+    invalidCode: "Código inválido o expirado",
+    logout: "Cerrar sesión",
+    loading: "Cargando...",
+  } : {
+    title: "My Account",
+    subtitle: "Enter your WhatsApp number to access your account",
+    sendCode: "Send code via WhatsApp",
+    enterCode: "Enter the 6-digit code",
+    verify: "Verify",
+    resend: "Resend code",
+    back: "Back",
+    noAccount: "No account?",
+    autoCreate: "It's created automatically when you verify your number",
+    codeSent: "We sent you a code via WhatsApp. Enter it below.",
+    openWa: "Open WhatsApp to see the code",
+    invalidCode: "Invalid or expired code",
+    logout: "Log out",
+    loading: "Loading...",
+  }
+
+  const loadClient = useCallback(async (phoneNumber: string) => {
+    try {
+      const res = await fetch(`/api/client/${phoneNumber}`)
+      if (!res.ok) {
+        setClient(null)
+        return
+      }
+      const data = await res.json()
+      setClient(data)
+      setStep("portal")
+    } catch {
+      setClient(null)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (step === "portal" && !client) {
+      fetch("/api/auth/me").then(async (r) => {
+        if (r.ok) {
+          const data = await r.json()
+          if (data.phone) loadClient(data.phone)
+        }
+      }).catch(() => {})
+    }
+  }, [step, client, loadClient])
+
+  async function handleSendOtp() {
     const cleaned = phone.replace(/\D/g, "")
     if (cleaned.length < 8) {
-      setError(lang === "es" ? "Ingresá un número de WhatsApp válido" : "Enter a valid WhatsApp number")
+      setError(lang === "es" ? "Ingresá un número válido" : "Enter a valid number")
       return
     }
     setLoading(true)
     setError(null)
     try {
-      const res = await fetch(`/api/client/${cleaned}`)
+      const res = await fetch("/api/auth/otp/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ phone: cleaned }),
+      })
+      const data = await res.json()
       if (!res.ok) {
-        setClient(null)
-        setError(lang === "es" ? "No encontramos una cuenta con ese número. ¡Reservá tu primer turno para crear tu perfil!" : "No account found with that number")
+        setError(data.error || "Error")
         return
       }
-      const data = await res.json()
-      setClient(data)
+      setPhone(cleaned)
+      setWaUrl(data.waUrl)
+      setStep("otp")
     } catch {
-      setError(lang === "es" ? "Error de conexión" : "Connection error")
+      setError("Error de conexión")
     } finally {
       setLoading(false)
     }
   }
 
-  if (!client) {
+  async function handleVerify() {
+    if (!otpCode || otpCode.length !== 6) {
+      setError(lang === "es" ? "Ingresá el código de 6 dígitos" : "Enter the 6-digit code")
+      return
+    }
+    setLoading(true)
+    setError(null)
+    try {
+      const res = await fetch("/api/auth/otp/verify", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ phone, code: otpCode }),
+      })
+      const data = await res.json()
+      if (!res.ok) {
+        setError(data.error || t.invalidCode)
+        return
+      }
+      await loadClient(data.phone)
+    } catch {
+      setError("Error de conexión")
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  async function handleLogout() {
+    await fetch("/api/auth/logout", { method: "POST" })
+    setClient(null)
+    setPhone("")
+    setOtpCode("")
+    setWaUrl(null)
+    setStep("phone")
+  }
+
+  if (step === "phone") {
     return (
       <div className="min-h-[80vh] flex items-center justify-center p-4">
         <div className="w-full max-w-md">
@@ -78,44 +182,103 @@ export default function ClientPortal({ lang }: { lang: "es" | "en" }) {
             <div className="w-16 h-16 rounded-2xl bg-rose-100 flex items-center justify-center mx-auto mb-6">
               <Phone className="w-8 h-8 text-rose-500" />
             </div>
-            <h1 className="font-heading text-3xl font-bold text-gray-900 mb-2">
-              {lang === "es" ? "Mi Cuenta" : "My Account"}
-            </h1>
-            <p className="text-gray-500 mb-8">
-              {lang === "es"
-                ? "Ingresá tu número de WhatsApp para ver tu historial, tarjetas de regalo y puntos."
-                : "Enter your WhatsApp number to see your history, gift cards, and points."}
-            </p>
+            <h1 className="font-heading text-3xl font-bold text-gray-900 mb-2">{t.title}</h1>
+            <p className="text-gray-500 mb-8">{t.subtitle}</p>
             <div className="flex gap-2 mb-4">
               <input
                 type="tel"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && lookup()}
+                onKeyDown={(e) => e.key === "Enter" && handleSendOtp()}
                 placeholder="0981 234567"
                 className="flex-1 border border-gray-200 rounded-xl px-4 py-3 text-lg focus:outline-none focus:ring-2 focus:ring-rose-300 focus:border-rose-300"
               />
               <button
-                onClick={lookup}
+                onClick={handleSendOtp}
                 disabled={loading}
-                className="bg-gray-900 text-white font-bold px-6 py-3 rounded-xl hover:bg-gray-800 transition-colors disabled:opacity-60"
+                className="bg-gray-900 text-white font-bold px-6 py-3 rounded-xl hover:bg-gray-800 transition-colors disabled:opacity-60 shrink-0"
               >
-                {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : "→"}
+                {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : <MessageCircle className="w-5 h-5" />}
               </button>
             </div>
-            {error && <p className="text-red-500 text-sm">{error}</p>}
-            <p className="text-xs text-gray-400 mt-6">
-              {lang === "es"
-                ? "¿No tenés cuenta? ¡Reservá tu primer turno y se crea automáticamente!"
-                : "No account? Book your first appointment and it's created automatically!"}
-            </p>
-            <a
-              href="/es/reserva"
-              className="inline-flex items-center gap-2 text-sm text-rose-500 font-semibold hover:underline mt-2"
-            >
-              {lang === "es" ? "Reservar turno" : "Book appointment"}
-            </a>
+            {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
+            <div className="flex items-center gap-2 justify-center text-xs text-gray-400 mt-4">
+              <ShieldCheck className="w-4 h-4" />
+              {t.autoCreate}
+            </div>
           </div>
+        </div>
+      </div>
+    )
+  }
+
+  if (step === "otp") {
+    return (
+      <div className="min-h-[80vh] flex items-center justify-center p-4">
+        <div className="w-full max-w-md">
+          <div className="bg-white rounded-3xl shadow-lg p-8 text-center">
+            <div className="w-16 h-16 rounded-2xl bg-green-100 flex items-center justify-center mx-auto mb-6">
+              <MessageCircle className="w-8 h-8 text-green-500" />
+            </div>
+            <h1 className="font-heading text-2xl font-bold text-gray-900 mb-2">{t.codeSent}</h1>
+            {waUrl && (
+              <a
+                href={waUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-[#25D366] text-white font-bold px-6 py-3 rounded-xl hover:bg-[#20BD5A] transition-colors mb-6"
+              >
+                <MessageCircle className="w-5 h-5" />
+                {t.openWa}
+              </a>
+            )}
+            <div className="mt-6">
+              <input
+                type="text"
+                inputMode="numeric"
+                maxLength={6}
+                value={otpCode}
+                onChange={(e) => setOtpCode(e.target.value.replace(/\D/g, ""))}
+                onKeyDown={(e) => e.key === "Enter" && handleVerify()}
+                placeholder="000000"
+                className="w-full text-center border border-gray-200 rounded-xl px-4 py-4 text-3xl font-mono tracking-[0.5em] focus:outline-none focus:ring-2 focus:ring-rose-300 focus:border-rose-300"
+              />
+              <div className="flex gap-2 mt-4">
+                <button
+                  onClick={() => { setStep("phone"); setOtpCode(""); setError(null) }}
+                  className="flex-1 border border-gray-200 text-gray-600 font-bold py-3 rounded-xl hover:bg-gray-50 transition-colors"
+                >
+                  {t.back}
+                </button>
+                <button
+                  onClick={handleVerify}
+                  disabled={loading || otpCode.length !== 6}
+                  className="flex-1 bg-gray-900 text-white font-bold py-3 rounded-xl hover:bg-gray-800 transition-colors disabled:opacity-60"
+                >
+                  {loading ? <Loader2 className="w-5 h-5 animate-spin mx-auto" /> : t.verify}
+                </button>
+              </div>
+              {error && <p className="text-red-500 text-sm mt-3">{error}</p>}
+              <button
+                onClick={handleSendOtp}
+                disabled={loading}
+                className="text-sm text-gray-400 hover:text-gray-600 mt-4 transition-colors"
+              >
+                {t.resend}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  if (!client) {
+    return (
+      <div className="min-h-[80vh] flex items-center justify-center p-4">
+        <div className="w-full max-w-md text-center">
+          <Loader2 className="w-8 h-8 animate-spin text-gray-300 mx-auto mb-4" />
+          <p className="text-gray-400">{t.loading}</p>
         </div>
       </div>
     )
@@ -125,13 +288,15 @@ export default function ClientPortal({ lang }: { lang: "es" | "en" }) {
 
   return (
     <div className="min-h-[80vh] max-w-3xl mx-auto px-4 py-10">
-      <button
-        onClick={() => { setClient(null); setPhone("") }}
-        className="flex items-center gap-1 text-sm text-gray-400 hover:text-gray-600 mb-6 transition-colors"
-      >
-        <ArrowLeft className="w-4 h-4" />
-        {lang === "es" ? "Buscar otro número" : "Search another number"}
-      </button>
+      <div className="flex items-center justify-between mb-6">
+        <button
+          onClick={handleLogout}
+          className="flex items-center gap-1 text-sm text-gray-400 hover:text-red-500 transition-colors"
+        >
+          <LogOut className="w-4 h-4" />
+          {t.logout}
+        </button>
+      </div>
 
       <div className="bg-white rounded-3xl shadow-lg overflow-hidden mb-6">
         <div className="bg-gradient-to-r from-rose-400 to-pink-500 p-6 text-white">
@@ -287,9 +452,7 @@ export default function ClientPortal({ lang }: { lang: "es" | "en" }) {
                 </div>
                 <div className="flex items-center justify-between text-sm">
                   <span className="text-gray-400">{lang === "es" ? "Monto original" : "Original amount"}: {formatGs(gc.amount_gs)}</span>
-                  <span className="font-bold text-gray-700">
-                    {lang === "es" ? "Saldo" : "Balance"}: {formatGs(gc.balance_gs)}
-                  </span>
+                  <span className="font-bold text-gray-700">{lang === "es" ? "Saldo" : "Balance"}: {formatGs(gc.balance_gs)}</span>
                 </div>
                 {gc.expires_at && (
                   <p className="text-xs text-gray-400 mt-1">{lang === "es" ? "Expira" : "Expires"}: {formatDate(gc.expires_at)}</p>
