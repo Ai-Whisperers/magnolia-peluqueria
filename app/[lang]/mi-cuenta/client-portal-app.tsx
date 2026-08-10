@@ -55,31 +55,31 @@ export default function ClientPortalApp({ lang }: { lang: "es" | "en"; initialSh
 
   const t = lang === "es" ? {
     title: "Mi Cuenta",
-    subtitle: "Ingresá tu número de WhatsApp para acceder a tu cuenta",
-    sendCode: "Enviar código por WhatsApp",
+    subtitle: "Ingresá tu número de Messaging para acceder a tu cuenta",
+    sendCode: "Enviar código por Messaging",
     enterCode: "Ingresá el código de 6 dígitos",
     verify: "Verificar",
     resend: "Reenviar código",
     back: "Volver",
     noAccount: "¿No tenés cuenta?",
     autoCreate: "Se crea automáticamente al verificar tu número",
-    codeSent: "Te enviamos un código por WhatsApp. Ingresalo abajo.",
-    openWa: "Abrir WhatsApp para ver el código",
+    codeSent: "Te enviamos un código por Messaging. Ingresalo abajo.",
+    openWa: "Abrir Messaging para ver el código",
     invalidCode: "Código inválido o expirado",
     logout: "Cerrar sesión",
     loading: "Cargando...",
   } : {
     title: "My Account",
-    subtitle: "Enter your WhatsApp number to access your account",
-    sendCode: "Send code via WhatsApp",
+    subtitle: "Enter your Messaging number to access your account",
+    sendCode: "Send code via Messaging",
     enterCode: "Enter the 6-digit code",
     verify: "Verify",
     resend: "Resend code",
     back: "Back",
     noAccount: "No account?",
     autoCreate: "It's created automatically when you verify your number",
-    codeSent: "We sent you a code via WhatsApp. Enter it below.",
-    openWa: "Open WhatsApp to see the code",
+    codeSent: "We sent you a code via Messaging. Enter it below.",
+    openWa: "Open Messaging to see the code",
     invalidCode: "Invalid or expired code",
     logout: "Log out",
     loading: "Loading...",
@@ -402,7 +402,7 @@ export default function ClientPortalApp({ lang }: { lang: "es" | "en"; initialSh
             </div>
           )}
           <a
-            href={`https://wa.me/${business.whatsapp}?text=${encodeURIComponent(
+            href={`tel:+${business.messaging}?text=${encodeURIComponent(
               `Hola! Soy ${client.name || "cliente"} (${client.phone}). Quiero consultar sobre mi cuenta.`
             )}`}
             target="_blank"
@@ -410,7 +410,7 @@ export default function ClientPortalApp({ lang }: { lang: "es" | "en"; initialSh
             className="flex items-center justify-center gap-3 bg-[#25D366] text-white font-bold w-full py-3 rounded-xl hover:bg-[#20BD5A] transition-all"
           >
             <MessageCircle className="w-5 h-5" />
-            {lang === "es" ? "Consultar por WhatsApp" : "Contact via WhatsApp"}
+            {lang === "es" ? "Consultar por Messaging" : "Contact via Messaging"}
           </a>
         </div>
       )}
@@ -470,7 +470,7 @@ export default function ClientPortalApp({ lang }: { lang: "es" | "en"; initialSh
                 )}
                 {gc.status !== "redeemed" && gc.status !== "expired" && (
                   <a
-                    href={`https://wa.me/${business.whatsapp}?text=${encodeURIComponent(
+                    href={`tel:+${business.messaging}?text=${encodeURIComponent(
                       `Hola! Quiero usar mi tarjeta ${gc.code} con saldo ${formatGs(gc.balance_gs)}`
                     )}`}
                     target="_blank"
@@ -478,7 +478,7 @@ export default function ClientPortalApp({ lang }: { lang: "es" | "en"; initialSh
                     className="inline-flex items-center gap-1 text-sm text-[#25D366] font-semibold hover:underline mt-3"
                   >
                     <MessageCircle className="w-4 h-4" />
-                    {lang === "es" ? "Usar por WhatsApp" : "Use via WhatsApp"}
+                    {lang === "es" ? "Usar por Messaging" : "Use via Messaging"}
                   </a>
                 )}
               </div>

@@ -6,7 +6,7 @@ interface CtaBannerProps {
 }
 
 export function CtaBanner({ waPhone, message }: CtaBannerProps) {
-  const waLink = `https://wa.me/${waPhone}?text=${message}`
+  const waLink = `tel:+${waPhone}?text=${message}`
 
   return (
     <section className="py-20 bg-gradient-to-r from-secondary via-secondary to-secondary-dark relative overflow-hidden">
@@ -21,7 +21,7 @@ export function CtaBanner({ waPhone, message }: CtaBannerProps) {
           ¿Lista para tu próximo look?
         </h2>
         <p className="text-white/80 text-lg max-w-2xl mx-auto mb-10">
-          Reservá tu turno por WhatsApp en segundos. Te respondemos rápido y coordinamos el mejor horario para vos.
+          Reservá tu turno por Messaging en segundos. Te respondemos rápido y coordinamos el mejor horario para vos.
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -32,7 +32,7 @@ export function CtaBanner({ waPhone, message }: CtaBannerProps) {
             className="inline-flex items-center gap-3 bg-white text-secondary font-bold px-10 py-5 rounded-2xl text-lg hover:bg-white/95 hover:scale-105 transition-all shadow-2xl"
           >
             <MessageCircle className="w-6 h-6" />
-            Reservar por WhatsApp
+            Reservar por Messaging
             <ArrowRight className="w-5 h-5" />
           </a>
           <a

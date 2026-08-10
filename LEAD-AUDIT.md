@@ -21,7 +21,7 @@ Notes: Hair salon in Asuncion -- needs portfolio, styling photos, product info
 - next/font optimization (no render-blocking)
 - CSS custom properties design system (15+ variables)
 - Business-specific SVG logo
-- CTA banner with WhatsApp button
+- CTA banner with Messaging button
 - Schema.org LocalBusiness JSON-LD
 - Open Graph + Twitter Card meta tags
 - Canonical URLs on all pages
@@ -47,7 +47,7 @@ Notes: Hair salon in Asuncion -- needs portfolio, styling photos, product info
 - No dark mode
 - No loading states / skeletons
 - No PWA / manifest / service worker
-- Generic CTA (all use same WhatsApp message)
+- Generic CTA (all use same Messaging message)
 
 ---
 
@@ -158,7 +158,7 @@ Notes: Hair salon in Asuncion -- needs portfolio, styling photos, product info
 | B-010 | Add exactOptionalPropertyTypes to tsconfig | PENDING |
 | B-011 | Extract service data from components to content/site.json | PENDING |
 | B-012 | Add cn() utility (clsx + tailwind-merge) | PENDING |
-| B-013 | Add wa() URL builder utility for WhatsApp links | PENDING |
+| B-013 | Add wa() URL builder utility for Messaging links | PENDING |
 | B-014 | Add formatCurrency utility for Gs. formatting | PENDING |
 | B-015 | Add formatPhone utility for display formatting | PENDING |
 | B-016 | Add slugify utility for URL generation | PENDING |
@@ -327,7 +327,7 @@ Notes: Hair salon in Asuncion -- needs portfolio, styling photos, product info
 | E-019 | Add newsletter signup form in footer | PENDING |
 | E-020 | Add Google Maps embed on contacto page | PENDING |
 | E-021 | Add contact form (name, email, phone, message) | PENDING |
-| E-022 | Add WhatsApp click-to-chat on all pages | PENDING |
+| E-022 | Add Messaging click-to-chat on all pages | PENDING |
 | E-023 | Add social media share buttons on blog posts | PENDING |
 | E-024 | Add RSS feed for blog content | PENDING |
 | E-025 | Add site-wide search functionality | PENDING |
@@ -336,7 +336,7 @@ Notes: Hair salon in Asuncion -- needs portfolio, styling photos, product info
 | E-028 | Add member login portal | PENDING |
 | E-029 | Add live class schedule with real-time availability | PENDING |
 | E-030 | Add push notification for class reminders | PENDING |
-| E-031 | Add WhatsApp chatbot integration | PENDING |
+| E-031 | Add Messaging chatbot integration | PENDING |
 | E-032 | Add mobile app download links | PENDING |
 | E-033 | Add QR code check-in system | PENDING |
 | E-034 | Add loyalty program page | PENDING |
@@ -448,7 +448,7 @@ Notes: Hair salon in Asuncion -- needs portfolio, styling photos, product info
 |---|------|--------|
 | I-001 | Add Google Analytics 4 property | PENDING |
 | I-002 | Add privacy-friendly Plausible/Umami as alternative | PENDING |
-| I-003 | Track WhatsApp CTA button clicks | PENDING |
+| I-003 | Track Messaging CTA button clicks | PENDING |
 | I-004 | Track phone number clicks (tel: links) | PENDING |
 | I-005 | Track page views per route | PENDING |
 | I-006 | Track CTA conversion rate | PENDING |
@@ -512,7 +512,7 @@ Notes: Hair salon in Asuncion -- needs portfolio, styling photos, product info
 3. Get 5 high-quality stock photos (Unsplash) (15 min)
 4. Add hero background image (10 min)
 5. Verify business hours are correct (5 min)
-6. Customize WhatsApp message per business (5 min)
+6. Customize Messaging message per business (5 min)
 7. Build + deploy (30 min)
 
 **Total quick wins: ~1.5 hours**

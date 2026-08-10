@@ -1,23 +1,23 @@
 import type { Metadata } from "next"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
-import { WhatsAppFloat } from "@/components/whatsapp-float"
+import { MessagingFloat } from "@/components/messaging-float"
 import { FAQAccordion } from "@/components/faq-accordion"
 import { FAQJsonLd } from "@/components/faq-json-ld"
 import { getContent, formatHours } from "@/lib/config"
 
 const FAQ_SCHEMA_ES = [
-  { q: "¿Necesito pedir turno?", a: "Recomendamos sacar turno por WhatsApp para garantizar disponibilidad, aunque también podés llegar sin turno si hay lugar." },
+  { q: "¿Necesito pedir turno?", a: "Recomendamos sacar turno por Messaging para garantizar disponibilidad, aunque también podés llegar sin turno si hay lugar." },
   { q: "¿Cómo pago?", a: "Aceptamos efectivo y pago móvil. El pago se realiza al finalizar el servicio." },
-  { q: "¿Hacés tratamientos para novias?", a: "Sí, tenemos paquetes especiales para eventos y bodas. Consultanos por WhatsApp." },
+  { q: "¿Hacés tratamientos para novias?", a: "Sí, tenemos paquetes especiales para eventos y bodas. Consultanos por Messaging." },
   { q: "¿Qué productos usan?", a: "Usamos productos de alta calidad: Wella, Schwarzkopf y Matrix." },
   { q: "¿Hay estacionamiento?", a: "Contamos con estacionamiento propio gratuito para nuestras clientas." },
 ]
 
 const FAQ_SCHEMA_EN = [
-  { q: "Do I need an appointment?", a: "We recommend booking via WhatsApp to ensure availability, though walk-ins are welcome if we have space." },
+  { q: "Do I need an appointment?", a: "We recommend booking via Messaging to ensure availability, though walk-ins are welcome if we have space." },
   { q: "How do I pay?", a: "We accept cash and mobile payment. Payment is due at the end of the service." },
-  { q: "Do you offer bridal services?", a: "Yes, we have special packages for events and weddings. Contact us via WhatsApp." },
+  { q: "Do you offer bridal services?", a: "Yes, we have special packages for events and weddings. Contact us via Messaging." },
   { q: "What products do you use?", a: "We use high-quality products: Wella, Schwarzkopf, and Matrix." },
   { q: "Is there parking?", a: "We have free parking available for our clients." },
 ]
@@ -68,10 +68,10 @@ export default async function FaqPage({ params }: { params: Promise<{ lang: stri
         address={c.business.address}
         phone={c.business.phoneFormatted}
         hours={formatHours(c.business.hours)}
-        waPhone={c.business.whatsapp}
+        waPhone={c.business.messaging}
         lang={lang as "es" | "en"}
       />
-      <WhatsAppFloat lang={lang as "es" | "en"} />
+      <MessagingFloat lang={lang as "es" | "en"} />
     </>
   )
 }

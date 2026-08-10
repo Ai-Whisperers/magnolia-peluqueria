@@ -10,7 +10,7 @@ import { LoyaltySection } from "@/components/loyalty"
 import { Location } from "@/components/location"
 import { InstagramFeed } from "@/components/instagram-feed"
 import { Footer } from "@/components/footer"
-import { WhatsAppFloat } from "@/components/whatsapp-float"
+import { MessagingFloat } from "@/components/messaging-float"
 import { getContent, formatHours } from "@/lib/config"
 import { business, heroSlides } from "@/lib/config"
 
@@ -53,10 +53,10 @@ export default async function LangHomePage({
         address={c.business.address}
         phone={c.business.phoneFormatted}
         hours={formatHours(c.business.hours)}
-        waPhone={c.business.whatsapp}
+        waPhone={c.business.messaging}
         lang={lang as "es" | "en"}
       />
-      <WhatsAppFloat lang={lang as "es" | "en"} />
+      <MessagingFloat lang={lang as "es" | "en"} />
     </>
   )
 }

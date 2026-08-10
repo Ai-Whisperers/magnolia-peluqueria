@@ -6,8 +6,8 @@
   "business": {
     "name": "Magnolia Peluquería",
     "tagline": "Your Best Look in Asunción",
-    "whatsapp": "595986106062",
-    "whatsappMessage": "Hi!%20I%20want%20to%20book%20an%20appointment%20at%20Magnolia",
+    "messaging": "595986106062",
+    "messagingMessage": "Hi!%20I%20want%20to%20book%20an%20appointment%20at%20Magnolia",
     "phoneFormatted": "0981 106 062",
     "phoneLink": "tel:+595****6062",
     "address": "Asunción, Paraguay",
@@ -42,7 +42,7 @@
         "badge": "Cuts · Styling · Events"
       }
     ],
-    "whatsappMessage": "Hi!%20I%20want%20information%20about%20your%20services"
+    "messagingMessage": "Hi!%20I%20want%20information%20about%20your%20services"
   },
   "stats": [
     { "value": "15+", "label": "Years of experience" },
@@ -140,9 +140,9 @@
     {
       "name": "Ana Rodríguez",
       "role": "Image Advisor",
-      "bio": "Available to answer WhatsApp and help you choose the ideal service. Coordinates appointments and advises on treatments.",
+      "bio": "Available to answer Messaging and help you choose the ideal service. Coordinates appointments and advises on treatments.",
       "image": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80",
-      "specialties": ["WhatsApp Support", "Appointment Coordination", "Consultation"]
+      "specialties": ["Messaging Support", "Appointment Coordination", "Consultation"]
     }
   ],
   "testimonials": [
@@ -196,8 +196,8 @@
     "desc": "El regalo perfecto para alguien especial. Tarjetas disponibles en cualquier denomination."
   },
   "faqs": [
-    { "q": "¿Necesito turno o puedo ir sin cita?", "a": "Recomendamos reservar con anticipación, especialmente para tratamientos y eventos. Podés pedir tu turno por WhatsApp. Sin embargo, si tenemos disponibilidad, te atendemos sin cita." },
-    { "q": "¿Cuál es el rango de precios?", "a": "Nuestros cortes van desde Gs. 50.000 hasta Gs. 90.000. Los tratamientos de coloración arrancan en Gs. 250.000. Keratina y peinados para eventos tienen precios según complejidad. Consultanos por WhatsApp para un presupuesto exacto." },
+    { "q": "¿Necesito turno o puedo ir sin cita?", "a": "Recomendamos reservar con anticipación, especialmente para tratamientos y eventos. Podés pedir tu turno por Messaging. Sin embargo, si tenemos disponibilidad, te atendemos sin cita." },
+    { "q": "¿Cuál es el rango de precios?", "a": "Nuestros cortes van desde Gs. 50.000 hasta Gs. 90.000. Los tratamientos de coloración arrancan en Gs. 250.000. Keratina y peinados para eventos tienen precios según complejidad. Consultanos por Messaging para un presupuesto exacto." },
     { "q": "¿Usan productos de calidad?", "a": "Sí, trabajamos exclusivamente con marcas internacionales premium como Wella, Schwarzkopf y Alfaparf. Cuidamos tu cabello usando productos profesionales en cada servicio." },
     { "q": "¿Hacen servicios para novias?", "a": "Sí! Contamos con servicio completo de novias: peinado, maquillaje y prueba previa. Reservá con al menos 2 semanas de anticipación para garantizar disponibilidad." },
     { "q": "¿Hay estacionamiento?", "a": "Estamos en zona céntrica de Asunción con fácil acceso. Hay estacionamiento público en las cercanías y algunos restaurantes vecinos que permiten uso de sus cocheras." }
@@ -205,8 +205,8 @@
   "cta": {
     "title": "Reservá tu turno",
     "subtitle": "Te esperamos para transformer tu look",
-    "whatsapp": "Hola!%20Quiero%20reservar%20un%20turno%20en%20Magnolia",
-    "button": "Reservar por WhatsApp"
+    "messaging": "Hola!%20Quiero%20reservar%20un%20turno%20en%20Magnolia",
+    "button": "Reservar por Messaging"
   },
   "nav": {
     "home": "Home",
@@ -237,7 +237,7 @@
     "terms_label": "Terms",
     "copyright": "All rights reserved.",
     "hours_label": "Hours",
-    "whatsapp_label": "WhatsApp",
+    "messaging_label": "Messaging",
     "closed_days": "Sundays and Mondays closed"
   },
   "hero": {
@@ -261,8 +261,8 @@
         "badge": "Cuts · Styling · Events"
       }
     ],
-    "whatsappMessage": "Hi!%20I%20want%20information%20about%20your%20services",
-    "cta_button": "Book via WhatsApp",
+    "messagingMessage": "Hi!%20I%20want%20information%20about%20your%20services",
+    "cta_button": "Book via Messaging",
     "view_services": "View Services"
   },
   "about": {
@@ -284,10 +284,10 @@
   "booking": {
     "meta": {
       "title": "Book an Appointment | Magnolia Peluquería",
-      "description": "Book your appointment at Magnolia Peluquería. Fill in the form and we'll contact you via WhatsApp in under 5 minutes."
+      "description": "Book your appointment at Magnolia Peluquería. Fill in the form and we'll contact you via Messaging in under 5 minutes."
     },
     "title": "Book Your Appointment",
-    "subtitle": "Fill in the form and we'll contact you via WhatsApp in under 5 minutes.",
+    "subtitle": "Fill in the form and we'll contact you via Messaging in under 5 minutes.",
     "form_name_label": "Your Name",
     "form_name_placeholder": "Full name",
     "form_phone_label": "Phone Number",
@@ -297,10 +297,10 @@
     "form_date_label": "Preferred Date",
     "form_notes_label": "Additional Notes",
     "form_notes_placeholder": "Any details about what you need...",
-    "form_submit": "Book via WhatsApp",
+    "form_submit": "Book via Messaging",
     "form_success": "We'll contact you shortly!",
-    "form_error": "Something went wrong. Try via WhatsApp.",
-    "whatsapp_fallback": "Or book directly via WhatsApp"
+    "form_error": "Something went wrong. Try via Messaging.",
+    "messaging_fallback": "Or book directly via Messaging"
   },
   "faqs": {
     "meta": {
@@ -314,11 +314,11 @@
   "contact": {
     "meta": {
       "title": "Contact | Magnolia Peluquería",
-      "description": "Contact Magnolia Peluquería. Visit us in Asunción, call or write via WhatsApp."
+      "description": "Contact Magnolia Peluquería. Visit us in Asunción, call or write via Messaging."
     },
     "title": "Get in Touch",
     "subtitle": "We'd love to hear from you",
-    "whatsapp_cta": "Write via WhatsApp",
+    "messaging_cta": "Write via Messaging",
     "phone_cta": "Call Us",
     "hours_label": "Hours",
     "visit_label": "Visit Us",
@@ -333,7 +333,7 @@
     "title": "Terms of Service",
     "content": {
       "intro": "By using Magnolia Peluquería services, you agree to these terms.",
-      "appointments": "Appointments can be booked via WhatsApp or in person. Please cancel or reschedule at least 24 hours in advance.",
+      "appointments": "Appointments can be booked via Messaging or in person. Please cancel or reschedule at least 24 hours in advance.",
       "payments": "Payment is due at the time of service. We accept cash and mobile payment.",
       "cancellations": "Cancellations with less than 24 hours notice may incur a 50% fee.",
       "refunds": "Services are non-refundable once completed. Complaints must be raised within 48 hours."
@@ -349,7 +349,7 @@
       "intro": "Magnolia Peluquería respects your privacy.",
       "data_collection": "We collect your contact information only for appointment purposes. Your data is never shared with third parties.",
       "cookies": "This website uses cookies to improve your experience. You can decline non-essential cookies.",
-      "contact": "For privacy concerns, contact us via WhatsApp."
+      "contact": "For privacy concerns, contact us via Messaging."
     }
   },
   "services": {
@@ -404,8 +404,8 @@
   "cta": {
     "title": "Book Your Turn",
     "subtitle": "We await to transform your look",
-    "whatsapp": "Hello!%20I%20want%20to%20book%20an%20appointment%20at%20Magnolia",
-    "button": "Book via WhatsApp"
+    "messaging": "Hello!%20I%20want%20to%20book%20an%20appointment%20at%20Magnolia",
+    "button": "Book via Messaging"
   },
   "cookieConsent": {
     "message": "We use cookies to improve your experience. By continuing to browse, you accept our cookie policy.",

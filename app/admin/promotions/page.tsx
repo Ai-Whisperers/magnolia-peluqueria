@@ -177,7 +177,7 @@ export default function AdminPromotionsPage() {
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-medium text-zinc-400 mb-1.5">Mensaje WhatsApp</label>
+                <label className="block text-sm font-medium text-zinc-400 mb-1.5">Mensaje Messaging</label>
                 <input value={form.wa_message} onChange={e => setForm(f => ({ ...f, wa_message: e.target.value }))} className="w-full bg-zinc-950 border border-zinc-800 text-white rounded-xl px-4 py-2.5 focus:outline-none focus:border-secondary transition-colors" placeholder="ej: ¡Hola! Quiero usar la promo..." />
               </div>
               <div className="grid grid-cols-2 gap-4">

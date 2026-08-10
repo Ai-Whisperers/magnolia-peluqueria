@@ -54,11 +54,11 @@ export const loyalty     = content.loyalty
 export const giftCards   = content.giftCards
 export const faqs        = content.faqs
 
-// ── WhatsApp helpers ─────────────────────────────────────────────
+// ── Messaging helpers ─────────────────────────────────────────────
 export function waLink(message?: string): string {
   const b = content.business
   const msg = message ?? b.ctaMessage
-  return `https://wa.me/${b.whatsapp}?text=${encodeURIComponent(decodeURIComponent(msg))}`
+  return `tel:+${b.messaging}?text=${encodeURIComponent(decodeURIComponent(msg))}`
 }
 
 export function waLinkForService(serviceName: string): string {
@@ -94,7 +94,7 @@ export function getInitialsBg(color: ColorName): string {
 export const t = {
   navHome: "Inicio", navServices: "Servicios", navAbout: "Nosotros",
   navBooking: "Reservar", navFAQ: "FAQ", navContact: "Contacto",
-  bookCta: "Reservar", bookCtaMobile: "Reservar por WhatsApp",
+  bookCta: "Reservar", bookCtaMobile: "Reservar por Messaging",
   closed: "Cerrado", openNow: "Abierto ahora",
 } as const
 

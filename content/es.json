@@ -6,8 +6,8 @@
   "business": {
     "name": "Magnolia Peluquería",
     "tagline": "Tu Mejor Look en Asunción",
-    "whatsapp": "595986106062",
-    "whatsappMessage": "Hola!%20Quiero%20reservar%20una%20cita%20en%20Magnolia",
+    "messaging": "595986106062",
+    "messagingMessage": "Hola!%20Quiero%20reservar%20una%20cita%20en%20Magnolia",
     "phoneFormatted": "0981 106 062",
     "phoneLink": "tel:+595****6062",
     "address": "Asunción, Paraguay",
@@ -42,7 +42,7 @@
         "badge": "Cortes · Peinados · Eventos"
       }
     ],
-    "whatsappMessage": "Hola!%20Quiero%20informaci%C3%B3n%20sobre%20sus%20servicios"
+    "messagingMessage": "Hola!%20Quiero%20informaci%C3%B3n%20sobre%20sus%20servicios"
   },
   "stats": [
     {
@@ -309,10 +309,10 @@
     {
       "name": "Ana Rodríguez",
       "role": "Asesora de Imagen",
-      "bio": "Disponible para responder WhatsApp y ayudarte a elegir el servicio ideal. Coordina turnos y te asesora sobre tratamientos.",
+      "bio": "Disponible para responder Messaging y ayudarte a elegir el servicio ideal. Coordina turnos y te asesora sobre tratamientos.",
       "image": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80",
       "specialties": [
-        "Atención WhatsApp",
+        "Atención Messaging",
         "Coordinación de Turnos",
         "Asesoría"
       ]
@@ -508,11 +508,11 @@
   "faqs": [
     {
       "q": "¿Cuáles son los horarios?",
-      "a": "Martes a sábado de 9:00 a 19:00. Lunes y domingos cerrados. Podés reservar por WhatsApp para coordinar tu turno."
+      "a": "Martes a sábado de 9:00 a 19:00. Lunes y domingos cerrados. Podés reservar por Messaging para coordinar tu turno."
     },
     {
       "q": "¿Aceptan walk-ins?",
-      "a": "Preferimos con cita previa para garantizarte atención personalizada. Escribinos por WhatsApp y te confirmamos en minutos."
+      "a": "Preferimos con cita previa para garantizarte atención personalizada. Escribinos por Messaging y te confirmamos en minutos."
     },
     {
       "q": "¿Qué servicios ofrecen?",
@@ -520,7 +520,7 @@
     },
     {
       "q": "¿Trabajan con extensiones?",
-      "a": "Sí, ofrecemos colocación y mantenimiento de extensiones capilares. Consultá por WhatsApp para coordinar."
+      "a": "Sí, ofrecemos colocación y mantenimiento de extensiones capilares. Consultá por Messaging para coordinar."
     },
     {
       "q": "¿Cuánto cuesta un corte?",
@@ -544,11 +544,11 @@
     },
     {
       "q": "¿Cómo reservo mi turno?",
-      "a": "La forma más rápida es por WhatsApp: 0981 106 062. Te respondemos en menos de 5 minutos y coordinamos el mejor horario."
+      "a": "La forma más rápida es por Messaging: 0981 106 062. Te respondemos en menos de 5 minutos y coordinamos el mejor horario."
     },
     {
       "q": "¿Tienen estacionamiento?",
-      "a": "Estamos en zona céntrica con fácil acceso. Consultanos por WhatsApp y te enviamos opciones de estacionamiento cercanas."
+      "a": "Estamos en zona céntrica con fácil acceso. Consultanos por Messaging y te enviamos opciones de estacionamiento cercanas."
     },
     {
       "q": "¿Hacen descuentos por referidos?",
@@ -557,8 +557,8 @@
   ],
   "cta": {
     "title": "Reservá tu Turno",
-    "subtitle": "Escribinos por WhatsApp y te confirmamos tu cita en minutos.",
-    "buttonText": "Reservar por WhatsApp"
+    "subtitle": "Escribinos por Messaging y te confirmamos tu cita en minutos.",
+    "buttonText": "Reservar por Messaging"
   },
   "seo": {
     "reviewCount": "100",
@@ -568,8 +568,8 @@
   },
   "contactPage": {
     "title": "Contactanos",
-    "subtitle": "Estamos para ayudarte. Escribinos por WhatsApp o visitanos.",
-    "whatsappLabel": "Escribinos directo",
+    "subtitle": "Estamos para ayudarte. Escribinos por Messaging o visitanos.",
+    "messagingLabel": "Escribinos directo",
     "mapLabel": "Cómo llegar"
   }
 }

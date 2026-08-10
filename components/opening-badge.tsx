@@ -35,7 +35,7 @@ function getNextOpen(config: HoursConfig = DEFAULT_CONFIG): string {
       return `Abre ${dayNames[checkDay]} a las ${config.open}:00`
     }
   }
-  return "Consultá por WhatsApp"
+  return "Consultá por Messaging"
 }
 
 export function OpeningBadge() {

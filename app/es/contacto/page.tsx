@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
-import { WhatsAppFloat } from "@/components/whatsapp-float"
+import { MessagingFloat } from "@/components/messaging-float"
 import { ContactSection } from "@/components/contact-section"
 import { getContent, formatHours } from "@/lib/config"
 
@@ -14,7 +14,7 @@ export async function generateMetadata({
   const c = getContent(lang as "es" | "en")
   return {
     title: c.contactPage?.title ?? (lang === "es" ? "Contacto" : "Contact"),
-    description: c.contactPage?.subtitle ?? (lang === "es" ? "Contactanos por WhatsApp o visítanos en Asunción" : "Contact us via WhatsApp or visit us in Asunción"),
+    description: c.contactPage?.subtitle ?? (lang === "es" ? "Contactanos por Messaging o visítanos en Asunción" : "Contact us via Messaging or visit us in Asunción"),
   }
 }
 
@@ -68,10 +68,10 @@ export default async function ContactPage({
         address={c.business.address}
         phone={c.business.phoneFormatted}
         hours={formatHours(c.business.hours)}
-        waPhone={c.business.whatsapp}
+        waPhone={c.business.messaging}
         lang={lang as "es" | "en"}
       />
-      <WhatsAppFloat lang={lang as "es" | "en"} />
+      <MessagingFloat lang={lang as "es" | "en"} />
     </>
   )
 }

@@ -36,7 +36,7 @@ magnolia-peluqueria/
 │   ├── team-section.tsx         # Team profiles
 │   ├── before-after.tsx         # Before/after slider
 │   ├── why-us.tsx               # Trust indicators
-│   ├── whatsapp-float.tsx       # Floating WhatsApp button
+│   ├── messaging-float.tsx       # Floating Messaging button
 │   ├── instagram-feed.tsx      # Instagram link
 │   ├── location.tsx            # Map embed
 │   ├── cta-banner.tsx          # Call-to-action section
@@ -94,8 +94,8 @@ NEXT_PUBLIC_SUPABASE_URL=https://xxx.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJ...
 SUPABASE_SERVICE_ROLE_KEY=eyJ...        # Server-only
 CONTACT_EMAIL=info@magnolia-peluqueria.com
-WHATSAPP_NUMBER=+595986106062
-WHATSAPP_MESSAGE=Hola!%20Quiero%20reservar%20un%20turno
+MESSAGING_NUMBER=+595986106062
+MESSAGING_MESSAGE=Hola!%20Quiero%20reservar%20un%20turno
 SITE_URL=https://magnolia-peluqueria.paragu-ai.com
 ```
 
@@ -168,9 +168,9 @@ All pages have unique `<title>` and `<meta description>` via `generateMetadata()
 - 4.5–5 star ratings (fake for now)
 - Real names needed
 
-### WhatsApp Float
+### Messaging Float
 - Fixed bottom-right
-- `https://wa.me/595986106062?text=WHATSAPP_MESSAGE`
+- `tel:+595986106062?text=MESSAGING_MESSAGE`
 - Pre-fills message per page context
 
 ### Location

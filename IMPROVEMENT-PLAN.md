@@ -31,7 +31,7 @@ El sitio usa `output: "export"` en `next.config.ts`. Esto genera HTML estático 
 Sitio Magnolia (Next.js, ~15 páginas)
   ├── Home / Servicios / Nosotros / FAQ / Contacto / Privacidad / Términos
   ├── API Routes (después de migrar a Vercel normal)
-  │   ├── POST /api/booking          → guardar reserva en Supabase + WhatsApp
+  │   ├── POST /api/booking          → guardar reserva en Supabase + Messaging
   │   ├── POST /api/contact          → guardar mensaje en Supabase + email
   │   ├── GET  /api/availability     → devolver horarios disponibles
   │   └── POST /api/newsletter       → suscribir a lista Mailchimp/Supabase
@@ -201,7 +201,7 @@ Agregar sección de paquetes debajo de la lista individual:
 **Opción B: Booking propio con Supabase (más trabajo, más poder)**  
 - Construimos un widget de booking custom en React
 - Guardamos reservas en Supabase
-- Enviamos confirmación por WhatsApp automático
+- Enviamos confirmación por Messaging automático
 - Costo: solo Supabase (free tier = 500MB, 2GB transfer, suficiente para empezar)
 - Tiempo: 20-30h de desarrollo
 - Con: control total, branding propio, datos propios, integración completa
@@ -277,8 +277,8 @@ CREATE TABLE clientas (
 
 `POST /api/booking`
 ```typescript
-// Validar slot disponible → guardar en Supabase → enviar WhatsApp a Magnolia
-// WHATSAPP MESSAGE:
+// Validar slot disponible → guardar en Supabase → enviar Messaging a Magnolia
+// MESSAGING MESSAGE:
 // "Nueva reserva! 👋\nCliente: [nombre]\nServicio: [servicio]\nFecha: [fecha] [hora]\nTel: [telefono]"
 ```
 
@@ -297,11 +297,11 @@ Flow:
 2. **Selecciona fecha** (calendario — Martes a Sábado solamente)
 3. **Selecciona horario** (slots disponibles de API)
 4. **Ingresa nombre + teléfono**
-5. **Confirma** → POST /api/booking → mensaje WhatsApp a Magnolia → mensaje de confirmación a clienta
+5. **Confirma** → POST /api/booking → mensaje Messaging a Magnolia → mensaje de confirmación a clienta
 
 Diseño: modal overlay que aparece con CTA "Reservar ahora", o página `/reservar`.
 
-### Ticket F2.5: WhatsApp Auto-Confirmación (2h)
+### Ticket F2.5: Messaging Auto-Confirmación (2h)
 **Responsable: Erebus (API + AgentCall)**
 
 Cuando una reserva se confirma:
@@ -316,7 +316,7 @@ Configurar AgentCall con el número de Magnolia.
 [ ] Supabase project creado con tablas
 [ ] API routes funcionando (testeadas con curl)
 [ ] Widget de booking en UI (/reservar o modal)
-[ ] Confirmación WhatsApp automática configurada
+[ ] Confirmación Messaging automática configurada
 ```
 
 ---
@@ -333,7 +333,7 @@ Sistema:
 - Cada vez que una clienta completa un servicio, recibe N puntos
 - 5 sellos = 1 servicio gratis (o 500 pts = 1 servicio)
 - Tracking automático basado en `reservas.estado = 'completada'`
-- Clienta puede ver sus puntos enviando "PUNTOS" por WhatsApp
+- Clienta puede ver sus puntos enviando "PUNTOS" por Messaging
 
 Widget en página `nosotros` o página `/fidelizacion`:
 ```tsx
@@ -342,17 +342,17 @@ Widget en página `nosotros` o página `/fidelizacion`:
 ```
 
 Opciones de implementación:
-1. **WhatsApp-first:** Todo por WhatsApp, clienta pregunta "cuántos sellos tengo?" y Magnolia responde
+1. **Messaging-first:** Todo por Messaging, clienta pregunta "cuántos sellos tengo?" y Magnolia responde
 2. **QR-based:** Clienta-scanea QR en el salón después del servicio, se registra el sello
 3. **Manual simple:** Magnolia ingresa los sellos desde un admin panel mínimo
 
-**Recomendación:** Opción 1 (WhatsApp-first) — cero desarrollo de app, solo entrenamiento del bot de WhatsApp.
+**Recomendación:** Opción 1 (Messaging-first) — cero desarrollo de app, solo entrenamiento del bot de Messaging.
 
 ### Ticket F3.2: Encuesta Post-Servicio Automática (4h)
 **API route:** `app/api/feedback/route.ts`
 
 30 minutos después de la hora del turno:
-- Enviar WhatsApp a clienta: "¿Cómo estuvo tu experiencia en Magnolia? 🙏 Responde del 1 al 5"
+- Enviar Messaging a clienta: "¿Cómo estuvo tu experiencia en Magnolia? 🙏 Responde del 1 al 5"
 - Si responde 1-2: flag para seguimiento manual de Magnolia
 - Si responde 5 (excelente): "¿Podrías dejarnos una reseña en Google? [link]"
 - Si acepta: mensaje con link directo a Google Reviews
@@ -370,7 +370,7 @@ Implementación:
 **API route:** `app/api/reminders/route.ts`
 
 24h antes de cada reserva:
-- WhatsApp: "Hola [nombre]! Te recordado tu turno mañana a las [hora] en Magnolia. ¿Estás confirmade? Responde SÍ para confirmar."
+- Messaging: "Hola [nombre]! Te recordado tu turno mañana a las [hora] en Magnolia. ¿Estás confirmade? Responde SÍ para confirmar."
 - Si no responde: seguimiento 2h antes
 
 ### Ticket F3.4: Admin Panel Básico (10h)
@@ -480,12 +480,12 @@ Opciones:
 Flow:
 1. Clienta selecciona denomination: Gs. 50.000 / 100.000 / 200.000 / personalizadas
 2. Ingresa nombre + teléfono de quien recibe
-3. Paga (simulado: link a WhatsApp para coordinar pago)
-4. Magnolia recibe la orden y envía gift card por WhatsApp/email
+3. Paga (simulado: link a Messaging para coordinar pago)
+4. Magnolia recibe la orden y envía gift card por Messaging/email
 
 Implementación inicial simple:
-- Form → guarda en Supabase → WhatsApp a Magnolia
-- Magnolia genera la gift card manually en WhatsApp
+- Form → guarda en Supabase → Messaging a Magnolia
+- Magnolia genera la gift card manually en Messaging
 - Costo: $0
 
 Expandir a pago real con Nequi/yape cuando el volumen lo justifique.
@@ -508,7 +508,7 @@ Expandir a pago real con Nequi/yape cuando el volumen lo justifique.
 **Esfuerzo estimado: 25-40 horas**  
 **Costo: $0-30/mes**
 
-### Ticket F5.1: Chatbot WhatsApp CRM Completo (20h)
+### Ticket F5.1: Chatbot Messaging CRM Completo (20h)
 **Herramienta:** AgentCall (número existente de Magnolia)
 
 Conversational flow:
@@ -578,7 +578,7 @@ Visualización: gráficos simples con Recharts o similar.
 
 ### Deliverables F5:
 ```
-[ ] Chatbot WhatsApp completo con booking, puntos, recordatorios
+[ ] Chatbot Messaging completo con booking, puntos, recordatorios
 [ ] Sistema de referidos funcionando
 [ ] Página Grupos / Fiestas de Amigas
 [ ] Staff scheduling basic
@@ -593,7 +593,7 @@ Visualización: gráficos simples con Recharts o similar.
 |---|---|---|---|
 | **F0** Foto Real | 0 | 2-4h fotos | Fotos reales del salón |
 | **F1** Quick Wins | 1-2 | 8-12h | Badge abierto, mapa real, CTA mobile, packages, testimonios corregidos |
-| **F2** Booking Online | 3-4 | 20-30h | Migración Vercel, Supabase, API routes, widget booking, WhatsApp auto |
+| **F2** Booking Online | 3-4 | 20-30h | Migración Vercel, Supabase, API routes, widget booking, Messaging auto |
 | **F3** CRM + Fidelización | 5-6 | 15-20h | Programa sellos, encuesta post-servicio, recordatorios, admin básico |
 | **F4** Contenido Real | 7-10 | 20-30h | Galería real, before/after, Nosotros real, videos, blog, gift cards |
 | **F5** Automation + Growth | Mes 3-4 | 25-40h | Chatbot CRM completo, referidos, grupos, staff, analytics |

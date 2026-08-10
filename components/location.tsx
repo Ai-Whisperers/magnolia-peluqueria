@@ -50,8 +50,8 @@ export function Location() {
                   <Phone className="w-5 h-5 text-secondary" />
                 </div>
                 <div>
-                  <p className="font-semibold text-foreground mb-0.5">WhatsApp</p>
-                  <a href={`https://wa.me/${business.whatsapp}`} target="_blank" rel="noopener noreferrer"
+                  <p className="font-semibold text-foreground mb-0.5">Messaging</p>
+                  <a href={`tel:+${business.messaging}`} target="_blank" rel="noopener noreferrer"
                     className="text-secondary font-medium hover:underline text-sm">
                     {business.phoneFormatted}
                   </a>
@@ -64,7 +64,7 @@ export function Location() {
               <a href={waLink("Hola! Cómo llego a su local?")} target="_blank" rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 bg-secondary text-white px-8 py-4 rounded-xl font-bold hover:bg-secondary-dark transition-all">
                 <Navigation className="w-5 h-5" />
-                Cómo Llegar por WhatsApp
+                Cómo Llegar por Messaging
               </a>
               <a href={business.mapsUrl} target="_blank" rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 border-2 border-primary/20 text-primary px-8 py-4 rounded-xl font-semibold hover:bg-primary/5 transition-all">

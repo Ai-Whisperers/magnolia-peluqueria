@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { Header } from "@/components/header"
 import { Services } from "@/components/services"
 import { Footer } from "@/components/footer"
-import { WhatsAppFloat } from "@/components/whatsapp-float"
+import { MessagingFloat } from "@/components/messaging-float"
 import { Breadcrumb } from "@/components/breadcrumb"
 import { getContent, formatHours } from "@/lib/config"
 
@@ -35,10 +35,10 @@ export default async function ServiciosPage({ params }: { params: Promise<{ lang
         address={c.business.address}
         phone={c.business.phoneFormatted}
         hours={formatHours(c.business.hours)}
-        waPhone={c.business.whatsapp}
+        waPhone={c.business.messaging}
         lang={lang as "es" | "en"}
       />
-      <WhatsAppFloat lang={lang as "es" | "en"} />
+      <MessagingFloat lang={lang as "es" | "en"} />
     </>
   )
 }

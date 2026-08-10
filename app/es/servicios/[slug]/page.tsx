@@ -4,7 +4,7 @@ import Link from "next/link"
 import { Clock, ArrowLeft, MessageCircle } from "lucide-react"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
-import { WhatsAppFloat } from "@/components/whatsapp-float"
+import { MessagingFloat } from "@/components/messaging-float"
 import { Breadcrumb } from "@/components/breadcrumb"
 import { services, waLinkForService, formatHours } from "@/lib/config"
 import type { Lang } from "@/lib/config"
@@ -65,7 +65,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
       ? `Hola! Quiero reservarme un turno para: ${svc.name}`
       : `Hi! I want to book an appointment for: ${svc.name}`
   )
-  const waHref = `https://wa.me/${c.business.whatsapp}?text=${waMsg}`
+  const waHref = `tel:+${c.business.messaging}?text=${waMsg}`
 
   return (
     <>
@@ -137,8 +137,8 @@ export default async function ServiceDetailPage({ params }: PageProps) {
             </h2>
             <p className="text-foreground-light text-sm mb-5">
               {isEs
-                ? "Reservá tu turno por WhatsApp y te confirmamos en minutos."
-                : "Book your appointment via WhatsApp and we'll confirm in minutes."}
+                ? "Reservá tu turno por Messaging y te confirmamos en minutos."
+                : "Book your appointment via Messaging and we'll confirm in minutes."}
             </p>
             <a
               href={waHref}
@@ -147,7 +147,7 @@ export default async function ServiceDetailPage({ params }: PageProps) {
               className="inline-flex items-center gap-3 bg-[#25D366] text-white font-bold px-8 py-4 rounded-xl hover:bg-[#20BD5A] transition-all text-lg w-full justify-center"
             >
               <MessageCircle className="w-6 h-6" />
-              {isEs ? "Reservar por WhatsApp" : "Book via WhatsApp"}
+              {isEs ? "Reservar por Messaging" : "Book via Messaging"}
             </a>
           </div>
 
@@ -170,10 +170,10 @@ export default async function ServiceDetailPage({ params }: PageProps) {
         address={c.business.address}
         phone={c.business.phoneFormatted}
         hours={formatHours(c.business.hours)}
-        waPhone={c.business.whatsapp}
+        waPhone={c.business.messaging}
         lang={lang as Lang}
       />
-      <WhatsAppFloat lang={lang as Lang} />
+      <MessagingFloat lang={lang as Lang} />
     </>
   )
 }

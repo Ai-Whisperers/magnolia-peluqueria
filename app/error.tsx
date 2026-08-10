@@ -1,7 +1,7 @@
 "use client"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
-import { WhatsAppFloat } from "@/components/whatsapp-float"
+import { MessagingFloat } from "@/components/messaging-float"
 
 export default function Error({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) {
   return (
@@ -17,7 +17,7 @@ export default function Error({ error, reset }: { error: Error & { digest?: stri
         </div>
       </main>
       <Footer />
-      <WhatsAppFloat />
+      <MessagingFloat />
     </>
   )
 }

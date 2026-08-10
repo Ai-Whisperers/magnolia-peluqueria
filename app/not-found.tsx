@@ -1,6 +1,6 @@
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
-import { WhatsAppFloat } from "@/components/whatsapp-float"
+import { MessagingFloat } from "@/components/messaging-float"
 import Link from "next/link"
 import { business, waLink, formatHours } from "@/lib/config"
 
@@ -26,9 +26,9 @@ export default function NotFound() {
         address={business.address}
         phone={business.phoneFormatted}
         hours={formatHours(business.hours)}
-        waPhone={business.whatsapp}
+        waPhone={business.messaging}
       />
-      <WhatsAppFloat />
+      <MessagingFloat />
     </>
   )
 }

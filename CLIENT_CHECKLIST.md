@@ -4,7 +4,7 @@
 
 | Feature | Status | Listo para producción |
 |---------|--------|----------------------|
-| Booking form + WhatsApp | ✅ Listo | ✅ |
+| Booking form + Messaging | ✅ Listo | ✅ |
 | Gift card system | 🔄 Pendiente (requiere Stripe) | ❌ |
 | Blog con posts reales | 🔄 Pendiente (requiere contenido) | ⚠️ |
 | Instagram feed real | 🔄 Pendiente (requiere Meta token) | ❌ |
@@ -12,9 +12,9 @@
 
 ---
 
-## 1. Booking + WhatsApp — ✅ PRODUCCIÓN LISTO
+## 1. Booking + Messaging — ✅ PRODUCCIÓN LISTO
 
-**Ya funciona end-to-end.** El formulario en `/es/booking` captura datos, los guarda en Supabase (si está configurado), y abre WhatsApp con el mensaje pre-llenado incluyendo el servicio seleccionado.
+**Ya funciona end-to-end.** El formulario en `/es/booking` captura datos, los guarda en Supabase (si está configurado), y abre Messaging con el mensaje pre-llenado incluyendo el servicio seleccionado.
 
 No necesita nada del cliente. Listo para desplegar.
 
@@ -47,14 +47,14 @@ STRIPE_SECRET_KEY=sk_live_...
 NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_live_...
 ```
 
-⚠️ **IMPORTANTE**: La SECRET KEY es sensible — compartir por privado (DM de WhatsApp, no por email público).
+⚠️ **IMPORTANTE**: La SECRET KEY es sensible — compartir por privado (DM de Messaging, no por email público).
 
 **3. Webhook para confirmar pago**
 
 Cuando alguien paga una gift card, Stripe envía un evento. Necesitamos configurar un webhook para:
 - Escuchar `payment_intent.succeeded`
 - Generar el código de la gift card
-- Enviarlo por WhatsApp al comprador
+- Enviarlo por Messaging al comprador
 
 Para configurar el webhook en Stripe:
 1. **Developers → Webhooks → Add endpoint**
@@ -80,7 +80,7 @@ Cada post necesita:
 - Título (ej: "5 errores que dañan tu cabello después de la keratina")
 - Slug (URL friendly, ej: "errores-cabello-keratina")
 - Excerpt (2-3 líneas de resumen)
-- Imagen principal (URL pública o enviar por WhatsApp y la subo yo)
+- Imagen principal (URL pública o enviar por Messaging y la subo yo)
 - Contenido (puede ser en Word/Google Docs — yo lo paso a markdown)
 - Categoría: "Cuidado capilar" | "Tendencias" | "Tips" | "Tratamientos"
 - Autor: "Lidia González" (o el nombre que prefiera)
@@ -88,7 +88,7 @@ Cada post necesita:
 ```
 
 ### Formato del contenido
-Puede enviar por WhatsApp:
+Puede enviar por Messaging:
 - Texto en Word o Google Docs
 - O escribirme directamente y lo armo
 
@@ -132,13 +132,13 @@ Si Lidia tiene acceso al Instagram business/creator, puede compartir las credenc
 - Datos en `content/es.json` con los 4 niveles de reward
 
 **Lo que falta para que funcione de verdad:**
-- Identificar clientas por WhatsApp para trackear visitas
+- Identificar clientas por Messaging para trackear visitas
 - Conectar con Supabase para guardar historial de reservas
 - Asignar descuentos o recompensas cuando alcanzan un nivel
 
 ### Para activar tracking real de clientas
 
-Opción simple: guardar el historial de reservas en Supabase y compararlo con el número de WhatsApp para mostrar los rewards en el próximo booking.
+Opción simple: guardar el historial de reservas en Supabase y compararlo con el número de Messaging para mostrar los rewards en el próximo booking.
 
 **Lo que necesito del cliente:**
 - Acceso al proyecto de Supabase si ya tienen uno creado
@@ -151,8 +151,8 @@ Opción simple: guardar el historial de reservas en Supabase y compararlo con el
 | # | Item | Prioridad | Formato |
 |---|------|----------|---------|
 | 1 | Posts de blog (mínimo 3) | Alta | Word/Docs/mensaje |
-| 2 | Stripe API keys + webhook | Media | Privado por WhatsApp |
-| 3 | Instagram Account ID + Access Token | Media | Privado por WhatsApp |
+| 2 | Stripe API keys + webhook | Media | Privado por Messaging |
+| 3 | Instagram Account ID + Access Token | Media | Privado por Messaging |
 | 4 | Accesso a Supabase (si tiene) | Baja | Credenciales |
 
 ---
@@ -164,7 +164,7 @@ Opción simple: guardar el historial de reservas en Supabase y compararlo con el
 3. **Configurar el webhook de Stripe** una vez tenga las keys
 4. **Mejorar SEO local** — más keywords Paraguay, structured data por servicio
 5. **Google Business Profile** — crear o reclamar el perfil de Google Maps
-6. **WhatsApp Business** oficial — migrar el número actual a WhatsApp Business para métricas
+6. **Messaging Business** oficial — migrar el número actual a Messaging Business para métricas
 
 ---
 

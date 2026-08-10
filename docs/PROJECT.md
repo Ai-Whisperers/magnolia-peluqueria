@@ -40,7 +40,7 @@ Magnolia Peluquería es un salón de belleza profesional en Asunción. El sitio 
 | Nombre | Magnolia Peluquería |
 | Tagline | Tu Mejor Look en Asunción |
 | Teléfono | 0981 106 062 |
-| WhatsApp | +595 986 106 062 |
+| Messaging | +595 986 106 062 |
 | Horario | Martes–Sábado 9:00–19:00 |
 | Ubicación | Zona céntrica, Asunción, Paraguay |
 | Instagram | @magnolia_peluqueria |
@@ -99,7 +99,7 @@ magnolia-peluqueria/
 │   ├── team-section.tsx     # Team profiles
 │   ├── before-after.tsx     # Before/After gallery
 │   ├── why-us.tsx           # Trust indicators
-│   ├── whatsapp-float.tsx   # Floating WhatsApp CTA
+│   ├── messaging-float.tsx   # Floating Messaging CTA
 │   ├── instagram-feed.tsx   # Instagram link
 │   ├── location.tsx         # Maps embed
 │   ├── footer.tsx           # Footer
@@ -134,7 +134,7 @@ magnolia-peluqueria/
 | team-section.tsx | ~80 | ⚠️ Placeholder | Alta |
 | before-after.tsx | ~80 | ⚠️ Placeholder | Media |
 | why-us.tsx | ~60 | ⚠️ Duplicate data | Baja |
-| whatsapp-float.tsx | 15 | ✅ Production | — |
+| messaging-float.tsx | 15 | ✅ Production | — |
 | instagram-feed.tsx | ~50 | ⚠️ Link only | Baja |
 | location.tsx | ~50 | ✅ Production | — |
 | footer.tsx | ~100 | ✅ Production | — |
@@ -219,11 +219,11 @@ See `deploy.sh` and `docker-compose.yml` for details.
 | 1 | Testimonials are placeholder (no real client names) | Alta | Pending |
 | 2 | No real photos — all Unsplash placeholders | Alta | Pending photos from client |
 | 3 | Team section placeholder | Alta | Pending |
-| 4 | No online booking — WhatsApp only | Media | Phase 2 |
+| 4 | No online booking — Messaging only | Media | Phase 2 |
 | 5 | Admin panel empty | Alta | Phase 3 |
 | 6 | No i18n | Media | Phase 4 |
 | 7 | No blog | Baja | Phase 4 |
-| 8 | Promociones not connected to WhatsApp dynamic | Baja | Phase 4 |
+| 8 | Promociones not connected to Messaging dynamic | Baja | Phase 4 |
 | 9 | No analytics beyond Vercel | Baja | Phase 1 |
 
 ---
@@ -237,7 +237,7 @@ See `deploy.sh` and `docker-compose.yml` for details.
 - `LEAD-AUDIT.md` — Lead quality audit (score 47/100)
 - `IMAGE-GENERATION-MANIFEST.md` — AI image generation plan
 - `README.md` — Next.js default readme (replace)
-- `docs/whatsapp-ai-integration.md` — WhatsApp AI agent integration docs
+- `docs/messaging-ai-integration.md` — Messaging AI agent integration docs
 
 ---
 

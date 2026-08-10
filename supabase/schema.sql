@@ -115,7 +115,7 @@ CREATE POLICY "Allow write for service role" ON public.site_content
 
 -- Seed key business info
 INSERT INTO public.site_content (key, value) VALUES
-  ('business', '{"phone":"+595 986 106 062","whatsapp":"595986106062","address":"Asunción, Paraguay","hours":"Mar-Sáb: 9:00 - 19:00","instagram":"magnolia_peluqueria"}'),
+  ('business', '{"phone":"+595 986 106 062","messaging":"595986106062","address":"Asunción, Paraguay","hours":"Mar-Sáb: 9:00 - 19:00","instagram":"magnolia_peluqueria"}'),
   ('cta_message', '{"default":"Hola! Quiero reservarme un turno 🪄"}')
 ON CONFLICT (key) DO NOTHING;
 
