@@ -22,7 +22,7 @@
 
 ### CROSS-CUTTING THEME
 Every world-class salon in First World countries (UK, USA) has:
-1. **Online booking system** (not just WhatsApp)
+1. **Online booking system** (not just Messaging)
 2. **Video content** (hero video or team intro)
 3. **Own product line** or recommended products shop
 4. **Blog/editorial content** (SEO + engagement)
@@ -50,7 +50,7 @@ Every world-class salon in First World countries (UK, USA) has:
 **STRENGTHS:**
 - Clean fade transition with transition state flag (prevents race conditions)
 - Proper `useEffect` cleanup (`clearInterval`)
-- Dual CTA: WhatsApp booking + anchor to services
+- Dual CTA: Messaging booking + anchor to services
 - Stats bar always visible for social proof
 - Scroll indicator adds polish
 - Mobile gracefully hides arrows
@@ -132,14 +132,14 @@ DIM Salon auto-syncs Google Reviews live via API.
 **WHAT IT DOES:**
 - 4 category tabs: Cortes / Coloración / Tratamientos / Peinados
 - Accordion-style expandable service list per category
-- Each service: name, description, duration, price in Gs., WhatsApp booking link
+- Each service: name, description, duration, price in Gs., Messaging booking link
 - "popular" badge with pulse animation on items marked popular
 
 **VERDICT: 8/10 — STRONG CONTENT ARCHITECTURE.**
 
 **STRENGTHS:**
 - Clean accordion UX — category tabs + expandable items
-- Individual WhatsApp booking per service using `waLinkForService()`
+- Individual Messaging booking per service using `waLinkForService()`
 - "popular" badges actually visible
 - Duration info shown
 - Prices are clear and prominent
@@ -148,8 +148,8 @@ DIM Salon auto-syncs Google Reviews live via API.
 
 **GAP 1 — NO ONLINE BOOKING WIDGET**
 - Every world-class salon has embedded online booking (DIM uses their own widget, Trevor Sorbie uses Classpass/external)
-- WhatsApp is great for LATAM market but a widget that pre-fills the service would convert more
-- **Recommendation:** Add a simple booking widget (Calendly embed or custom) alongside WhatsApp
+- Messaging is great for LATAM market but a widget that pre-fills the service would convert more
+- **Recommendation:** Add a simple booking widget (Calendly embed or custom) alongside Messaging
 
 **GAP 2 — NO SERVICE DESCRIPTIONS FOR SEO**
 - Rich service descriptions are invisible to Google (client-side only)
@@ -324,11 +324,11 @@ const stats: StatItem[] = [
 - This describes a loyalty program but there's no way to track it
 - What's the "account"? How do clientas track their progress?
 - **Reality:** This is a marketing concept butMagnolia has no backend to track visits
-- **Fix options:** (A) Simple WhatsApp-based tracking — clientas DM "Mi código: XXXX" and Magnolia tracks in a spreadsheet. (B) Airtable base. (C) Full digital loyalty card (more complex)
+- **Fix options:** (A) Simple Messaging-based tracking — clientas DM "Mi código: XXXX" and Magnolia tracks in a spreadsheet. (B) Airtable base. (C) Full digital loyalty card (more complex)
 
 **GAP 2 — NO LOYALTY CARD PRINTABLE/SAVEABLE**
 - World-class: printable loyalty card or QR code for digital card
-- **Fix:** Add a downloadable loyalty card or WhatsApp auto-reply that sends a loyalty card image
+- **Fix:** Add a downloadable loyalty card or Messaging auto-reply that sends a loyalty card image
 
 **GAP 3 — NO "HOW IT WORKS" EXPANDED CONTENT**
 - "Sin tarjetas. Sin complicated paperwork." — the "complicated" typo is there too
@@ -339,7 +339,7 @@ const stats: StatItem[] = [
 ```
 [ ] Fix typo: "complicated" → "trámites complicados"
 [ ] Add collapsible "Cómo funciona" FAQ for the loyalty program
-[ ] Create a simple WhatsApp-based tracking system description
+[ ] Create a simple Messaging-based tracking system description
 [ ] Add " Descargá tu tarjeta de fidelización" secondary CTA
 ```
 
@@ -363,7 +363,7 @@ const stats: StatItem[] = [
 
 **ISSUE 2 — NO BOOKING-BASED TEAM ROUTING**
 - World-class: click on a team member → see their schedule → book directly with them
-- **Fix:** Add team member WhatsApp or booking that pre-selects that stylist
+- **Fix:** Add team member Messaging or booking that pre-selects that stylist
 
 **ISSUE 3 — NO SOCIAL PROOF PER STYLIST**
 - Each stylist should have their own Google rating / review count
@@ -389,7 +389,7 @@ const stats: StatItem[] = [
 
 **WHAT IT DOES:**
 - 4 gift card tiers: Momentito (Gs. 50k), Día de Princesa (Gs. 150k), Pack Novia (Gs. 300k),时报 (typo — "时报" looks corrupted)
-- Price + description + WhatsApp purchase CTA
+- Price + description + Messaging purchase CTA
 
 **VERDICT: 6/10 — GOOD CONCEPT, CRITICAL BUG.**
 
@@ -402,14 +402,14 @@ const stats: StatItem[] = [
 ```
 
 **GAP 2 — NO PAYMENT INTEGRATION**
-- Asking clientas to WhatsApp to buy a gift card is friction-heavy
+- Asking clientas to Messaging to buy a gift card is friction-heavy
 - World-class: buy gift card directly on site (Stripe payment link or QR code)
-- **Fix:** Add a Stripe payment link per tier OR a WhatsApp auto-purchase flow with payment instructions
+- **Fix:** Add a Stripe payment link per tier OR a Messaging auto-purchase flow with payment instructions
 
 **GAP 3 — NO PRINTABLE GIFT CARD**
 - For a gift, the experience of receiving matters
-- A printable PDF gift card or WhatsApp image attachment would massively increase perceived value
-- **Fix:** Create a branded gift card image sent automatically via WhatsApp
+- A printable PDF gift card or Messaging image attachment would massively increase perceived value
+- **Fix:** Create a branded gift card image sent automatically via Messaging
 
 **GAP 4 — NO EXPIRY/TERMS**
 - No mention of gift card expiry date
@@ -419,7 +419,7 @@ const stats: StatItem[] = [
 **QUICK WINS:**
 ```
 [ ] Fix "时报 Magnolia" → "Momento Magnolia" (or proper Spanish name)
-[ ] Add WhatsApp flow that sends a branded gift card image
+[ ] Add Messaging flow that sends a branded gift card image
 [ ] Add expiry info: "Válido por 6 meses"
 [ ] Consider: add a custom amount option ("Monto personalizado")
 ```
@@ -431,7 +431,7 @@ const stats: StatItem[] = [
 **WHAT IT DOES:**
 - 3 promotions: First-time 20% off, Keratina+Corte combo, Referidos program
 - Expiry countdown badge ("Vence pronto")
-- CTA to WhatsApp
+- CTA to Messaging
 
 **VERDICT: 7/10 — GOOD STRUCTURE, MISSING COUNTDOWN.**
 
@@ -449,14 +449,14 @@ const stats: StatItem[] = [
 
 **GAP 3 — "PROGRAM DE REFERIDOS" IS VAGUE**
 - How does it work exactly? "Referí una amiga y ambas reciben 10%"
-- How does Magnolia track who referred whom via WhatsApp?
-- **Fix:** Create a simple referral code system (even WhatsApp-based)
+- How does Magnolia track who referred whom via Messaging?
+- **Fix:** Create a simple referral code system (even Messaging-based)
 
 **QUICK WINS:**
 ```
 [ ] Add live countdown timer to each promotion
 [ ] Add actual coupon codes with terms
-[ ] Create WhatsApp auto-reply flow for referral codes
+[ ] Create Messaging auto-reply flow for referral codes
 [ ] Add promo to hero slide rotation for visibility
 ```
 
@@ -466,8 +466,8 @@ const stats: StatItem[] = [
 
 **WHAT IT DOES:**
 - 2-column layout: left = contact info, right = Google Maps embed
-- Address, hours, WhatsApp contact
-- "Cómo llegar por WhatsApp" + "Abrir en Google Maps" CTAs
+- Address, hours, Messaging contact
+- "Cómo llegar por Messaging" + "Abrir en Google Maps" CTAs
 - Floating address card overlay on map
 
 **VERDICT: 8/10 — SOLID.**
@@ -508,16 +508,16 @@ const stats: StatItem[] = [
 
 **CRITICAL ISSUE — "RESERVAR" HIDDEN IN HAMBURGER MENU ON MOBILE**
 ```tsx
-// Mobile menu hides the WhatsApp CTA inside the hamburger:
+// Mobile menu hides the Messaging CTA inside the hamburger:
 <div className="pt-4 border-t border-gray-100 mt-2">
   <a href={waLink(...)} className="flex items-center justify-center gap-2 ...">
-    Reservar por WhatsApp
+    Reservar por Messaging
   </a>
 </div>
 ```
-- User must open hamburger → scroll down → find "Reservar por WhatsApp"
+- User must open hamburger → scroll down → find "Reservar por Messaging"
 - **CRITICAL CONVERSION KILLER:** Mobile users who want to book must complete 3 steps instead of 1
-- **Fix:** Add a sticky WhatsApp floating button for mobile OR make "Reservar" visible directly in mobile header
+- **Fix:** Add a sticky Messaging floating button for mobile OR make "Reservar" visible directly in mobile header
 
 **WORLD-CLASS GAP:**
 - No announcement banner for active promotions (e.g., "🎉 20% off primera visita —úsalo aquí")
@@ -535,8 +535,8 @@ const stats: StatItem[] = [
 **GAP 1 — NO NEWSLETTER INTEGRATION**
 - Every world-class salon has newsletter capture
 - Email marketing = repeat client revenue
-- **Fix:** Connect to a simple email list (ConvertKit, Mailchimp, or even a WhatsApp broadcast list)
-- **Quick win:** Use WhatsApp broadcast list as the "newsletter" equivalent
+- **Fix:** Connect to a simple email list (ConvertKit, Mailchimp, or even a Messaging broadcast list)
+- **Quick win:** Use Messaging broadcast list as the "newsletter" equivalent
 
 **GAP 2 — NO "ABOUT OUR STORY" LINK**
 - World-class: origin story page (not just /nosotros)
@@ -550,7 +550,7 @@ const stats: StatItem[] = [
 
 **QUICK WINS:**
 ```
-[ ] Add WhatsApp newsletter capture ("Sumate a novedades por WhatsApp")
+[ ] Add Messaging newsletter capture ("Sumate a novedades por Messaging")
 [ ] Add origin story section to /nosotros
 [ ] Verify all footer links have working destinations
 [ ] Add "Términos y Condiciones" link
@@ -585,7 +585,7 @@ const stats: StatItem[] = [
 
 ---
 
-### 15. WHATSAPP FLOAT (`whatsapp-float.tsx`) — 13 lines
+### 15. MESSAGING FLOAT (`messaging-float.tsx`) — 13 lines
 
 **VERDICT: 8/10 — ESSENTIAL AND WORKING.**
 
@@ -594,15 +594,15 @@ const stats: StatItem[] = [
 **GAP 1 — NO "QUICK REPLY" PRESET MESSAGES**
 - World-class (Orb XI): floating button opens a menu with preset options
 - E.g., "¿Reservar?" / "¿Ver precios?" / "¿Dónde están?"
-- **Fix:** On click, open WhatsApp with pre-filled multi-choice message
+- **Fix:** On click, open Messaging with pre-filled multi-choice message
 
 **GAP 2 — NO ONLINE STATUS (OPEN/CLOSED)**
-- WhatsApp button doesn't show if the salon is currently open
+- Messaging button doesn't show if the salon is currently open
 - World-class: green dot when open, message "Abierto ahora" or "Cerrado — abrinos un mensaje"
 - **Fix:** Add open/closed status based on business hours
 
 **GAP 3 — NO MOBILE APP DEEP LINK**
-- On mobile: use `whatsapp://send?phone=` for native WhatsApp app
+- On mobile: use `messaging://send?phone=` for native Messaging app
 - Current link opens wa.me web on mobile (less ideal)
 - **Fix:** Use `wa.me` but add `intent://` fallback for Android
 
@@ -636,7 +636,7 @@ const stats: StatItem[] = [
 | Gap | Impact | Effort | Priority |
 |-----|--------|--------|----------|
 | Real testimonials (not fake) | LEGAL RISK | Medium | 🔴 CRITICAL |
-| WhatsApp booking only (no widget) | Revenue leak | Medium | 🔴 HIGH |
+| Messaging booking only (no widget) | Revenue leak | Medium | 🔴 HIGH |
 | Stock photos everywhere | Credibility | Medium | 🔴 HIGH |
 | Gift card "时报" typo | Brand damage | Low | 🟡 MEDIUM |
 | Promo countdown timers missing | Urgency loss | Low | 🟡 MEDIUM |
@@ -666,7 +666,7 @@ const stats: StatItem[] = [
 |---|---|---|---|
 | Online booking widget | 0% (WA only) | +15-20% more bookings | No widget |
 | Loyalty program | Concept only | +25% repeat client rate | No tracking |
-| Gift cards | WhatsApp-only sale | +40% gift purchases | No payment link |
+| Gift cards | Messaging-only sale | +40% gift purchases | No payment link |
 | Package deals (combos) | Only 1 promo | +30% avg transaction value | No combo builder |
 | Referral program | Concept only | +20% new client acquisition | No referral tracking |
 | Product sales | 0 (no shop) | +15% revenue | No e-commerce |
@@ -690,9 +690,9 @@ For comparison, LATAM salon websites (Paraguay, Argentina, Chile, Brazil):
 | **E出示 Salon** | estilokey.com (Argentina) | Online booking, packages, before/after gallery |
 | **Lolla Salon** | sillla.com (Brazil) | Video banner, booking widget, loyalty cards, product shop |
 | **Passarel-la** | passarela.com (Brazil) | Full e-commerce, booking, Instagram feed |
-| **Bierre Pelu** | bielle.com (Chile) | Clean site, WhatsApp CTA, services with pricing |
+| **Bierre Pelu** | bielle.com (Chile) | Clean site, Messaging CTA, services with pricing |
 
-**Key LATAM insight:** WhatsApp booking is the standard in Paraguay/Argentina/Brazil. The gap isn't "online vs WhatsApp" — it's how sophisticated the WhatsApp flow is (preset messages, quick replies, CRM integration). Focus on making the WhatsApp flow world-class, THEN add widget.
+**Key LATAM insight:** Messaging booking is the standard in Paraguay/Argentina/Brazil. The gap isn't "online vs Messaging" — it's how sophisticated the Messaging flow is (preset messages, quick replies, CRM integration). Focus on making the Messaging flow world-class, THEN add widget.
 
 ---
 
@@ -718,12 +718,12 @@ Low Effort   → Fix "时报" typo         Announcement banner
 3. Add live Google rating + review count to AnimatedStats + footer
 
 **3 GROWTH ITEMS (2-4 weeks each):**
-4. Online booking widget (Calendly + WhatsApp dual-flow)
+4. Online booking widget (Calendly + Messaging dual-flow)
 5. Before/after video content + proper real photography
 6. Gift card payment links (Stripe or payment note flow)
 
 **3 REVENUE ITEMS (4-8 weeks each):**
-7. Loyalty tracking system (WhatsApp-based, Airtable backend)
+7. Loyalty tracking system (Messaging-based, Airtable backend)
 8. Referral code system with auto-reply flows
 9. Service packages/combo builder page
 

@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
-import { WhatsAppFloat } from "@/components/whatsapp-float"
+import { MessagingFloat } from "@/components/messaging-float"
 import { Breadcrumb } from "@/components/breadcrumb"
 import { getContent, formatHours } from "@/lib/config"
 
@@ -16,7 +16,7 @@ Al utilizar nuestros servicios, aceptás estos términos y condiciones en su tot
 Magnolia Peluquería ofrece servicios de peluquería, coloración, tratamientos capilares, peinados y servicios relacionados. Los precios y disponibilidad pueden cambiar sin previo aviso.
 
 ### 3. RESERVAS
-- Las reservas pueden realizarse vía WhatsApp o a través de nuestro formulario en línea.
+- Las reservas pueden realizarse vía Messaging o a través de nuestro formulario en línea.
 - Las reservas quedan confirmadas al recibir respuesta afirmativa por parte del salón.
 - Cancelaciones deben comunicarse con al menos 2 horas de anticipación.
 
@@ -60,7 +60,7 @@ By using our services, you accept these terms and conditions in full. If you do 
 Magnolia Peluquería offers hairdressing, coloring, hair treatments, styling, and related services. Prices and availability may change without prior notice.
 
 ### 3. BOOKINGS
-- Bookings may be made via WhatsApp or through our online form.
+- Bookings may be made via Messaging or through our online form.
 - Bookings are confirmed upon receiving an affirmative response from the salon.
 - Cancellations must be communicated at least 2 hours in advance.
 
@@ -133,8 +133,8 @@ export default async function TerminosPage({ params }: { params: Promise<{ lang:
           />
         </div>
       </div>
-      <Footer businessName={c.business.name} tagline={c.business.tagline} address={c.business.address} phone={c.business.phoneFormatted} hours={formatHours(c.business.hours)} waPhone={c.business.whatsapp} lang={lang as "es" | "en"} />
-      <WhatsAppFloat lang={lang as "es" | "en"} />
+      <Footer businessName={c.business.name} tagline={c.business.tagline} address={c.business.address} phone={c.business.phoneFormatted} hours={formatHours(c.business.hours)} waPhone={c.business.messaging} lang={lang as "es" | "en"} />
+      <MessagingFloat lang={lang as "es" | "en"} />
     </>
   )
 }

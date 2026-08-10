@@ -75,7 +75,7 @@ function GiftCard({ card, index }: { card: (typeof giftCards)[number]; index: nu
             className="mt-2 w-full inline-flex items-center justify-center gap-2 bg-surface-muted text-foreground-muted font-semibold py-2.5 rounded-xl hover:bg-gray-200 transition-all text-sm"
           >
             <Gift className="w-4 h-4" />
-            Pagar por WhatsApp
+            Pagar por Messaging
           </a>
         </div>
       </div>
@@ -108,7 +108,7 @@ export function GiftCardsSection() {
               rel="noopener noreferrer"
               className="text-secondary font-semibold hover:underline"
             >
-              Escríbenos por WhatsApp
+              Escríbenos por Messaging
             </a>
           </p>
         </div>

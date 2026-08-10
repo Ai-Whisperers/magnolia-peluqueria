@@ -111,12 +111,12 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               <p className="text-sm text-foreground-muted mb-3">{labels.share}</p>
               <div className="flex gap-3">
                 <a
-                  href={`https://wa.me/?text=${encodeURIComponent(post.title + " — magnolia-peluqueria.paragu-ai.com/es/blog/" + post.slug)}`}
+                  href={`tel:+?text=${encodeURIComponent(post.title + " — magnolia-peluqueria.paragu-ai.com/es/blog/" + post.slug)}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 bg-[#25D366] text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-[#20BD5A] transition-colors"
                 >
-                  <ExternalLink className="w-4 h-4" /> WhatsApp
+                  <ExternalLink className="w-4 h-4" /> Messaging
                 </a>
                 <CopyLinkButton url={`https://magnolia-peluqueria.paragu-ai.com/es/blog/${post.slug}`} label={labels.copyLink} />
               </div>
@@ -150,7 +150,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                   Reservá tu turno en Magnolia
                 </h3>
                 <p className="text-foreground-light text-sm mb-6 max-w-md mx-auto">
-                  Completá el formulario y te confirmamos por WhatsApp en minutos.
+                  Completá el formulario y te confirmamos por Messaging en minutos.
                 </p>
                 <a
                   href="/es/booking"

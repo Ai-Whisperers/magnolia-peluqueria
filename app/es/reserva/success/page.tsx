@@ -96,10 +96,10 @@ export default function ReservationSuccessPage({ params, searchParams }: Success
           </div>
         </div>
 
-        {/* WhatsApp confirmation */}
+        {/* Messaging confirmation */}
         <div className="text-center space-y-3">
           <a
-            href={`https://wa.me/${"595986106062"}?text=${encodeURIComponent(`¡Hola! ${
+            href={`tel:+${"595986106062"}?text=${encodeURIComponent(`¡Hola! ${
               isBooking ? `Soy ${name || "cliente"}. Confirmo mi turno en Magnolia.` :
               isGiftCard ? "Confirmo mi tarjeta de regalo Magnolia." :
               "Quiero confirmar mi turno en Magnolia."
@@ -109,7 +109,7 @@ export default function ReservationSuccessPage({ params, searchParams }: Success
             className="inline-flex items-center gap-2 bg-[#25D366] text-white font-bold px-8 py-4 rounded-xl hover:bg-[#20BD5A] transition-all"
           >
             <Gift className="w-5 h-5" />
-            Confirmar por WhatsApp
+            Confirmar por Messaging
           </a>
           <Link href={`/${lang}`} className="block text-sm text-foreground-muted hover:text-secondary transition-colors">
             Volver al inicio

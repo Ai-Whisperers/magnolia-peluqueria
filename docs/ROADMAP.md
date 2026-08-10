@@ -30,8 +30,8 @@ Show real open/closed state. Live data from opening hours, not hardcoded.
 Replace broken `maps/google-maps.tsx` with working iframe embed in `location.tsx`.
 Coordinates: -25.2794, -57.6350 (Asunción centro).
 
-### P0-3: Contact form WhatsApp integration (30 min)
-Form currently sends email. Wire it to WhatsApp instead (or both).
+### P0-3: Contact form Messaging integration (30 min)
+Form currently sends email. Wire it to Messaging instead (or both).
 Template: "Hola Magnolia! Me llamo [NOMBRE] y quiero reservar [SERVICIO] para [FECHA]."
 
 ### P0-4: Favicon update (10 min)
@@ -54,9 +54,9 @@ Wire `instagram-feed.tsx` to actual Instagram profile @magnolia_peluqueria.
 > **Effort:** 2 weeks | **Score delta:** +1.5 (7.0 → 8.5) | **Owner:** Erebus + Kiki
 
 ### Revenue levers
-1. **WhatsApp booking button** — primary CTA, every page
-2. **Dynamic promotion cards** → WhatsApp prefill
-3. **Gift card purchase** → WhatsApp inquiry flow
+1. **Messaging booking button** — primary CTA, every page
+2. **Dynamic promotion cards** → Messaging prefill
+3. **Gift card purchase** → Messaging inquiry flow
 4. **Service page** → "Reservar ahora" on each service
 
 ### P1-1: Supabase setup (Day 1, 1h)
@@ -67,30 +67,30 @@ Wire `instagram-feed.tsx` to actual Instagram profile @magnolia_peluqueria.
 
 ### P1-2: Booking flow (Days 1–5)
 - `/booking` page with service selector + date/time picker
-- Confirmation screen with WhatsApp follow-up
+- Confirmation screen with Messaging follow-up
 - Admin receives email + can view in CMS
 - **Key metric:** bookings/week
 
 ### P1-3: Promotions as conversion tools (Days 3–4)
 - Rewrite `promotions.tsx` to pull from Supabase
 - Each promo card has a "Reservar con este descuento" button
-- Pre-fills WhatsApp with: service name + discount code + expiry
+- Pre-fills Messaging with: service name + discount code + expiry
 - Promo codes stored in `promotions` table
 
 ### P1-4: Loyalty program (Days 4–5)
 - `loyalty.tsx` — explain the program
 - Card stamp system (physical cards, tracked manually for now)
-- "Ya tengo X sellos" WhatsApp message template
+- "Ya tengo X sellos" Messaging message template
 - Future: digitize with Supabase
 
 ### P1-5: Gift cards (Days 5–6)
 - `/gift-cards` page with denomination selector (Gs. 50k / 100k / 200k)
-- Inquiry via WhatsApp prefill
-- Kiki handles payment manually, sends code via WhatsApp
+- Inquiry via Messaging prefill
+- Kiki handles payment manually, sends code via Messaging
 - Future: Stripe/Pyvo integration
 
 ### P1-6: Abandoned booking detection (Days 6–7)
-- If user starts booking but doesn't submit → trigger WhatsApp follow-up after 30 min
+- If user starts booking but doesn't submit → trigger Messaging follow-up after 30 min
 - Implemented via Supabase Edge Function
 
 ---
@@ -114,7 +114,7 @@ Wire `instagram-feed.tsx` to actual Instagram profile @magnolia_peluqueria.
 
 ### P2-3: Email notifications (Day 5)
 - Booking confirmation to client (via Resend)
-- New booking alert to Magnolia (email + WhatsApp)
+- New booking alert to Magnolia (email + Messaging)
 - Reminder 24h before appointment
 
 ---
@@ -156,7 +156,7 @@ Wire `instagram-feed.tsx` to actual Instagram profile @magnolia_peluqueria.
 - Stripe for gift cards
 - Pyvo/Moova for booking deposits
 
-### F2: WhatsApp AI receptionist
+### F2: Messaging AI receptionist
 - AgentCall integration (num.Argentinas)
 - AI answers FAQs, takes bookings 24/7
 
@@ -175,7 +175,7 @@ Wire `instagram-feed.tsx` to actual Instagram profile @magnolia_peluqueria.
 ### Phase 0 — Quick Wins
 - [ ] P0-1: Open/closed badge (real hours)
 - [ ] P0-2: Google Maps embed
-- [ ] P0-3: Contact → WhatsApp
+- [ ] P0-3: Contact → Messaging
 - [ ] P0-4: Favicon
 - [ ] P0-5: Schema audit
 - [ ] P0-6: Meta tags all pages
@@ -184,7 +184,7 @@ Wire `instagram-feed.tsx` to actual Instagram profile @magnolia_peluqueria.
 ### Phase 1 — Revenue Engine
 - [ ] P1-1: Supabase setup
 - [ ] P1-2: Booking flow
-- [ ] P1-3: Promotions → WhatsApp
+- [ ] P1-3: Promotions → Messaging
 - [ ] P1-4: Loyalty program
 - [ ] P1-5: Gift cards
 - [ ] P1-6: Abandoned booking detection
@@ -208,7 +208,7 @@ Wire `instagram-feed.tsx` to actual Instagram profile @magnolia_peluqueria.
 | Metric | Baseline | Target (Month 1) |
 |--------|----------|------------------|
 | Bookings/week via website | 0 | 10 |
-| WhatsApp clicks/day | ~5 | 20 |
+| Messaging clicks/day | ~5 | 20 |
 | Gift cards sold/month | 0 | 5 |
 | Promo redemptions | 0 | 15 |
 | Loyalty signups | 0 | 20 |

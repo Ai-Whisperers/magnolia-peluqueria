@@ -13,7 +13,7 @@ export async function POST(request: Request) {
 
   const { phone } = await request.json()
   if (!phone || phone.replace(/\D/g, "").length < 8) {
-    return NextResponse.json({ error: "Ingresá un número de WhatsApp válido" }, { status: 400 })
+    return NextResponse.json({ error: "Ingresá un número de Messaging válido" }, { status: 400 })
   }
 
   const cleaned = phone.replace(/\D/g, "")
@@ -39,7 +39,7 @@ export async function POST(request: Request) {
   })
 
   const waMsg = encodeURIComponent(`Tu código de verificación Magnolia es: ${code}. Válido por 10 minutos.`)
-  const waUrl = `https://wa.me/${business.whatsapp}?text=${waMsg}`
+  const waUrl = `tel:+${business.messaging}?text=${waMsg}`
 
   return NextResponse.json({ ok: true, waUrl, phone: cleaned })
 }

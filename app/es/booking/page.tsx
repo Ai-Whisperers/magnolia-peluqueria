@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
-import { WhatsAppFloat } from "@/components/whatsapp-float"
+import { MessagingFloat } from "@/components/messaging-float"
 import { Breadcrumb } from "@/components/breadcrumb"
 import { BookingForm } from "@/components/booking-form"
 import { isSupabaseConfigured } from "@/lib/supabase"
@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   const c = getContent(lang as "es" | "en")
   return {
     title: `Reservar | ${c.business.name}`,
-    description: `Reservá tu turno en ${c.business.name} vía WhatsApp o completa el formulario.`,
+    description: `Reservá tu turno en ${c.business.name} vía Messaging o completa el formulario.`,
   }
 }
 
@@ -39,8 +39,8 @@ export default async function BookingPage({ params }: { params: Promise<{ lang: 
               </h1>
               <p className="text-foreground-light text-lg max-w-xl mx-auto">
                 {t.subtitle ?? (isEs
-                  ? "Completá el formulario y te confirmamos por WhatsApp en minutos"
-                  : "Fill out the form and we'll confirm via WhatsApp in minutes")}
+                  ? "Completá el formulario y te confirmamos por Messaging en minutos"
+                  : "Fill out the form and we'll confirm via Messaging in minutes")}
               </p>
             </section>
             <BookingForm lang={lang as "es" | "en"} supabaseConfigured={isSupabaseConfigured} />
@@ -53,10 +53,10 @@ export default async function BookingPage({ params }: { params: Promise<{ lang: 
         address={c.business.address}
         phone={c.business.phoneFormatted}
         hours={formatHours(c.business.hours)}
-        waPhone={c.business.whatsapp}
+        waPhone={c.business.messaging}
         lang={lang as "es" | "en"}
       />
-      <WhatsAppFloat lang={lang as "es" | "en"} />
+      <MessagingFloat lang={lang as "es" | "en"} />
     </>
   )
 }

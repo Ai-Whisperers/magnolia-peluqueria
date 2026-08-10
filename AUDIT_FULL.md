@@ -16,10 +16,10 @@
 | Team section | ✅ OK | 4 members with specialties |
 | Stats animated counters | ⚠️ SSR flicker | Fixed: starts at target value now |
 | FAQ accordion + JSON-LD | ✅ OK | Schema-ready |
-| Booking form (4-step, WhatsApp) | ✅ OK | Saves to Supabase if configured |
+| Booking form (4-step, Messaging) | ✅ OK | Saves to Supabase if configured |
 | Blog (3 posts, 2 locales) | ✅ OK | `/[lang]/blog` + `[slug]` pages exist |
 | Blog JSON-LD + sitemap | ✅ OK | Auto-discovers slugs from JSON |
-| Loyalty program section | ✅ OK | 4-step rewards, WhatsApp CTA |
+| Loyalty program section | ✅ OK | 4-step rewards, Messaging CTA |
 | Gift card cards (UI only) | ✅ OK | 4 tiers, `GiftCards` component |
 | Footer blog link | ✅ FIXED | Blog link added to footer nav |
 | SEO JSON-LD (LocalBusiness) | ✅ OK | Has AggregateRating + OfferCatalog prices now |
@@ -27,7 +27,7 @@
 | hreflang alternates | ✅ ADDED | es-PY + en-US in layout metadata |
 | Sitemap (static + blog) | ✅ FIXED | Now includes all blog slugs |
 | Instagram icon in header | ✅ OK | Links to `magnolia_peluqueria` |
-| WhatsApp floating button | ✅ OK | Across all pages |
+| Messaging floating button | ✅ OK | Across all pages |
 | Admin panel (bookings, promotions, content) | ✅ OK | Basic CRUD for content |
 
 ---
@@ -117,13 +117,13 @@ Current fallback: static gallery in content/site.json
 | Multi-locale SEO (hreflang, OG per page) | ✅ hreflang added this session |
 | Service detail pages with booking CTA | ✅ `[lang]/servicios/[slug]/page.tsx` exists |
 | Google Maps embed with custom styling | ✅ Maps URL in content/site.json |
-| WhatsApp pre-filled message per service | ✅ Configured in content/site.json |
+| Messaging pre-filled message per service | ✅ Configured in content/site.json |
 
 ### From Superspuma
 | Pattern | Status in Magnolia |
 |---|---|
 | Stripe gift card checkout (full) | ⚠️ Route exists, keys missing |
-| WhatsApp flow wired to booking (primary) | ✅ Done |
+| Messaging flow wired to booking (primary) | ✅ Done |
 | Loyalty program with Supabase tracking | ⚠️ UI exists, no tracking backend |
 | Blog post SEO (meta desc, OG image) | ⚠️ Basic only |
 | Promotions system in CMS | ✅ `/app/admin/promotions` exists |
@@ -146,7 +146,7 @@ Current fallback: static gallery in content/site.json
    - **Owner:** Ivan/Kiki — provide Stripe keys
    - **Effort:** 1h if keys ready, 3h if building webhook
 
-2. **WhatsApp flow as primary CTA** — Booking only works via WhatsApp message. If the WhatsApp link breaks or the message isn't compelling, zero conversions.
+2. **Messaging flow as primary CTA** — Booking only works via Messaging message. If the Messaging link breaks or the message isn't compelling, zero conversions.
    - **Fix:** A/B test message copy. Add "Quiero reservarme un turno" vs "Hola! Quiero reservar" vs a service-specific message.
    - **Owner:** Kiki — write better message variants
 
@@ -194,7 +194,7 @@ Current fallback: static gallery in content/site.json
 |---|---|---|
 | Booking form: date input has no `min` date enforced server-side | 🟡 MED | `min={new Date()}` in JSX is client-only |
 | Carousel: no pause button, auto-advances | 🟢 LOW | Add pause on hover + manual controls |
-| WhatsApp floating button: no aria-label | 🟢 LOW | Add `aria-label="Contactar por WhatsApp"` |
+| Messaging floating button: no aria-label | 🟢 LOW | Add `aria-label="Contactar por Messaging"` |
 | Mobile nav: no focus trap | 🟢 LOW | Hard to fix without refactor |
 
 ---
@@ -230,7 +230,7 @@ app/
 
 **Weaknesses:**
 - No email newsletter (Supabase or external)
-- Booking requires WhatsApp — no SMS fallback for international
+- Booking requires Messaging — no SMS fallback for international
 - No A/B testing capability
 - Admin panel unprotected
 
@@ -267,12 +267,12 @@ app/
 - [ ] **Admin password** for the `/admin` panel
   - `ADMIN_PASSWORD=yourSecurePassword`
 - [ ] **More blog content** — at least 8-10 posts for SEO. Current 3 is thin.
-- [ ] **Booking message variants** — A/B test 2-3 WhatsApp message templates
+- [ ] **Booking message variants** — A/B test 2-3 Messaging message templates
 
 ### Nice-to-have (competitive advantage)
 
 - [ ] **Email marketing** — integrate EmailJS or Resend for newsletter capture
-- [ ] **SMS fallback** — for international clients who don't use WhatsApp
+- [ ] **SMS fallback** — for international clients who don't use Messaging
 - [ ] **Real team photos** — replace Unsplash stock with actual photos of Lidia, Claudia, María, Ana
 - [ ] **Google Reviews widget** — embed live Google reviews on homepage
 
@@ -336,7 +336,7 @@ docker stack deploy -c docker-compose.yml magnolia
 | Feature | Magnolia | Best LATAM salons |
 |---|---|---|
 | Online gift card purchase | ⚠️ In progress | ✅ Many have |
-| WhatsApp booking | ✅ | ✅ Standard |
+| Messaging booking | ✅ | ✅ Standard |
 | Loyalty program UI | ✅ | ❌ Most don't |
 | Blog with SEO | ✅ Basic | ✅ Top salons do |
 | Instagram feed | ❌ Static only | ⚠️ Mixed |
@@ -353,7 +353,7 @@ docker stack deploy -c docker-compose.yml magnolia
 ```
 Priority 1 (Revenue — Do First)
   1. Stripe gift card checkout (needs keys)
-  2. WhatsApp message A/B testing (needs Kiki's input)
+  2. Messaging message A/B testing (needs Kiki's input)
   3. Blog post CTAs (1h, no deps)
 
 Priority 2 (Conversion — Do Second)

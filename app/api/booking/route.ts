@@ -7,7 +7,7 @@ export async function POST(request: Request) {
   const { client_name, phone, service, preferred_date, notes } = body
 
   if (!client_name || !phone || !service) {
-    return NextResponse.json({ error: "Nombre, WhatsApp y servicio son requeridos" }, { status: 400 })
+    return NextResponse.json({ error: "Nombre, Messaging y servicio son requeridos" }, { status: 400 })
   }
 
   // Try data store first (Supabase → JSON file)
@@ -25,19 +25,19 @@ export async function POST(request: Request) {
       return NextResponse.json({ ok: true, method: "database", id: booking.id })
     }
   } catch {
-    // Fallback to WhatsApp
+    // Fallback to Messaging
   }
 
-  // WhatsApp fallback
-  const waPhone = businessData().whatsapp
+  // Messaging fallback
+  const waPhone = businessData().messaging
   const waMsg = encodeURIComponent(
-    `¡Hola! Quiero reservarme un turno en Magnolia Peluquería.\n\n👤 Nombre: ${client_name}\n📞 WhatsApp: ${phone}\n✂️ Servicio: ${service}${preferred_date ? `\n📅 Fecha preferida: ${preferred_date}` : ""}${notes ? `\n📝 Notas: ${notes}` : ""}`
+    `¡Hola! Quiero reservarme un turno en Magnolia Peluquería.\n\n👤 Nombre: ${client_name}\n📞 Messaging: ${phone}\n✂️ Servicio: ${service}${preferred_date ? `\n📅 Fecha preferida: ${preferred_date}` : ""}${notes ? `\n📝 Notas: ${notes}` : ""}`
   )
 
   return NextResponse.json({
     ok: false,
     error: "base_de_datos_no_disponible",
-    fallback_url: `https://wa.me/${waPhone}?text=${waMsg}`,
-    message: "No se pudo guardar la reserva. Podés reservar directo por WhatsApp.",
+    fallback_url: `tel:+${waPhone}?text=${waMsg}`,
+    message: "No se pudo guardar la reserva. Podés reservar directo por Messaging.",
   })
 }

@@ -27,7 +27,7 @@
     "phone": "0981106062",
     "phoneFormatted": "0981 106 062",
     "email": "info@magnolia-peluqueria.com",
-    "whatsapp": "595986106062",
+    "messaging": "595986106062",
     "instagram": "magnolia_peluqueria",
     "facebook": "magnolia.peluqueria",
     "mapsEmbed": "https://www.google.com/maps?q=-25.2971,-57.6401&z=15&output=embed",
@@ -49,7 +49,7 @@
     "cerrado": "Domingos y Lunes cerrados"
   },
   "features": {
-    "whatsappFloat": {
+    "messagingFloat": {
       "enabled": true,
       "phone": "595986106062",
       "defaultMessage": "Hola!%20Quiero%20reservar%20una%20cita%20en%20Magnolia"
@@ -63,7 +63,7 @@
     },
     "bookingForm": {
       "enabled": true,
-      "whatsappFallback": true,
+      "messagingFallback": true,
       "supabaseEnabled": true
     },
     "promotions": {
@@ -79,7 +79,7 @@
     },
     "exitIntent": {
       "enabled": true,
-      "whatsappPrompt": true
+      "messagingPrompt": true
     },
     "structuredData": {
       "enabled": true,
@@ -124,9 +124,9 @@
     },
     "footer": [
       {
-        "id": "whatsapp-float",
+        "id": "messaging-float",
         "variant": "standard",
-        "content": "whatsapp"
+        "content": "messaging"
       },
       {
         "id": "footer",

@@ -32,9 +32,9 @@ importers:
       '@ai-whisperers/ui':
         specifier: file:/root/ai-whisperers-base/packages/ui
         version: file:../ai-whisperers-base/packages/ui(lucide-react@0.510.0(react@19.2.4))(react-dom@19.2.4(react@19.2.4))(react-is@18.3.1)(react@19.2.4)(redux@5.0.1)
-      '@ai-whisperers/whatsapp':
-        specifier: file:/root/ai-whisperers-base/packages/whatsapp
-        version: file:../ai-whisperers-base/packages/whatsapp(react@19.2.4)
+      '@ai-whisperers/messaging':
+        specifier: file:/root/ai-whisperers-base/packages/messaging
+        version: file:../ai-whisperers-base/packages/messaging(react@19.2.4)
       '@alloc/quick-lru':
         specifier: ^5.2.0
         version: 5.2.0
@@ -176,8 +176,8 @@ packages:
       react: ^19.0.0
       react-dom: ^19.0.0
 
-  '@ai-whisperers/whatsapp@file:../ai-whisperers-base/packages/whatsapp':
-    resolution: {directory: ../ai-whisperers-base/packages/whatsapp, type: directory}
+  '@ai-whisperers/messaging@file:../ai-whisperers-base/packages/messaging':
+    resolution: {directory: ../ai-whisperers-base/packages/messaging, type: directory}
     peerDependencies:
       react: ^19.0.0
 
@@ -3578,7 +3578,7 @@ snapshots:
       - react-is
       - redux
 
-  '@ai-whisperers/whatsapp@file:../ai-whisperers-base/packages/whatsapp(react@19.2.4)':
+  '@ai-whisperers/messaging@file:../ai-whisperers-base/packages/messaging(react@19.2.4)':
     dependencies:
       '@types/react': 19.2.15
       '@types/react-dom': 19.2.3(@types/react@19.2.15)

@@ -16,11 +16,11 @@ export function ContactSection({ lang = "es" }: { lang?: "es" | "en" }) {
         subtitle: "Escribinos y te respondemos en menos de 5 minutos",
         nameLabel: "Tu nombre",
         namePlaceholder: "María García",
-        whatsappLabel: "Tu WhatsApp",
-        whatsappPlaceholder: "0981 123 456",
+        messagingLabel: "Tu Messaging",
+        messagingPlaceholder: "0981 123 456",
         messageLabel: "Mensaje (opcional)",
         messagePlaceholder: "Quiero saber más sobre...",
-        send: "Enviar por WhatsApp",
+        send: "Enviar por Messaging",
         info: "Info",
       }
     : {
@@ -28,20 +28,20 @@ export function ContactSection({ lang = "es" }: { lang?: "es" | "en" }) {
         subtitle: "Write to us and we'll reply in under 5 minutes",
         nameLabel: "Your name",
         namePlaceholder: "María García",
-        whatsappLabel: "Your WhatsApp",
-        whatsappPlaceholder: "+595 981 123 456",
+        messagingLabel: "Your Messaging",
+        messagingPlaceholder: "+595 981 123 456",
         messageLabel: "Message (optional)",
         messagePlaceholder: "I want to know more about...",
-        send: "Send via WhatsApp",
+        send: "Send via Messaging",
         info: "Info",
       }
 
-  function handleWhatsApp(e: React.FormEvent) {
+  function handleMessaging(e: React.FormEvent) {
     e.preventDefault()
     const msg = encodeURIComponent(
-      `¡Hola! Me gustaría contactarlos.\n\n👤 Nombre: ${name}\n📞 WhatsApp: ${phone}${message ? `\n💬 Mensaje: ${message}` : ""}`
+      `¡Hola! Me gustaría contactarlos.\n\n👤 Nombre: ${name}\n📞 Messaging: ${phone}${message ? `\n💬 Mensaje: ${message}` : ""}`
     )
-    window.open(`https://wa.me/${business.whatsapp}?text=${msg}`, "_blank")
+    window.open(`tel:+${business.messaging}?text=${msg}`, "_blank")
     setSent(true)
   }
 
@@ -60,24 +60,24 @@ export function ContactSection({ lang = "es" }: { lang?: "es" | "en" }) {
                 <MessageCircle className="w-8 h-8 text-secondary" />
               </div>
               <h3 className="font-heading text-2xl font-bold text-primary mb-2">
-                {lang === "es" ? "¡Ya casi! Abrí WhatsApp" : "Almost there! Open WhatsApp"}
+                {lang === "es" ? "¡Ya casi! Abrí Messaging" : "Almost there! Open Messaging"}
               </h3>
               <p className="text-foreground-light">
                 {lang === "es"
-                  ? "Se abrió tu chat de WhatsApp. Completá el mensaje y envialo."
-                  : "Your WhatsApp chat opened. Complete and send the message."}
+                  ? "Se abrió tu chat de Messaging. Completá el mensaje y envialo."
+                  : "Your Messaging chat opened. Complete and send the message."}
               </p>
             </div>
           ) : (
-            <form onSubmit={handleWhatsApp} className="space-y-5">
+            <form onSubmit={handleMessaging} className="space-y-5">
               <div>
                 <label className="block text-sm font-semibold text-foreground mb-2">{labels.nameLabel}</label>
                 <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder={labels.namePlaceholder} required
                   className="w-full px-4 py-3 rounded-xl border-2 border-gray-100 focus:border-secondary outline-none transition-all bg-white text-foreground" />
               </div>
               <div>
-                <label className="block text-sm font-semibold text-foreground mb-2">{labels.whatsappLabel}</label>
-                <input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder={labels.whatsappPlaceholder} required
+                <label className="block text-sm font-semibold text-foreground mb-2">{labels.messagingLabel}</label>
+                <input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder={labels.messagingPlaceholder} required
                   className="w-full px-4 py-3 rounded-xl border-2 border-gray-100 focus:border-secondary outline-none transition-all bg-white text-foreground" />
               </div>
               <div>
@@ -117,8 +117,8 @@ export function ContactSection({ lang = "es" }: { lang?: "es" | "en" }) {
                 <Phone className="w-5 h-5 text-secondary" />
               </div>
               <div>
-                <p className="text-xs font-bold text-secondary uppercase tracking-wide">WhatsApp</p>
-                <a href={`https://wa.me/${business.whatsapp}`} target="_blank" rel="noopener noreferrer"
+                <p className="text-xs font-bold text-secondary uppercase tracking-wide">Messaging</p>
+                <a href={`tel:+${business.messaging}`} target="_blank" rel="noopener noreferrer"
                   className="text-sm text-secondary font-medium hover:underline mt-0.5 block">
                   {business.phoneFormatted}
                 </a>

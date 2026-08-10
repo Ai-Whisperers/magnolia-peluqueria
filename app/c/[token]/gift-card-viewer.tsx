@@ -41,7 +41,7 @@ export default function GiftCardViewer({ card }: { card: GiftCardData }) {
   const statusInfo = STATUS_LABELS[card.status] || { label: card.status, color: "bg-gray-100 text-gray-600" }
   const isUsable = card.status === "active" || card.status === "partial"
   const waMsg = encodeURIComponent(`Hola! Tengo una Tarjeta de Regalo con código ${card.code} (saldo: ${formatGs(card.balance_gs)}). ¿Puedo usarla?`)
-  const waUrl = `https://wa.me/${business.whatsapp}?text=${waMsg}`
+  const waUrl = `tel:+${business.messaging}?text=${waMsg}`
 
   function copyCode() {
     navigator.clipboard.writeText(card.code)
@@ -122,7 +122,7 @@ export default function GiftCardViewer({ card }: { card: GiftCardData }) {
                 </li>
                 <li className="flex gap-3">
                   <span className="shrink-0 w-6 h-6 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center text-xs font-bold">2</span>
-                  <span>O envialo por WhatsApp para reservar con saldo</span>
+                  <span>O envialo por Messaging para reservar con saldo</span>
                 </li>
                 <li className="flex gap-3">
                   <span className="shrink-0 w-6 h-6 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center text-xs font-bold">3</span>
@@ -138,7 +138,7 @@ export default function GiftCardViewer({ card }: { card: GiftCardData }) {
               className="flex items-center justify-center gap-3 bg-[#25D366] text-white font-bold w-full py-4 rounded-xl hover:bg-[#20BD5A] transition-all text-lg shadow-sm"
             >
               <MessageCircle className="w-6 h-6" />
-              Usar por WhatsApp
+              Usar por Messaging
             </a>
           </div>
         )}

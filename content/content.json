@@ -13,7 +13,7 @@
     "tagline": "Donde la belleza florece",
     "address": "Av. San Lorenzo 1234, San Lorenzo, Paraguay",
     "phone": "+595 21 123 456",
-    "whatsapp": "595976123456",
+    "messaging": "595976123456",
     "email": "info@magnoliapeluqueria.com",
     "hours": {
       "weekdays": "Lun-Vie: 9:00 - 20:00",
@@ -372,7 +372,7 @@
     {
       "id": "1",
       "question": "¿Cómo puedo reservar una cita?",
-      "answer": "Puedes reservar por WhatsApp en +595 976 123 456, llámanos al +595 21 123 456, o visítanos en nuestro salón. También tenemos un sistema de reservas online disponible."
+      "answer": "Puedes reservar por Messaging en +595 976 123 456, llámanos al +595 21 123 456, o visítanos en nuestro salón. También tenemos un sistema de reservas online disponible."
     },
     {
       "id": "2",

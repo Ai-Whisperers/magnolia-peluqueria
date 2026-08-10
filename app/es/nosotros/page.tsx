@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
-import { WhatsAppFloat } from "@/components/whatsapp-float"
+import { MessagingFloat } from "@/components/messaging-float"
 import { Breadcrumb } from "@/components/breadcrumb"
 import { Testimonials } from "@/components/testimonials"
 import { getContent, formatHours } from "@/lib/config"
@@ -56,8 +56,8 @@ export default async function NosotrosPage({ params }: { params: Promise<{ lang:
           </div>
         </div>
       </div>
-      <Footer businessName={c.business.name} tagline={c.business.tagline} address={c.business.address} phone={c.business.phoneFormatted} hours={formatHours(c.business.hours)} waPhone={c.business.whatsapp} lang={lang as "es" | "en"} />
-      <WhatsAppFloat lang={lang as "es" | "en"} />
+      <Footer businessName={c.business.name} tagline={c.business.tagline} address={c.business.address} phone={c.business.phoneFormatted} hours={formatHours(c.business.hours)} waPhone={c.business.messaging} lang={lang as "es" | "en"} />
+      <MessagingFloat lang={lang as "es" | "en"} />
     </>
   )
 }

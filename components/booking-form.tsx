@@ -124,8 +124,8 @@ export function BookingForm({ supabaseConfigured, lang = "es" }: BookingFormProp
         // if ok, still show WA confirmation (desired behaviour)
       } catch (_) {
         apiError = lang === "es"
-          ? "No se pudo conectar con el servidor. Podés reservar directo por WhatsApp."
-          : "Could not connect to the server. You can book directly via WhatsApp."
+          ? "No se pudo conectar con el servidor. Podés reservar directo por Messaging."
+          : "Could not connect to the server. You can book directly via Messaging."
       }
     }
 
@@ -138,7 +138,7 @@ export function BookingForm({ supabaseConfigured, lang = "es" }: BookingFormProp
     ;(window as unknown as Record<string, unknown>).__magnolia_booking_service = serviceLabel
   }
 
-  function getWhatsAppMessage(serviceOverride = "") {
+  function getMessagingMessage(serviceOverride = "") {
     const chosen = serviceOverride || serviceLabel
     const dateText = preferredDate ? `\n📅 Fecha preferida: ${preferredDate}` : ""
     const notesText = notes ? `\n📝 Notas: ${notes}` : ""
@@ -146,10 +146,10 @@ export function BookingForm({ supabaseConfigured, lang = "es" }: BookingFormProp
     const intro = isEs
       ? `¡Hola! Quiero reservarme un turno en Magnolia Peluquería.\n\n👤 Nombre: ${name}`
       : `Hi! I'd like to book an appointment at Magnolia Peluquería.\n\n👤 Name: ${name}`
-    return `${intro}\n📞 WhatsApp: ${phone}\n✂️ Servicio: ${chosen}${dateText}${notesText}`
+    return `${intro}\n📞 Messaging: ${phone}\n✂️ Servicio: ${chosen}${dateText}${notesText}`
   }
 
-  const waPhone = businessData(lang).whatsapp
+  const waPhone = businessData(lang).messaging
 
   if (submitted) {
     return (
@@ -173,17 +173,17 @@ export function BookingForm({ supabaseConfigured, lang = "es" }: BookingFormProp
               <h3 className="font-heading text-2xl font-bold text-primary mb-3">{lang === "es" ? "¡Casi listo!" : "Almost done!"}</h3>
               <p className="text-foreground-light mb-6 max-w-sm mx-auto text-sm">
                 {lang === "es"
-                  ? "Completá tu reserva enviándonos un mensaje por WhatsApp."
-                  : "Complete your booking by sending us a WhatsApp message."}
+                  ? "Completá tu reserva enviándonos un mensaje por Messaging."
+                  : "Complete your booking by sending us a Messaging message."}
               </p>
               <a
-                href={fallbackUrl ?? `https://wa.me/${waPhone}?text=${encodeURIComponent(getWhatsAppMessage(savedService))}`}
+                href={fallbackUrl ?? `tel:+${waPhone}?text=${encodeURIComponent(getMessagingMessage(savedService))}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-3 bg-[#25D366] text-white font-bold px-8 py-3.5 rounded-xl hover:bg-[#20BD5A] transition-all text-base mb-6"
               >
                 <MessageCircle className="w-5 h-5" />
-                {lang === "es" ? "Confirmar por WhatsApp" : "Confirm via WhatsApp"}
+                {lang === "es" ? "Confirmar por Messaging" : "Confirm via Messaging"}
               </a>
 
               {/* Loyalty progress tracker */}
@@ -242,8 +242,8 @@ export function BookingForm({ supabaseConfigured, lang = "es" }: BookingFormProp
         step2Sub: "Los usamos solo para confirmar tu turno.",
         nameLabel: "Nombre completo",
         namePlaceholder: "María García",
-        whatsappLabel: "WhatsApp",
-        whatsappPlaceholder: "0981 123 456",
+        messagingLabel: "Messaging",
+        messagingPlaceholder: "0981 123 456",
         step3Title: "¿Cuándo querés venir?",
         step3Sub: "Martes a Sábado, 9:00 – 19:00.",
         dateLabel: "Fecha preferida",
@@ -254,13 +254,13 @@ export function BookingForm({ supabaseConfigured, lang = "es" }: BookingFormProp
         step4Sub: "Revisá que todo esté bien antes de enviar.",
         serviceLabel: "Servicio",
         nameField: "Nombre",
-        whatsappField: "WhatsApp",
+        messagingField: "Messaging",
         dateField: "Fecha preferida",
         notesField: "Notas",
         noDate: "A confirmar",
         back: "Volver",
         continue: "Continuar",
-        submitWA: "Reservar por WhatsApp",
+        submitWA: "Reservar por Messaging",
         submitting: "Enviando...",
       }
     : {
@@ -270,8 +270,8 @@ export function BookingForm({ supabaseConfigured, lang = "es" }: BookingFormProp
         step2Sub: "We only use them to confirm your appointment.",
         nameLabel: "Full name",
         namePlaceholder: "María García",
-        whatsappLabel: "WhatsApp",
-        whatsappPlaceholder: "+595 981 123 456",
+        messagingLabel: "Messaging",
+        messagingPlaceholder: "+595 981 123 456",
         step3Title: "When do you want to come?",
         step3Sub: "Tuesday to Saturday, 9:00 AM – 7:00 PM.",
         dateLabel: "Preferred date",
@@ -282,13 +282,13 @@ export function BookingForm({ supabaseConfigured, lang = "es" }: BookingFormProp
         step4Sub: "Review everything before sending.",
         serviceLabel: "Service",
         nameField: "Name",
-        whatsappField: "WhatsApp",
+        messagingField: "Messaging",
         dateField: "Preferred date",
         notesField: "Notes",
         noDate: "TBC",
         back: "Back",
         continue: "Continue",
-        submitWA: "Book via WhatsApp",
+        submitWA: "Book via Messaging",
         submitting: "Sending...",
       }
 
@@ -345,12 +345,12 @@ export function BookingForm({ supabaseConfigured, lang = "es" }: BookingFormProp
               />
             </div>
             <div>
-              <label className="block text-sm font-semibold text-foreground mb-2">{LABELS.whatsappLabel}</label>
+              <label className="block text-sm font-semibold text-foreground mb-2">{LABELS.messagingLabel}</label>
               <input
                 type="tel"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
-                placeholder={LABELS.whatsappPlaceholder}
+                placeholder={LABELS.messagingPlaceholder}
                 className="w-full px-4 py-3 rounded-xl border-2 border-gray-100 focus:border-secondary outline-none transition-all text-foreground bg-white"
               />
             </div>
@@ -399,7 +399,7 @@ export function BookingForm({ supabaseConfigured, lang = "es" }: BookingFormProp
             {[
               { label: LABELS.serviceLabel, value: serviceLabel },
               { label: LABELS.nameField, value: name },
-              { label: LABELS.whatsappField, value: phone },
+              { label: LABELS.messagingField, value: phone },
               { label: LABELS.dateField, value: preferredDate || LABELS.noDate },
               ...(notes ? [{ label: LABELS.notesField, value: notes }] : []),
             ].map(({ label, value }) => (

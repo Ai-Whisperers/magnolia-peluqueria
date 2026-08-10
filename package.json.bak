@@ -20,7 +20,7 @@
     "@ai-whisperers/seo": "file:/root/ai-whisperers-base/packages/seo",
     "@ai-whisperers/theme": "file:/root/ai-whisperers-base/packages/theme",
     "@ai-whisperers/ui": "file:/root/ai-whisperers-base/packages/ui",
-    "@ai-whisperers/whatsapp": "file:/root/ai-whisperers-base/packages/whatsapp",
+    "@ai-whisperers/messaging": "file:/root/ai-whisperers-base/packages/messaging",
     "@supabase/supabase-js": "^2.39.0",
     "@vercel/analytics": "^1.5.0",
     "@vercel/speed-insights": "^1.2.0",

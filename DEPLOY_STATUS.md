@@ -4,7 +4,7 @@
 
 | Feature | Status | Producción |
 |---------|--------|-----------|
-| Booking + WhatsApp | ✅ Listo | ✅ |
+| Booking + Messaging | ✅ Listo | ✅ |
 | Blog (3 posts reales) | ✅ LIVE 2026-05-28 | ✅ |
 | Gift cards (UI + API) | ⚠️ Stripe keys needed | ❌ |
 | Instagram feed | ⚠️ Meta token needed | ❌ |

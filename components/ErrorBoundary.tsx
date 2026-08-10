@@ -44,7 +44,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
               Algo salió mal
             </h2>
             <p style={{ fontSize: "14px" }}>
-              Por favor, recargá la página o escribinos por WhatsApp.
+              Por favor, recargá la página o escribinos por Messaging.
             </p>
           </div>
         )

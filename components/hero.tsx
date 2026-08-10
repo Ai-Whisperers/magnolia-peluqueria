@@ -31,8 +31,8 @@ export function Hero({ lang }: HeroProps) {
   const slide = slides[current]
 
   const labels = {
-    es: { book: "Reservar por WhatsApp", services: "Ver Servicios", scroll: "Scroll" },
-    en: { book: "Book via WhatsApp", services: "View Services", scroll: "Scroll" },
+    es: { book: "Reservar por Messaging", services: "Ver Servicios", scroll: "Scroll" },
+    en: { book: "Book via Messaging", services: "View Services", scroll: "Scroll" },
   }
   const l = labels[lang] ?? labels.es
 

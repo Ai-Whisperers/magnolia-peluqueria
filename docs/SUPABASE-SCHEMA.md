@@ -61,7 +61,7 @@ CREATE TABLE promotions (
   starts_at TIMESTAMPTZ NOT NULL,
   expires_at TIMESTAMPTZ NOT NULL,
   is_active BOOLEAN DEFAULT true,
-  whatsapp_message TEXT,            -- Pre-filled WhatsApp message
+  messaging_message TEXT,            -- Pre-filled Messaging message
   created_at TIMESTAMPTZ DEFAULT now()
 );
 
@@ -150,7 +150,7 @@ CREATE TABLE bookings (
   preferred_time TEXT NOT NULL,     -- '09:00', '09:30', ..., '18:30'
   notes TEXT,
   status TEXT DEFAULT 'pending'     -- 'pending' | 'confirmed' | 'cancelled'
-  whatsapp_message_sent BOOLEAN DEFAULT false,
+  messaging_message_sent BOOLEAN DEFAULT false,
   email_sent BOOLEAN DEFAULT false,
   created_at TIMESTAMPTZ DEFAULT now(),
   updated_at TIMESTAMPTZ DEFAULT now()
@@ -234,10 +234,10 @@ CREATE POLICY "Admin write" ON gift_cards FOR ALL
 ## 4. Edge Functions
 
 ### 4.1 Booking Confirmation
-Triggered on `bookings` INSERT. Sends WhatsApp to Magnolia + confirmation to client.
+Triggered on `bookings` INSERT. Sends Messaging to Magnolia + confirmation to client.
 
 ### 4.2 Abandoned Booking Detection
-Runs every 30 min. If booking status = 'pending' for >30 min → WhatsApp follow-up to client.
+Runs every 30 min. If booking status = 'pending' for >30 min → Messaging follow-up to client.
 
 ### 4.3 Promotion Expiry
 Edge function on `expires_at` column. Auto-sets `is_active = false` when expired.

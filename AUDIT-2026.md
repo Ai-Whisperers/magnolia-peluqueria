@@ -29,7 +29,7 @@ El sitio es correcto, funcional y bien ejecutado para ser un MVP. Pero es un MVP
 - Los stats (800+ clientas, 4.9★) son hardcodeados y NO linked a ninguna fuente verificable. Cero credibilidad.
 - El badge "Asunción, Paraguay" es innecesario — ya lo dice el footer.
 - No hay urgencia temporal: "Martes a Sábado: 9:00 - 19:00" no aparece en ningún lado del hero. La gente no sabe si está abierto AHORA.
-- El CTA primario es WhatsApp directo. No hay pre-appointment funnel (seleccionar servicio → elegir fecha → confirmar).
+- El CTA primario es Messaging directo. No hay pre-appointment funnel (seleccionar servicio → elegir fecha → confirmar).
 
 **Benchmark first world:** Salon websites premium muestran *live availability* y ofrecen *instant booking* con selección de estilista.
 
@@ -105,7 +105,7 @@ El sitio es correcto, funcional y bien ejecutado para ser un MVP. Pero es un MVP
 - Patrón correcto de urgencia.
 
 **Problemas:**
-- Todo se resuelve en WhatsApp. No hay alternativa de email, teléfono, ni formulario de contacto.
+- Todo se resuelve en Messaging. No hay alternativa de email, teléfono, ni formulario de contacto.
 - No hay *urgency element* ("solo quedan 3 turnos esta semana").
 
 ### 10. `header.tsx`
@@ -159,24 +159,24 @@ El sitio es correcto, funcional y bien ejecutado para ser un MVP. Pero es un MVP
 
 | Feature faltante | Qué hacen en USA/UK/España |
 |---|---|
-| **Booking en línea** | Reserve with厉, Acuity, Calendly. Clientas reservan 24/7 sin WhatsApp. |
+| **Booking en línea** | Reserve with厉, Acuity, Calendly. Clientas reservan 24/7 sin Messaging. |
 | **Perfil de estilista** | Cada estilista tiene página con foto, especialidades, reseñas, disponibilidad. |
 | **Galería de trabajos reales** |feedlive de Instagram + foto real de cada client before/after. |
 | **Programa de fidelización** | Sellos digitales, puntos, descuentos por referidos. Ej: "Traé una amiga y ambas reciben 20% off". |
 | **Gift cards** | Tarjetas de regalo digitales comprables desde el sitio. |
-| **No-show prevention** | Recordatorios SMS/WhatsApp automáticos 24h antes. Depósito por seguridad. |
+| **No-show prevention** | Recordatorios SMS/Messaging automáticos 24h antes. Depósito por seguridad. |
 | **Pricing con paquetes** | "Color + Corte + Tratamiento = $X (ahorrás $Y)" — aumenta ticket promedio. |
 | **Reviews con fotos** | Google Reviews API con fotos reales de clientas. |
 | **Carrito de productos** | Venta de productos capilares con envío a domicilio. |
 | **Blog/Educación** | Tips de cuidado capilar, tendencias de color, tutoriales. SEO y trust building. |
-| **WhatsApp CRM** | Chatbot de reservas + seguimiento post-servicio + cumpleaños. |
+| **Messaging CRM** | Chatbot de reservas + seguimiento post-servicio + cumpleaños. |
 | **Live availability** | Calendario en tiempo real: "Disponible mañana 10am o 2pm". |
 | **Multi-ubicación** | Si expanden a 2 locales: gestión centralizada. |
 | **Staff scheduling** | Los empleados ven sus turnos online, reducing llamadas. |
 | **Sistema de referidos** | "Tu amiga reserva $20 crédito para vos". Viral loop. |
 | **Instagram shop** | Tagged products en Instagram directamentecomprables. |
 | **Video testimonios** | Clips de 30s de clientas reales hablando del servicio. |
-| **Encuesta post-servicio** | "Cómo estuvo tu experiencia?" 30 min después por WhatsApp. |
+| **Encuesta post-servicio** | "Cómo estuvo tu experiencia?" 30 min después por Messaging. |
 | **Reserva de grupo** | "Fiesta de amigas" — paquete para grupos de 3+. |
 
 ---
@@ -220,7 +220,7 @@ El sitio es correcto, funcional y bien ejecutado para ser un MVP. Pero es un MVP
 ### FASE 2 — Revenue Engine (semana 3-6, medio esfuerzo, alto impacto en ventas)
 
 **7. Implementar sistema de reservas online (opciones viables para Paraguay):**
-- Opción A: Superorder + WhatsApp integration
+- Opción A: Superorder + Messaging integration
 - Opción B: Custom booking widget con Supabase (diseño propio)
 - Opción C: Lyxa AI o Anolla (los viu en la investigación)
 - Impacto: ++++
@@ -235,7 +235,7 @@ El sitio es correcto, funcional y bien ejecutado para ser un MVP. Pero es un MVP
 - Prioridad: ALTA
 
 **9. Programa de fidelización simple**
-- Sellos digitales vía WhatsApp: "5 cortes = 1 gratis"
+- Sellos digitales vía Messaging: "5 cortes = 1 gratis"
 - O implementar en Supabase con tabla de clientas
 - Impacto: ++++
 - Esfuerzo: medio
@@ -243,7 +243,7 @@ El sitio es correcto, funcional y bien ejecutado para ser un MVP. Pero es un MVP
 
 **10. Gift cards**
 - Comprables desde el sitio
-- Envío por WhatsApp o email
+- Envío por Messaging o email
 - Impacto: +++
 - Esfuerzo: medio
 - Prioridad: MEDIA
@@ -283,7 +283,7 @@ El sitio es correcto, funcional y bien ejecutado para ser un MVP. Pero es un MVP
 
 ### FASE 4 — Automation (mes 3-4, alto esfuerzo, impacto en operaciones)
 
-**16. WhatsApp CRM con chatbot de reservas**
+**16. Messaging CRM con chatbot de reservas**
 - Auto-respuesta, confirmación, recordatorio 24h antes
 - Impacto: +++++
 - Esfuerzo: alto
@@ -346,7 +346,7 @@ SEMANA 3-4:
 
 SEMANA 5-8:
 11. Video testimonios reales
-12. WhatsApp CRM automático
+12. Messaging CRM automático
 ```
 
 ---

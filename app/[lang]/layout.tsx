@@ -19,8 +19,8 @@ export async function generateMetadata({
       ? "Magnolia Peluquería | Tu Mejor Look en Asunción"
       : "Magnolia Peluquería | Your Best Look in Asunción",
     description: isSpanish
-      ? "Peluquería profesional en Asunción, Paraguay. Balayage, cortes, coloración, keratina y más. Reserva por WhatsApp."
-      : "Professional hair salon in Asunción, Paraguay. Balayage, cuts, coloring, keratin and more. Book via WhatsApp.",
+      ? "Peluquería profesional en Asunción, Paraguay. Balayage, cortes, coloración, keratina y más. Reserva por Messaging."
+      : "Professional hair salon in Asunción, Paraguay. Balayage, cuts, coloring, keratin and more. Book via Messaging.",
     openGraph: {
       type: "website",
       locale: lang === "es" ? "es_PY" : "en_US",

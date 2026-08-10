@@ -144,7 +144,7 @@ export function ExitIntentPopup({ lang = "es" }: { lang?: "es" | "en" }) {
           </div>
 
           <a
-            href={`https://wa.me/${business.whatsapp}?text=${waMsg}`}
+            href={`tel:+${business.messaging}?text=${waMsg}`}
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => dismiss()}

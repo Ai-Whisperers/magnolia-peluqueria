@@ -80,12 +80,12 @@
 
 | Route | Title | Meta Description |
 |-------|-------|-----------------|
-| `/` | Magnolia Peluquería — Tu Mejor Look en Asunción | Expertos en cortes, coloración y tratamientos capilares en Asunción. Reserva tu turno por WhatsApp. Martes a sábado. |
+| `/` | Magnolia Peluquería — Tu Mejor Look en Asunción | Expertos en cortes, coloración y tratamientos capilares en Asunción. Reserva tu turno por Messaging. Martes a sábado. |
 | `/servicios` | Servicios — Magnolia Peluquería | Cortes desde Gs. 50.000, coloración, keratina y más. Precios claros, atención personalizada en Asunción. |
 | `/nosotros` | Sobre Nosotros — Magnolia Peluquería | Conocé a Magnolia: peluquería profesional en el centro de Asunción con +5 años de experiencia. |
 | `/faq` | Preguntas Frecuentes — Magnolia Peluquería | Respondemos las dudas más comunes sobre turnos, precios, técnicas y cuidado del cabello. |
-| `/contacto` | Contacto — Magnolia Peluquería | Reservá tu turno, preguntanos cualquier cosa. WhatsApp, teléfono, mapa y formulario. |
-| `/booking` | Reservar Turno — Magnolia Peluquería | Elegí servicio, fecha y horario. Te confirmamos por WhatsApp en minutos. |
+| `/contacto` | Contacto — Magnolia Peluquería | Reservá tu turno, preguntanos cualquier cosa. Messaging, teléfono, mapa y formulario. |
+| `/booking` | Reservar Turno — Magnolia Peluquería | Elegí servicio, fecha y horario. Te confirmamos por Messaging en minutos. |
 
 ---
 
@@ -104,7 +104,7 @@
 - Service pages with detailed descriptions
 
 ### BOFU (Decision) — Booking + Promotions
-- Prominent WhatsApp booking CTA
+- Prominent Messaging booking CTA
 - Active promotions → urgency
 - Loyalty program → repeat visits
 - Gift cards → gift giving occasions
